@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   
   resources :records
-  resources :vets
-  resources :pets
-  resources :owners
+  resources :vets, only:[index, show, create]
+  resources :pets, only:[index, create, show, destroy]
+  resources :owners, only: [index, show, create]
+
+  post "/signup", to: "owners#create"
+  get "/me", to:"owners#show"
+  post "/login", to:"sessions#create"
+  delete "/logout", to:"sessions#destroy"
+
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
