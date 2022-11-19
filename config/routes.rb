@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :records
   resources :vets, only: [:index, :show, :create]
   resources :pets, only: [:index, :create, :show, :destroy]
-  resources :owners, only: [:index, :show, :create]
+  resources :owners, only: [:show, :create]
 
   post "/signup", to: "owners#create"
   get "/me", to:"owners#show"
