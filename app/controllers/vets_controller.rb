@@ -1,10 +1,12 @@
 class VetsController < ApplicationController
 
     def index 
-
+        render json: Vet.all, status: :ok
     end
 
     def show 
+        vet = Vets.find(params[:id])
+        render json: vet
     end
 
     def create 
