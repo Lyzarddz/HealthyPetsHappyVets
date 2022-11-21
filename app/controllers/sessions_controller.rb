@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
         owner= Owner.find_by(username: params[:username])
         if owner&.authenticate(params[:password])
             session[:owner_id] = owner.index
-            render json: owner
+            render json: owner,  status: :created
         else
             render json: {errors:["Invalid username or password"]}, status: :unauthorized
         end
