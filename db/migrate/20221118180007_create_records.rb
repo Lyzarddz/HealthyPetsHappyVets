@@ -4,7 +4,7 @@ class CreateRecords < ActiveRecord::Migration[6.1]
       t.string :vaccine
       t.string :prevention
       t.boolean :altered
-      t.belongs_to :pets
+      t.belongs_to :pet, index: true
 
       t.timestamps
     end
