@@ -9,8 +9,6 @@ const errorCards = errors.map((error, idx) => <Error key={idx} error={error} />)
      <ul>
          { errorCards }
      </ul>
-   
-   
   )
 }
     

@@ -2,6 +2,7 @@ import NavBar from './Components/NavBar';
 import MainPg from './Components/MainPg';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Errors from './Components/Errors';
 import StyleSheet from './Components/StyleSheet';
 
 function App() {
@@ -44,9 +45,10 @@ function App() {
   return (
     <Router>
     <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
+    <Errors errors= {errors} />
     <Routes>
      <Route path="/" element= {<MainPg/>} />
-     
+
     </Routes>
     </Router> 
   
