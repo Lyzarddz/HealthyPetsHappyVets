@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Errors from './Components/Errors';
 import StyleSheet from './Components/StyleSheet';
 import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
 
@@ -50,7 +51,7 @@ function App() {
     <Routes>
      <Route path="/" element= {<MainPg/>} />
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
-
+     <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   
