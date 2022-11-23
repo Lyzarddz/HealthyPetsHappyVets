@@ -1,11 +1,15 @@
-import './App.css';
 import NavBar from './Components/NavBar';
+import MainPg from './Components/MainPg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
+    <Router>
     <NavBar/>
-    </div>
+    <Routes>
+     <Route path="/" element= {<MainPg/>} />
+    </Routes>
+    </Router> 
   
   );
 }
