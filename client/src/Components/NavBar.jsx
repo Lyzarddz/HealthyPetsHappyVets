@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import PetsIcon from '@mui/icons-material/Pets';
 
 
 
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    paddingLeft: 10
   },
 }));
 
@@ -57,8 +59,9 @@ function NavBar( {loggedIn, logoutUser}) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+            <PetsIcon/>
           <Typography variant="h6" className={classes.title}>
-            Healthy Pets, Happy Vets!
+              Healthy Pets, Happy Vets!
           </Typography>
           { loggedIn ? loggedInLinks() :  loggedOutLinks()}
         </Toolbar>
