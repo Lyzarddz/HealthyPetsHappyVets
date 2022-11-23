@@ -29,7 +29,28 @@ function NavBar( {loggedIn, logoutUser}) {
     e.preventDefault();
     logoutUser();
     navigate("/");
-    
+  }
+
+  function loggedInLinks(){
+    return (
+      <div>
+         <Button color="inherit" to="/" component={ Link }>Home </Button> 
+         
+         <Button color="inherit" to="/create" component={ Link }>Pets</Button>  
+           <a href="#" className="logout" onClick={logout}>Logout
+           </a> 
+      </div>
+    )
+  }
+
+  function loggedOutLinks(){
+    return(
+      <div >
+          <Button color="inherit" to="/" component={ Link }>Home </Button> 
+          <Button color="inherit" to="/login" component={ Link }>Login</Button> 
+          <Button color="inherit" to="/signup" component={ Link } >Sign Up</Button> 
+      </div>
+    )
   }
 
   return (
@@ -39,8 +60,7 @@ function NavBar( {loggedIn, logoutUser}) {
           <Typography variant="h6" className={classes.title}>
             Healthy Pets, Happy Vets!
           </Typography>
-          <Button color="inherit">Pets</Button>
-          <Button color="inherit">Login</Button>
+          { loggedIn ? loggedInLinks() :  loggedOutLinks()}
         </Toolbar>
       </AppBar>
     </div>
