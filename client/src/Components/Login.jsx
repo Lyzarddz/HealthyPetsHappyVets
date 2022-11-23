@@ -24,6 +24,12 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
       }
     }
 
+    useEffect(() => {
+        return () => {
+          clearErrors();
+        }
+      }, [])
+
   
     return (
       <div className='primary'>
