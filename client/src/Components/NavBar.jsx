@@ -22,10 +22,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10
   },
   green: {
-    backgroundColor: "#8fbc8f" 
-  },
-  gray: {
-    backgroundColor: "#778899"
+    backgroundColor: "#8fbc8f"
   }
 }));
 
