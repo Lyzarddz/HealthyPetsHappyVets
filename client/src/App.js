@@ -22,6 +22,14 @@ function App() {
     localStorage.removeItem('user_id');
   }
 
+  function addErrors (errors) {
+    setErrors(errors);
+ }
+ 
+ const clearErrors = () => {
+   setErrors([]);
+ }
+
   useEffect(() => {
     const userId = localStorage.getItem('user_id')
     if (userId && !loggedIn) {
@@ -38,6 +46,7 @@ function App() {
     <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
     <Routes>
      <Route path="/" element= {<MainPg/>} />
+     
     </Routes>
     </Router> 
   
