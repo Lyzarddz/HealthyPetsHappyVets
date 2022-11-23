@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,8 +21,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavBar() {
+function NavBar( {loggedIn, logoutUser}) {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  function logout(e) {
+    e.preventDefault();
+    logoutUser();
+    navigate("/");
+    
+  }
 
   return (
     <div className={classes.root}>
