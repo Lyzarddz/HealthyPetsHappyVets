@@ -10,10 +10,22 @@ function App() {
   const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
 
+  function loginUser (user) {
+    setCurrentUser(user);
+    setLoggedIn(true);
+    localStorage.setItem('user_id', user.id);
+  }
+  
+  function logoutUser () {
+    setCurrentUser({});
+    setLoggedIn(false);
+    localStorage.removeItem('user_id');
+  }
+
 
   return (
     <Router>
-    <NavBar/>
+    <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
     <Routes>
      <Route path="/" element= {<MainPg/>} />
     </Routes>
