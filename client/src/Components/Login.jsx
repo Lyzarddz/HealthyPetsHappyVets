@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = ({ loginUser, addErrors, clearErrors }) => {
     const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [users, setUsers] = useState([]);
   
     const navigate = useNavigate();
@@ -32,6 +33,10 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
             <label htmlFor="username">Username: </label>
             <input type="text" name="username" id="username" onChange={ handleChange } value={ username } />
           </div>
+          <div>
+        <label htmlFor="password">Password: </label>
+        <input type="text" name="password" id="password" value={password} onChange={(e) => setUsername(e.target.value)} />
+        </div> 
           <br></br>
           <input type="submit" value="Login" />
         </form>
