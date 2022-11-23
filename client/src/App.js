@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Errors from './Components/Errors';
 import StyleSheet from './Components/StyleSheet';
+import Login from './Components/Login';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
     <Errors errors= {errors} />
     <Routes>
      <Route path="/" element= {<MainPg/>} />
+     <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
 
     </Routes>
     </Router> 

@@ -1,6 +1,6 @@
 .primary {
-    color: tan;
-    padding-top: 20px;
+    color: gray;
+    padding-top: 140px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
 }
@@ -13,9 +13,6 @@
     font-size: 45px;
 }
 
-.navBtn {
-    font-size: 25px;
-}
 
 .border {
     border-color: tan;
@@ -23,17 +20,10 @@
 }
 
 .errors {
-        color: slategrey;
-        padding-top: 20px;
+        color: black;
+        padding-top: 40px;
         font-family: Georgia, 'Times New Roman', Times, serif;
         text-align: center;  
-        font-size: 50px;
+        font-size: 20px;
 }
 
-.btn {
-    color: tan;
-}
-
-.logout {
-   color: white;
-}
