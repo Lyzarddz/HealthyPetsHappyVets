@@ -22,6 +22,16 @@ function App() {
     localStorage.removeItem('user_id');
   }
 
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id')
+    if (userId && !loggedIn) {
+      fetch('http://localhost:3000/users/' + userId )
+      .then(resp => resp.json())
+      .then(data => loginUser(data))
+  
+    }
+  
+  }, [loggedIn])
 
   return (
     <Router>

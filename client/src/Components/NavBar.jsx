@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingLeft: 10
   },
+  green: {
+    backgroundColor: "#8fbc8f" 
+  },
+  gray: {
+    backgroundColor: "#778899"
+  }
 }));
 
 function NavBar( {loggedIn, logoutUser}) {
@@ -57,7 +63,7 @@ function NavBar( {loggedIn, logoutUser}) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.green}>
         <Toolbar>
             <PetsIcon/>
           <Typography variant="h6" className={classes.title}>
