@@ -10,7 +10,7 @@ import Signup from './Components/Signup';
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn]  = useState(false);
+  const [loggedIn, setLoggedIn]  = useState(true);
   const [errors, setErrors] = useState([]);
 
   function loginUser (user) {

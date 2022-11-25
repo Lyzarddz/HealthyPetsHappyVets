@@ -44,7 +44,7 @@ useEffect(() => {
         </div>   
         <div>
         <label htmlFor="password">Password: </label>
-        <input type="text" name="password" id="password" value={password} onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div> 
         <br></br>
         <input type="submit" value="Create Account"/>
