@@ -24,6 +24,15 @@ const MainPg = ({ loggedIn }) => {
             <br/> 
             health!
             <br/>
+             <br/>
+            <br/>
+            <br/>
+             <div className="smallText">
+             Head to the Pets page 
+             <br/>
+             to get started!
+             </div>
+            <br/>
             </div>
         )
       }
