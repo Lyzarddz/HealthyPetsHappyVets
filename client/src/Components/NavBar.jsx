@@ -41,7 +41,7 @@ function NavBar( {loggedIn, logoutUser}) {
       <div>
          <Button color="inherit" to="/" component={ Link }>Home </Button> 
          
-         <Button color="inherit" to="/create" component={ Link }>Pets</Button>  
+         <Button color="inherit" to="/createPet" component={ Link }>Pets</Button>  
            <a href="#" className="logout" onClick={logout}>Logout
            </a> 
       </div>

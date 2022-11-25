@@ -1,4 +1,5 @@
 import NavBar from './Components/NavBar';
+import CreatePet from './Components/CreatePet';
 import MainPg from './Components/MainPg';
 import CreateRecord from './Components/CreateRecord';
 import { useState, useEffect } from 'react';
@@ -54,6 +55,7 @@ function App() {
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   
