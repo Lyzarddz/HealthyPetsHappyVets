@@ -1,5 +1,6 @@
 import NavBar from './Components/NavBar';
 import MainPg from './Components/MainPg';
+import CreateRecord from './Components/CreateRecord';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Errors from './Components/Errors';
@@ -10,7 +11,7 @@ import Signup from './Components/Signup';
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn]  = useState(true);
+  const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
 
   function loginUser (user) {
@@ -49,9 +50,10 @@ function App() {
     <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
     <Errors errors= {errors} />
     <Routes>
-     <Route path="/" element= {<MainPg/>} />
+     <Route path="/" element= {<MainPg loginUser={loginUser}/>} />
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
+     <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   
