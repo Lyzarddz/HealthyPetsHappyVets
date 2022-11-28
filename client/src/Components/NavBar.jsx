@@ -40,8 +40,8 @@ function NavBar( {loggedIn, logoutUser}) {
     return (
       <div>
          <Button color="inherit" to="/" component={ Link }>Home </Button> 
-         
-         <Button color="inherit" to="/createPet" component={ Link }>Pets</Button>  
+         <Button color="inherit" to="/pets" component={ Link }>My Pets</Button>  
+         <Button color="inherit" to="/createPet" component={ Link }>Add Pet</Button>  
            <a href="#" className="logout" onClick={logout}>Logout
            </a> 
       </div>
