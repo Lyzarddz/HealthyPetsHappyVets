@@ -8,12 +8,26 @@ import Errors from './Components/Errors';
 import StyleSheet from './Components/StyleSheet';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import PetList from './Components/PetList';
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn]  = useState(true);
   const [errors, setErrors] = useState([]);
+  const [petLoad, setPetLoad] = useState([]);
+
+
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/pet")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setPetLoad(data)
+  //   })
+     
+  // } , [])
+
+ 
 
   function loginUser (user) {
     setCurrentUser(user);
@@ -56,6 +70,7 @@ function App() {
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} />} />
      <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/pets"  element= {<PetList pet={petLoad} />} />
     </Routes>
     </Router> 
   

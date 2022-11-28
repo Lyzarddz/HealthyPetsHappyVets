@@ -1,13 +1,10 @@
 .primary {
     color: gray;
-    padding-top: 140px;
+    padding-top: 120px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
 }
 
-.underline {
-    text-decoration: underline;
-}
 
 .smallText {
     color: gray;

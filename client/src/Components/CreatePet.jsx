@@ -40,7 +40,7 @@ function handleSubmit() {
   })
     .then((r) => r.json())
     .then(addPet);
-    navigate("/");
+    navigate("/pets");
 }
 
     return (
