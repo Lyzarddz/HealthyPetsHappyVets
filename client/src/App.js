@@ -28,6 +28,9 @@ function App() {
   // } , [])
 
  
+  function addPet(pet){
+    setPetLoad([pet,...petLoad])
+  }
 
   function loginUser (user) {
     setCurrentUser(user);
@@ -69,7 +72,7 @@ function App() {
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList pet={petLoad} />} />
     </Routes>
     </Router> 

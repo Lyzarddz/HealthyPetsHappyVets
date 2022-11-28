@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const CreatePet = ({ addPet }) => {
-
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -12,6 +16,11 @@ const CreatePet = ({ addPet }) => {
     age: "",
     vet: "",    
   });
+
+  const [vet, setVet] = useState("");
+
+  
+
 
   function handleChange(event) {
     setFormData({
@@ -72,18 +81,40 @@ function handleSubmit() {
             onChange={handleChange}
           />
            <br></br>
-          <Form.Input
+
+           <Box sx={{ maxWidth: 150 }} paddingLeft="835px">
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Vet</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={vet}
+          label="Vet"
+          onChange={handleChange}
+        >
+          <MenuItem value={vet.name}>first vet</MenuItem>
+          <MenuItem value={vet.name}>second vet</MenuItem>
+          <MenuItem value={vet.name}>Third vet</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+
+
+          {/* <Form.Input
             label="Vet"
             placeholder="Vet"
             name="vet"
             value={formData.vet}
             onChange={handleChange}
-          />
+          /> */}
            <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>
       </Form>
     </div>
+
+
+
     )
     }
 
