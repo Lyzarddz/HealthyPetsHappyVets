@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -19,6 +19,14 @@ const CreatePet = ({ addPet }) => {
 
   const [vet, setVet] = useState("");
 
+    // useEffect(() => {
+  //   fetch("http://localhost:3000/vet")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setVet(data)
+  //   })
+     
+  // } , [])
   
 
 
