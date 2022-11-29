@@ -32,11 +32,16 @@ const CreatePet = ({ addPet }) => {
   //   fetch("http://localhost:3000/vet")
   //   .then((resp) => resp.json())
   //   .then((data)=> {
-  //     setVet(data)
+  //     setVetLoad(data)
   //   })
      
   // } , [])
 
+   
+ 
+  function addVet(vet){
+    setVet([vet,...vet])
+  }
 
   function handleChange(event) {
     setFormData({
@@ -45,6 +50,23 @@ const CreatePet = ({ addPet }) => {
     });
   }
 
+  function handleSubmitVet(){
+    const newVet = {
+        name: vet.name
+    }
+
+    fetch("http://localhost:3000/vets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVet),
+      })
+        .then((r) => r.json())
+        .then(addVet);
+        window.location.reload(false)
+    }
+    
 
 function handleSubmit() {
 
@@ -105,7 +127,7 @@ function handleSubmit() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={vet}
+          value={value}
           label="Vet"
           onChange={handleChange}
         >
@@ -115,21 +137,15 @@ function handleSubmit() {
         </Select>
       </FormControl>
     </Box>
-
-
-          {/* <Form.Input
-            label="Vet"
-            placeholder="Vet"
-            name="vet"
-            value={formData.vet}
-            onChange={handleChange}
-          /> */}
            <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>
           <br/>
           <br/>
           <br/>
+          </Form>
+          <div>
+          <Form onSubmit={handleSubmitVet}>
         <h3>Don't see your Vet? Add below</h3>
           <Form.Input
             placeholder="Vet Name"
@@ -137,10 +153,13 @@ function handleSubmit() {
             value={formData.newVet}
             onChange={handleChange}
           />
-       
+          <br/>
+          <Form.Button className="btn">Submit</Form.Button>
+          </Form>
+          </div>
 
        
-      </Form>
+      
     </div>
 
     )
