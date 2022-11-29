@@ -15,6 +15,7 @@ const CreatePet = ({ addPet }) => {
     species: "",
     age: "",
     vet: "",    
+    newVet: "",
   });
 
   const [vet, setVet] = useState("");
@@ -126,10 +127,21 @@ function handleSubmit() {
            <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>
+          <br/>
+          <br/>
+          <br/>
+        <h3>Don't see your Vet? Add below</h3>
+          <Form.Input
+            placeholder="Vet Name"
+            name="newVet"
+            value={formData.newVet}
+            onChange={handleChange}
+          />
+       
+
+       
       </Form>
     </div>
-
-
 
     )
     }
