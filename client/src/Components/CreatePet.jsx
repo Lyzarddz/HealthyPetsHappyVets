@@ -19,6 +19,14 @@ const CreatePet = ({ addPet }) => {
 
   const [vet, setVet] = useState("");
 
+  const [value, setValue] = useState('');
+
+  const handleChangeAge = event => {
+    const result = event.target.value.replace(/\D/g, '');
+
+    setValue(result);
+  };
+
     // useEffect(() => {
   //   fetch("http://localhost:3000/vet")
   //   .then((resp) => resp.json())
@@ -27,7 +35,6 @@ const CreatePet = ({ addPet }) => {
   //   })
      
   // } , [])
-  
 
 
   function handleChange(event) {
@@ -85,8 +92,9 @@ function handleSubmit() {
             label="Age"
             placeholder="Age"
             name="age"
-            value={formData.age}
-            onChange={handleChange}
+            type='text'
+            value={value}
+            onChange={handleChangeAge}
           />
            <br></br>
 
