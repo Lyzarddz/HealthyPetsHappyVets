@@ -6,12 +6,12 @@ class OwnersController < ApplicationController
         owner= Owner.create!(owner_params)
         session[:owner_id] = owner.id
         render json: owner, status: :created
-    end
+    end 
 
     def show
         render json: @current_owner
     end
-
+ 
     private
 
     def owner_params

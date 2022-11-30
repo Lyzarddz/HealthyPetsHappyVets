@@ -4,9 +4,6 @@ import PetCard from './PetCard';
 
 const PetList = ( { pet } ) => {
 
-
-
-
     const cards= pet.map((p)=> {
         return(
             <PetCard
@@ -18,11 +15,10 @@ const PetList = ( { pet } ) => {
   
     return (
       <Card>
+        <h1 className='primary'>My Pets</h1>
 
-<h1 className='primary'>My Pets</h1>
           {cards}
 
-         
       </Card>
     )
   }

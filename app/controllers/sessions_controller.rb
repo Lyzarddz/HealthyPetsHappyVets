@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
     skip_before_action :authorize, only: :create
 
     def create 
-        owner= Owner.find_by(username: params[:username])
+        owner = Owner.find_by_username(params[:username])
         if owner&.authenticate(params[:password])
-            session[:owner_id] = owner.index
+            session[:owner_id] = owner.id 
             render json: owner,  status: :created
         else
             render json: {errors:["Invalid username or password"]}, status: :unauthorized

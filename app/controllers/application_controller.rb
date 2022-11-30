@@ -1,11 +1,17 @@
 class ApplicationController < ActionController::API
+
+  before_action :authorize
+
   include ActionController::Cookies
 
 rescue_from ActiveRecord::RecordInvalid, with: :unproccesable_entity_resp
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_resp
 
-before_action :authorize
 
+
+def current_owner
+  @current_owner ||= Owner.find_by(id: session[:owner_id])    #memoization 
+end
 
 
 private 
@@ -19,8 +25,7 @@ def not_found_resp
 end
 
 def authorize
-  @current_owner ||= Owner.find_by(id: session[:owner_id])    #memoization
-  render json: {errors:["Not Authorized"]}, status: :unauthorized unless @current_owner
+  render json: {errors:{Owner: "Not Authorized"}}, status: :unauthorized unless @current_owner
 end
 
 end

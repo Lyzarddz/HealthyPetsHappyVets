@@ -28,14 +28,14 @@ const CreatePet = ({ addPet }) => {
     setValue(result);
   };
 
-    // useEffect(() => {
-  //   fetch("http://localhost:3000/vet")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setVetLoad(data)
-  //   })
+    useEffect(() => {
+    fetch("http://localhost:3000/vets")
+    .then((resp) => resp.json())
+    .then((data)=> {
+      setVet(data)
+    })
      
-  // } , [])
+  } , [])
 
    
  

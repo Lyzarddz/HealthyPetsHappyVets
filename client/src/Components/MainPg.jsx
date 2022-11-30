@@ -1,6 +1,4 @@
 
-
-
 const MainPg = ({ loggedIn }) => {
 
     const myStyles = {

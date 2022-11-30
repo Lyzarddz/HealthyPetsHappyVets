@@ -13,13 +13,13 @@ import PetList from './Components/PetList';
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn]  = useState(true);
+  const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
 
 
   // useEffect(() => {
-  //   fetch("http://localhost:3000/pet")
+  //   fetch("http://localhost:3000/pets")
   //   .then((resp) => resp.json())
   //   .then((data)=> {
   //     setPetLoad(data)
