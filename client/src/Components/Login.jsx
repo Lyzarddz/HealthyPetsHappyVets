@@ -1,28 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+
 const Login = ({ loginUser, addErrors, clearErrors }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [users, setUsers] = useState([]);
+  
   
     const navigate = useNavigate();
+
+
+    const [formData, setFormData] = useState({
+      username:'',
+      password:''
+  })
+
+  const [errors, setErrors] = useState([])
+
+  const {username, password} = formData;
   
-    const handleChange = e => {
-      setUsername(e.target.value);
+  function handleSubmit(e){
+    e.preventDefault();
+
+    const owner = {
+      username,
+      password
     }
+
   
-    const handleSubmit = e => {
-      e.preventDefault();
-  
-      const user = users.find(user => user.username.toLowerCase() === username.toLowerCase());
-      if(user) {
-        loginUser(user);
-        navigate("/")
-      } else {
-        addErrors(["Username did not match anything in the database"])
+    fetch('http://localhost:3000/owners', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({owner})
+    }) 
+    .then(res => {
+      if(res.ok){
+          res.json().then(owner => {
+            loginUser(owner)
+              navigate((`/pets`))
+          })
+      }else {
+        res.json().then(json => setErrors(json.errors))
       }
-    }
+  })
+ 
+}   const handleChange = (e) => {
+  const { name, value } = e.target
+  setFormData({ ...formData, [name]: value })
+}
 
     useEffect(() => {
         return () => {
@@ -41,7 +67,7 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
           </div>
           <div>
         <label htmlFor="password">Password: </label>
-        <input type="text" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="text" name="password" id="password" value={password} onChange={handleChange} />
         </div> 
           <br></br>
           <input type="submit" value="Login" />

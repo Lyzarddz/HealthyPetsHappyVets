@@ -13,7 +13,7 @@ import PetList from './Components/PetList';
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn]  = useState(false);
+  const [loggedIn, setLoggedIn]  = useState(true);
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
 
@@ -55,10 +55,10 @@ function App() {
   useEffect(() => {
     const userId = localStorage.getItem('user_id')
     if (userId && !loggedIn) {
-      fetch('http://localhost:3000/users/' + userId )
+      fetch('http://localhost:3000/owners/' + userId )
       .then(resp => resp.json())
       .then(data => loginUser(data))
-  
+
     }
   
   }, [loggedIn])
