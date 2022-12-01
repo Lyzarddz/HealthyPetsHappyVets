@@ -8,9 +8,8 @@ rescue_from ActiveRecord::RecordInvalid, with: :unproccesable_entity_resp
 rescue_from ActiveRecord::RecordNotFound, with: :not_found_resp
 
 
-
 def current_owner
-  @current_owner ||= Owner.find_by(id: session[:owner_id])    #memoization 
+  @current_owner ||= Owner.find_by_id(session[:owner_id])    #memoization 
 end
 
 

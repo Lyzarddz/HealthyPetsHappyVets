@@ -8,11 +8,11 @@ const PetCard = ( { pet } ) => {
   return (
     <Card>
         
-        <div className="content">
+        <div className="content" >
         <h1>  <div className="header"> {pet.name}</div> </h1>
         </div>
         <h3>
-        <div className="extra content">
+        <div className="extra content" >
             <ul>
             Species: {pet.species}
             <br></br>

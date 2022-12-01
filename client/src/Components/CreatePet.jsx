@@ -29,7 +29,7 @@ const CreatePet = ({ addPet }) => {
   };
 
     useEffect(() => {
-    fetch("http://localhost:3000/vets")
+    fetch("http://localhost:3000/vet")
     .then((resp) => resp.json())
     .then((data)=> {
       setVet(data)

@@ -25,22 +25,24 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
       password
     }
 
+    console.log(JSON.stringify(owner));
   
-    fetch('http://localhost:3000/owners', {
+    fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify({owner})
+      body: JSON.stringify(owner)
     }) 
     .then(res => {
       if(res.ok){
           res.json().then(owner => {
-            loginUser(owner)
+              loginUser(owner)
               navigate((`/pets`))
           })
       }else {
+        console.log(res)
         res.json().then(json => setErrors(json.errors))
       }
   })

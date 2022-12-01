@@ -13,7 +13,7 @@ import PetList from './Components/PetList';
 function App() {
 
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn]  = useState(true);
+  const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
 
@@ -32,8 +32,9 @@ function App() {
     setPetLoad([pet,...petLoad])
   }
 
+
   function loginUser (user) {
-    setCurrentUser(user);
+    setCurrentUser(user); 
     setLoggedIn(true);
     localStorage.setItem('user_id', user.id);
   }
@@ -52,16 +53,16 @@ function App() {
    setErrors([]);
  }
 
-  useEffect(() => {
-    const userId = localStorage.getItem('user_id')
-    if (userId && !loggedIn) {
-      fetch('http://localhost:3000/owners/' + userId )
-      .then(resp => resp.json())
-      .then(data => loginUser(data))
+  // useEffect(() => {
+  //   const userId = localStorage.getItem('user_id')
+  //   if (userId && !loggedIn) {
+  //     fetch('http://localhost:3000/owners/' + userId )
+  //     .then(resp => resp.json())
+  //     .then(data => loginUser(data))
 
-    }
+  //   }
   
-  }, [loggedIn])
+  // }, [loggedIn])
 
   return (
     <Router>

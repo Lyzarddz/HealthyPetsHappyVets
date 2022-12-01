@@ -1,7 +1,5 @@
 class VetsController < ApplicationController
 
-   
-
 
     def index 
         render json: Vet.all, status: :ok
