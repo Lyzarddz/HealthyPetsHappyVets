@@ -1,9 +1,13 @@
 import React from 'react';
 import { Card } from "semantic-ui-react";
+import Button from '@material-ui/core/Button';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 const PetCard = ( { pet } ) => {
+
+  console.log(pet)
 
   return (
     <Card>
@@ -13,13 +17,17 @@ const PetCard = ( { pet } ) => {
         </div>
         <h3>
         <div className="extra content" >
+       
             <ul>
+            Name: {pet.name}
+              <br/>
             Species: {pet.species}
             <br></br>
              Age: {pet.age}    
            <br></br>
             Vet: {pet.vet}
             </ul>
+            <Button color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 
             <br></br>
             <br></br>
         </div>

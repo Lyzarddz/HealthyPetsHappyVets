@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 const PetList = ( { pet } ) => {
+  
+  console.log(pet)
 
     const cards= pet.map((p)=> {
         return(
