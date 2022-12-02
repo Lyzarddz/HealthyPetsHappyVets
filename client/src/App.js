@@ -9,6 +9,7 @@ import StyleSheet from './Components/StyleSheet';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import PetList from './Components/PetList';
+import Records from './Components/Records';
 
 function App() {
 
@@ -59,7 +60,6 @@ function App() {
   //     fetch('http://localhost:3000/owners/' + userId )
   //     .then(resp => resp.json())
   //     .then(data => loginUser(data))
-
   //   }
   
   // }, [loggedIn])
@@ -75,6 +75,7 @@ function App() {
      <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} />} />
      <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList pet={petLoad} />} />
+     <Route path="/records"  element= {<Records pet={petLoad} />} />
     </Routes>
     </Router> 
   

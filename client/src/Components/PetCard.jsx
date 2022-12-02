@@ -1,16 +1,14 @@
 import React from 'react';
-import { Card } from "semantic-ui-react";
+import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
 import { Link, useNavigate } from 'react-router-dom';
-
-
 
 const PetCard = ( { pet } ) => {
 
   console.log(pet)
 
   return (
-    <Card>
+    <Card variant="outlined">
         
         <div className="content" >
         <h1>  <div className="header"> {pet.name}</div> </h1>
@@ -27,7 +25,8 @@ const PetCard = ( { pet } ) => {
            <br></br>
             Vet: {pet.vet}
             </ul>
-            <Button color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 
+            <Button variant="outlined" color="inherit" to="/Records" component={ Link } >All Records</Button>
+            <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 
             <br></br>
             <br></br>
         </div>
@@ -37,3 +36,8 @@ const PetCard = ( { pet } ) => {
 }
 
 export default PetCard;
+
+
+
+
+

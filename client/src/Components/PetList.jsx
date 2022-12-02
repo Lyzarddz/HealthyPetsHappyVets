@@ -22,6 +22,8 @@ const PetList = ( { pet } ) => {
         <h1 className='primary'>My Pets</h1>
           {cards}
 
+<br/>
+<br/>
   <Button  className="primary" variant="contained" to="/createPet" component={ Link } disableElevation>
      Add New Pet
     </Button>
