@@ -25,7 +25,6 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
       password
     }
 
-    console.log(JSON.stringify(owner));
   
     fetch('http://localhost:3000/login', {
       method: 'POST',

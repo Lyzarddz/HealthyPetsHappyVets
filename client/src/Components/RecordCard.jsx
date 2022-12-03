@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { Form } from "semantic-ui-react";
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
-import { Link, useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const Records = ( ) => {
+const RecordCard = ( ) => {
 
-    const navigate = useNavigate();
-    
   return (
 
     <Card variant="outlined">
@@ -40,4 +37,4 @@ const Records = ( ) => {
   )
 }
 
-export default Records;
+export default RecordCard;

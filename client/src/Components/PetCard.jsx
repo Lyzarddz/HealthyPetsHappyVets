@@ -2,16 +2,15 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const PetCard = ( { pet } ) => {
 
-  console.log(pet)
 
   return (
     <Card variant="outlined">
         
         <div className="content" >
-        <h1>  <div className="header"> {pet.name}</div> </h1>
         </div>
         <h3>
         <div className="extra content" >
@@ -29,6 +28,10 @@ const PetCard = ( { pet } ) => {
             <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 
             <br></br>
             <br></br>
+
+            <Button variant="outlined" color="inherit"  > 
+            <DeleteIcon/> Delete Pet</Button> 
+      
         </div>
         </h3>
     </Card>

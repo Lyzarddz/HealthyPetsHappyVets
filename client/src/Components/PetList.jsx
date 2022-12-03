@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 
 const PetList = ( { pet } ) => {
   
-  console.log(pet)
 
     const cards= pet.map((p)=> {
         return(

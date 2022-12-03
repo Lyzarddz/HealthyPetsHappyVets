@@ -9,7 +9,8 @@ import StyleSheet from './Components/StyleSheet';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import PetList from './Components/PetList';
-import Records from './Components/Records';
+import RecordList from './Components/RecordList';
+
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
   const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
+  const [recordLoad, setRecordLoad] = useState([]);
 
 
   // useEffect(() => {
@@ -28,9 +30,24 @@ function App() {
      
   // } , [])
 
+
+    // useEffect(() => {
+  //   fetch("http://localhost:3000/records")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setRecordLoad(data)
+  //   })
+     
+  // } , [])
+
+ 
  
   function addPet(pet){
     setPetLoad([pet,...petLoad])
+  }
+
+  function addRecord(record){
+    setRecordLoad([record,...recordLoad])
   }
 
 
@@ -72,10 +89,10 @@ function App() {
      <Route path="/" element= {<MainPg loggedIn={loggedIn}/>} />
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
-     <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord}/>} />
      <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList pet={petLoad} />} />
-     <Route path="/records"  element= {<Records pet={petLoad} />} />
+     <Route path="/records"  element= {<RecordList record={recordLoad} />} />
     </Routes>
     </Router> 
   
