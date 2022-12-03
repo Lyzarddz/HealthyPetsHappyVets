@@ -9,15 +9,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const Records = ( ) => {
 
     const navigate = useNavigate();
+    
   return (
+
     <Card variant="outlined">
         
         <div className="content" >
         </div>
         <h3>
+         Record Date:
         <div className="extra content" >
        
             <ul>
+         <br/>
           Vaccine(s):
               <br/>
             Prevention:
