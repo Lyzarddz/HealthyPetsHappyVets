@@ -1,5 +1,9 @@
 class RecordsController < ApplicationController
 
+    
+    skip_before_action :authorize, only: [:create]
+
+
     def index 
         render json: Record.all, status: :ok
     end

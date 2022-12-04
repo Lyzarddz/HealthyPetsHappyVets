@@ -50,17 +50,26 @@ function App() {
     setRecordLoad([record,...recordLoad])
   }
 
+  function updateRecord(updatedRecord){
+     setRecordLoad(current => {
+      return current.map(record => {
+        if (record.id === updatedRecord.id) {
+          return updatedRecord
+        } else {
+            return record
+          }
+    })
+  })
+
 
   function loginUser (user) {
     setCurrentUser(user); 
     setLoggedIn(true);
-    localStorage.setItem('user_id', user.id);
   }
   
   function logoutUser () {
     setCurrentUser({});
     setLoggedIn(false);
-    localStorage.removeItem('user_id');
   }
 
   function addErrors (errors) {
@@ -70,6 +79,8 @@ function App() {
  const clearErrors = () => {
    setErrors([]);
  }
+
+ const deleteRecord = (id) => {setRecordLoad(current => current.filter(r => r.id !== id))}
 
   // useEffect(() => {
   //   const userId = localStorage.getItem('user_id')

@@ -1,5 +1,6 @@
 class VetsController < ApplicationController
-
+    
+    skip_before_action :authorize, only: [:create]
 
     def index 
         render json: Vet.all, status: :ok

@@ -11,15 +11,15 @@ const CreatePet = ({ addPet }) => {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    name: '',
     species: "",
     age: "",
-    vet: "",    
+    vet_id: "",    
     newVet: "",
   });
 
   const [vet, setVet] = useState("");
-
+  const [errors, setErrors] = useState([])
   const [value, setValue] = useState('');
 
   const handleChangeAge = event => {
@@ -50,11 +50,14 @@ const CreatePet = ({ addPet }) => {
     });
   }
 
+  const {name, species, age} = formData;
+
+
   function handleSubmitVet(){
+
     const newVet = {
         name: vet.name
     }
-
     fetch("http://localhost:3000/vets", {
         method: "POST",
         headers: {
@@ -68,13 +71,13 @@ const CreatePet = ({ addPet }) => {
     }
     
 
-function handleSubmit() {
+function handleSubmit(e) {
+e.preventDefault();
 
   const newPet = {
-    name: formData.name,
-    species: formData.species,
-    age: formData.age,
-    vet: formData.vet
+    name,
+    species,
+    age,
  };
 
 
@@ -82,13 +85,29 @@ function handleSubmit() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json"
     },
     body: JSON.stringify(newPet),
   })
-    .then((r) => r.json())
-    .then(addPet);
-    navigate("/pets");
+  .then(res => {
+    if(res.ok){
+        res.json().then(newPet => {
+            addPet(newPet)
+            navigate((`/pets`))
+        })
+    }else {
+      console.log(res)
+      res.json().then(json => setErrors(json.errors))
+    }
+})
 }
+
+
+
+//     .then((r) => r.json())
+//     .then(addPet);
+//     navigate("/pets");
+// }
 
     return (
          <div className='primary'>
@@ -121,13 +140,13 @@ function handleSubmit() {
           />
            <br></br>
 
-           <Box sx={{ maxWidth: 150 }} paddingLeft="835px">
+           <Box sx={{ maxWidth: 150 }} paddingLeft="850px">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Vet</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={value}
+          value={formData.vet_id}
           label="Vet"
           onChange={handleChange}
         >
