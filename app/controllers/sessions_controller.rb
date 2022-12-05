@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
         owner = Owner.find_by_username(params[:username])
       
         if owner&.authenticate(params[:password])
+            puts owner.id
             session[:owner_id] = owner.id  
             render json: owner,  status: :ok
         else

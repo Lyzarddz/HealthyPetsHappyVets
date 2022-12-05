@@ -16,6 +16,8 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
   const [errors, setErrors] = useState([])
 
   const {username, password} = formData;
+
+  
   
   function handleSubmit(e){
     e.preventDefault();
@@ -43,10 +45,14 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
       }else {
         console.log(res)
         res.json().then(json => setErrors(json.errors))
+    
       }
   })
  
-}   const handleChange = (e) => {
+}   
+
+
+  const handleChange = (e) => {
   const { name, value } = e.target
   setFormData({ ...formData, [name]: value })
 }

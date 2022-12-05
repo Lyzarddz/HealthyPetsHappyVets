@@ -14,7 +14,9 @@ class PetsController < ApplicationController
     def create
         pet = Pet.create!(pet_params)
         render json: pet, status: :created
+        
     end
+ 
 
     def destroy
         pet = Pet.find(params[:id])
@@ -25,6 +27,6 @@ class PetsController < ApplicationController
     private
 
     def pet_params
-        params.permit(:name, :species, :age, :vet_id)
+        params.permit(:name, :species, :age, :vet_id, :owner_id )
     end
 end

@@ -42,7 +42,7 @@ function App() {
 
  
  
-  function addPet(pet){
+  function addPet(pet, user){
     setPetLoad([pet,...petLoad])
   }
 
@@ -50,16 +50,16 @@ function App() {
     setRecordLoad([record,...recordLoad])
   }
 
-  function updateRecord(updatedRecord){
-     setRecordLoad(current => {
-      return current.map(record => {
-        if (record.id === updatedRecord.id) {
-          return updatedRecord
-        } else {
-            return record
-          }
-    })
-  })
+  // function updateRecord(updatedRecord){
+  //    setRecordLoad(current => {
+  //     return current.map(record => {
+  //       if (record.id === updatedRecord.id) {
+  //         return updatedRecord
+  //       } else {
+  //           return record
+  //         }
+  //   })
+  // })
 
 
   function loginUser (user) {
@@ -75,6 +75,8 @@ function App() {
   function addErrors (errors) {
     setErrors(errors);
  }
+
+ console.log(currentUser)
  
  const clearErrors = () => {
    setErrors([]);
@@ -97,13 +99,13 @@ function App() {
     <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
     <Errors errors= {errors} />
     <Routes>
-     <Route path="/" element= {<MainPg loggedIn={loggedIn}/>} />
+     <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
-     <Route path="/createRecord"  element= {<CreateRecord clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord}/>} />
-     <Route path="/createPet"  element= {<CreatePet clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList pet={petLoad} />} />
-     <Route path="/records"  element= {<RecordList record={recordLoad} />} />
+     <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord}/>} />
+     <Route path="/createPet"  element= {<CreatePet  user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
+     <Route path="/pets"  element= {<PetList  user={currentUser}  pet={petLoad} />} />
+     <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} />} />
     </Routes>
     </Router> 
   

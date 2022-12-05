@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-const CreatePet = ({ addPet }) => {
+const CreatePet = ({ addPet , user }) => {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -16,17 +16,13 @@ const CreatePet = ({ addPet }) => {
     age: "",
     vet_id: "",    
     newVet: "",
+    owner_id: "",
   });
 
   const [vet, setVet] = useState("");
   const [errors, setErrors] = useState([])
   const [value, setValue] = useState('');
 
-  const handleChangeAge = event => {
-    const result = event.target.value.replace(/\D/g, '');
-
-    setValue(result);
-  };
 
   //   useEffect(() => {
   //   fetch("http://localhost:3000/vet")
@@ -74,19 +70,25 @@ const CreatePet = ({ addPet }) => {
 function handleSubmit(e) {
 e.preventDefault();
 
+  const owner_id = user["id"];
+
   const newPet = {
     name,
     species,
     age,
+    owner_id, 
  };
 
+ console.log(user)
 
  fetch("http://localhost:3000/pets", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json", 
+      "Access-Control-Allow-Origin": "http://localhost:3000",
     },
+    credentials: "include",
     body: JSON.stringify(newPet),
   })
   .then(res => {
@@ -135,8 +137,8 @@ e.preventDefault();
             placeholder="Age"
             name="age"
             type='text'
-            value={value}
-            onChange={handleChangeAge}
+            value={formData.age}
+            onChange={handleChange}
           />
            <br></br>
 
