@@ -41,7 +41,7 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
       if(res.ok){
           res.json().then(owner => {
               loginUser(owner)
-             loadPets()
+            //  loadPets()
               navigate((`/pets`))
           })
       }else {

@@ -18,20 +18,20 @@ const CreatePet = ({ addPet , user }) => {
     vet_id: "",    
     owner_id: "",
   });
-
-  const [vet, setVet] = useState("");
+  const [addVet, setAddVet] = useState("")
+ 
   const [errors, setErrors] = useState([])
   const [value, setValue] = useState('');
 
 
-    useEffect(() => {
-    fetch("http://localhost:3000/vets")
-    .then((resp) => resp.json())
-    .then((data)=> {
-      setVet(data)
-    })
+  //   useEffect(() => {
+  //   fetch("http://localhost:3000/vet")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setVet(data)
+  //   })
      
-  } , [])
+  // } , [])
 
    
  
@@ -49,22 +49,22 @@ const CreatePet = ({ addPet , user }) => {
   const {name, species, age, vet_id } = formData;
 
 
-  // function handleSubmitVet(){
+  function handleSubmitVet(){
 
-  //   const newVet = {
-  //       name: vet.name
-  //   }
-  //   fetch("http://localhost:3000/vets", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(newVet),
-  //     })
-  //       .then((r) => r.json())
-  //       .then(addVet);
-  //       window.location.reload(false)
-  //   }
+    const newVet = {
+        name: vet_id
+    }
+    fetch("http://localhost:3000/vets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVet),
+      })
+        .then((r) => r.json())
+        .then(addVet);
+        window.location.reload(false)
+    }
     
 
 function handleSubmit(e) {
@@ -79,6 +79,7 @@ e.preventDefault();
     owner_id, 
     vet_id
  };
+
 
 
  fetch("http://localhost:3000/pets", {
@@ -102,6 +103,7 @@ e.preventDefault();
       res.json().then(json => setErrors(json.errors))
     }
 })
+handleSubmitVet()
 }
 
 

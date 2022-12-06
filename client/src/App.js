@@ -22,18 +22,41 @@ function App() {
 
 console.log(petLoad)
 
+
+function loadPets() {
+ 
+fetch("http://localhost:3000/pets", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json", 
+    "Access-Control-Allow-Origin": "http://localhost:3000",
+  },
+  credentials: "include"
+})
+.then(res => {
+  if(res.ok){
+      res.json().then(pets => {
+          setPetLoad(Object.keys(pets))
+      })
+  }else {
+    console.log(res)
+    res.json().then(json => setErrors(json.errors))
+  }
+})
+}
+
+
   // useEffect(() => {
 
-
-  function loadPets(){
-    fetch("http://localhost:3000/pets")
-    .then((resp) => resp.json())
-    .then((data)=> {
-      setPetLoad(Object.keys(data))
-    })
-  }
+  // function loadPets(){
+  //   fetch("http://localhost:3000/pets")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setPetLoad(Object.keys(data))
+  //   })
+  // }
   // } , [])
-
 
 
 console.log(petLoad)
@@ -52,7 +75,7 @@ console.log(petLoad)
   // console.log(petNames)
  
  
-  function addPet(pet, user){
+  function addPet(pet){
     setPetLoad([pet,...petLoad])
   }
 
@@ -85,7 +108,6 @@ console.log(petLoad)
   function addErrors (errors) {
     setErrors(errors);
  }
-
 
  
  const clearErrors = () => {
