@@ -20,17 +20,23 @@ function App() {
   const [petLoad, setPetLoad] = useState([]);
   const [recordLoad, setRecordLoad] = useState([]);
 
+console.log(petLoad)
 
   // useEffect(() => {
-  //   fetch("http://localhost:3000/pets")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setPetLoad(data)
-  //   })
-     
+
+
+  function loadPets(){
+    fetch("http://localhost:3000/pets")
+    .then((resp) => resp.json())
+    .then((data)=> {
+      setPetLoad(Object.keys(data))
+    })
+  }
   // } , [])
 
 
+
+console.log(petLoad)
     // useEffect(() => {
   //   fetch("http://localhost:3000/records")
   //   .then((resp) => resp.json())
@@ -40,6 +46,10 @@ function App() {
      
   // } , [])
 
+
+  // const petNames = Object.keys(petLoad)
+
+  // console.log(petNames)
  
  
   function addPet(pet, user){
@@ -76,7 +86,7 @@ function App() {
     setErrors(errors);
  }
 
- console.log(currentUser)
+
  
  const clearErrors = () => {
    setErrors([]);
@@ -94,13 +104,18 @@ function App() {
   
   // }, [loggedIn])
 
+
+  // const pets = petLoad.filter((pet) =>
+  // pet.name.toLowerCase().includes(search.toLowerCase())
+  // )
+
   return (
     <Router>
     <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
     <Errors errors= {errors} />
     <Routes>
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
-     <Route path="/login" element= {<Login clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors}/>} />
+     <Route path="/login" element= {<Login clearErrors={ clearErrors } loadPets={loadPets} loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />

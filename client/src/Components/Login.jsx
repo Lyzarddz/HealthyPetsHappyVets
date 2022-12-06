@@ -1,8 +1,9 @@
+import { LocalFireDepartmentSharp } from '@mui/icons-material';
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const Login = ({ loginUser, addErrors, clearErrors }) => {
+const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
   
   
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
       if(res.ok){
           res.json().then(owner => {
               loginUser(owner)
+             loadPets()
               navigate((`/pets`))
           })
       }else {
@@ -50,7 +52,6 @@ const Login = ({ loginUser, addErrors, clearErrors }) => {
   })
  
 }   
-
 
   const handleChange = (e) => {
   const { name, value } = e.target

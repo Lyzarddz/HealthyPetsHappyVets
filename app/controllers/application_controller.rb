@@ -15,13 +15,13 @@ end
 
 private 
 
-def unproccesable_entity_resp(exception)
-render json: {errors: exception.record.errors.full_messages}, status: :unproccesable_entity
-end
-
-# def not_found_resp  
-#   render json: {errors: "Not Found"}, status: :not_found
+# def unproccesable_entity_resp(exception)
+# render json: {errors: exception.record.errors.full_messages}, status: :unproccesable_entity
 # end
+
+def not_found_resp  
+  render json: {errors: "Not Found"}, status: :not_found
+end
 
 def authorize
   render json: {errors:{Owner: "Not Authorized"}}, status: :unauthorized unless current_owner

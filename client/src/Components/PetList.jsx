@@ -7,12 +7,14 @@ import Button from '@material-ui/core/Button';
 const PetList = ( { pet } ) => {
   
 
-    const cards= pet.map((p)=> {
+    const cards= pet.map((p, idx)=> {
         return(
+          <div key={idx}>
             <PetCard
-            key={p.id}
+            key={idx}
             pet={p}
           />
+          </div>
         )
     })  
   
@@ -20,13 +22,11 @@ const PetList = ( { pet } ) => {
       <Card>
         <h1 className='primary'>My Pets</h1>
           {cards}
-
-<br/>
-<br/>
+    <br/>
+    <br/>
   <Button  className="primary" variant="contained" to="/createPet" component={ Link } disableElevation>
      Add New Pet
     </Button>
-
       </Card>
     )
   }

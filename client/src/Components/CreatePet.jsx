@@ -10,12 +10,12 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 const CreatePet = ({ addPet , user }) => {
 
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     species: "",
     age: "",
     vet_id: "",    
-    newVet: "",
     owner_id: "",
   });
 
@@ -24,20 +24,20 @@ const CreatePet = ({ addPet , user }) => {
   const [value, setValue] = useState('');
 
 
-  //   useEffect(() => {
-  //   fetch("http://localhost:3000/vet")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setVet(data)
-  //   })
+    useEffect(() => {
+    fetch("http://localhost:3000/vets")
+    .then((resp) => resp.json())
+    .then((data)=> {
+      setVet(data)
+    })
      
-  // } , [])
+  } , [])
 
    
  
-  function addVet(vet){
-    setVet([vet,...vet])
-  }
+  // function addVet(vet){
+  //   setVet([vet,...vet])
+  // }
 
   function handleChange(event) {
     setFormData({
@@ -46,25 +46,25 @@ const CreatePet = ({ addPet , user }) => {
     });
   }
 
-  const {name, species, age} = formData;
+  const {name, species, age, vet_id } = formData;
 
 
-  function handleSubmitVet(){
+  // function handleSubmitVet(){
 
-    const newVet = {
-        name: vet.name
-    }
-    fetch("http://localhost:3000/vets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newVet),
-      })
-        .then((r) => r.json())
-        .then(addVet);
-        window.location.reload(false)
-    }
+  //   const newVet = {
+  //       name: vet.name
+  //   }
+  //   fetch("http://localhost:3000/vets", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(newVet),
+  //     })
+  //       .then((r) => r.json())
+  //       .then(addVet);
+  //       window.location.reload(false)
+  //   }
     
 
 function handleSubmit(e) {
@@ -77,9 +77,9 @@ e.preventDefault();
     species,
     age,
     owner_id, 
+    vet_id
  };
 
- console.log(user)
 
  fetch("http://localhost:3000/pets", {
     method: "POST",
@@ -103,6 +103,11 @@ e.preventDefault();
     }
 })
 }
+
+
+// function handleVetChange(event){
+//   setVet(event.currentTarget.value);
+// }
 
 
 
@@ -141,8 +146,17 @@ e.preventDefault();
             onChange={handleChange}
           />
            <br></br>
+           <Form.Input
+            label="Vet"
+            placeholder="Vet"
+            name="vet_id"
+            type='text'
+            value={formData.vet_id}
+            onChange={handleChange}
+          />
+           <br></br>
 
-           <Box sx={{ maxWidth: 150 }} paddingLeft="850px">
+           {/* <Box sx={{ maxWidth: 150 }} paddingLeft="850px">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Vet</InputLabel>
         <Select
@@ -157,7 +171,7 @@ e.preventDefault();
           <MenuItem value={vet.name}>Third vet</MenuItem>
         </Select>
       </FormControl>
-    </Box>
+    </Box> */}
            <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>
@@ -165,21 +179,21 @@ e.preventDefault();
           <br/>
           <br/>
           </Form>
-          <div>
+          {/* <div>
           <Form onSubmit={handleSubmitVet}>
         <h3>Don't see your Vet? Add below</h3>
           <Form.Input
             placeholder="Vet Name"
             name="newVet"
             value={formData.newVet}
-            onChange={handleChange}
+            onChange={handleVetChange}
           />
           <br/>
           <Form.Button className="btn">Submit</Form.Button>
           </Form>
           </div>
 
-       
+        */}
       
     </div>
 
