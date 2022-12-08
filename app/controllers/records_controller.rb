@@ -33,6 +33,6 @@ class RecordsController < ApplicationController
     private
 
     def record_params
-        params.permit(:vaccine, :prevention, :altered, :notes)
+        params.permit(:vaccine, :prevention, :altered, :notes, :pet_id)
     end
 end

@@ -8,16 +8,18 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
-const CreateRecord = ({ addRecord }) => {
+const CreateRecord = ({ addRecord, pet }) => {
+
+  console.log(pet)
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     vaccine: "",
     prevention: "",
     altered: "",
-    notes: ""
+    notes: "",
+    pet_id: "",
   });
-
 
   const [value, setValue] = useState('');
 
@@ -29,14 +31,19 @@ const CreateRecord = ({ addRecord }) => {
     });
   }
 
+const {vaccine, prevention, altered, notes, pet_id} = formData;
 
-function handleSubmit() {
+function handleSubmit(e) {
+  e.preventDefault();
+  
+  // const pet_id = pet["id"];
 
   const newRecord = {
-    name: formData.vaccine,
-    species: formData.prevention,
-    age: formData.altered,
-    notes: formData.notes
+    vaccine,
+    prevention,
+    altered,
+    notes,
+    pet_id
  };
 
 

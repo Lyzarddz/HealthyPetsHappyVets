@@ -40,13 +40,12 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
       if(res.ok){
           res.json().then(owner => {
               loginUser(owner)
-            //  loadPets()
+            //  loadPets
               navigate((`/pets`))
           })
       }else {
         console.log(res)
         res.json().then(json => setErrors(json.errors))
-    
       }
   })
  
@@ -66,6 +65,7 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
   
     return (
       <div className='primary'>
+      <h1>{errors}</h1>
       <h1> Log In </h1> 
         <form onSubmit={ handleSubmit }>
           <div>

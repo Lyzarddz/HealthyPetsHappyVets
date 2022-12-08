@@ -58,6 +58,7 @@ useEffect(() => {
  
   return ( 
     <div className='primary'>
+      <h1>{errors}</h1>
     <h1> Create Account </h1> 
     <form onSubmit={ handleSubmit}>
       <div>

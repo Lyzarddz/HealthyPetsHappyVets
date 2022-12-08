@@ -20,7 +20,7 @@ function App() {
   const [petLoad, setPetLoad] = useState([]);
   const [recordLoad, setRecordLoad] = useState([]);
 
-console.log(petLoad)
+
 
 
 function loadPets() {
@@ -56,7 +56,8 @@ fetch("http://localhost:3000/pets", {
   //     setPetLoad(Object.keys(data))
   //   })
   // }
-  // } , [])
+  
+
 
 
 console.log(petLoad)
@@ -69,11 +70,6 @@ console.log(petLoad)
      
   // } , [])
 
-
-  // const petNames = Object.keys(petLoad)
-
-  // console.log(petNames)
- 
  
   function addPet(pet){
     setPetLoad([pet,...petLoad])
@@ -139,7 +135,7 @@ console.log(petLoad)
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loadPets={loadPets} loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
-     <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord}/>} />
+     <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList  user={currentUser}  pet={petLoad} />} />
      <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} />} />
