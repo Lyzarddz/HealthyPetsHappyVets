@@ -25,19 +25,19 @@ const CreatePet = ({ addPet , user }) => {
 
 
   //   useEffect(() => {
-  //   fetch("http://localhost:3000/vet")
+  //   fetch("http://localhost:3000/vets")
   //   .then((resp) => resp.json())
   //   .then((data)=> {
-  //     setVet(data)
+  //     setAddVet(data)
   //   })
      
   // } , [])
 
    
  
-  // function addVet(vet){
-  //   setVet([vet,...vet])
-  // }
+  function addVetToForm(vet){
+    setAddVet([vet,...vet])
+  }
 
   function handleChange(event) {
     setFormData({
@@ -96,14 +96,14 @@ e.preventDefault();
     if(res.ok){
         res.json().then(newPet => {
             addPet(newPet)
-            navigate((`/pets`))
         })
     }else {
       console.log(res)
       res.json().then(json => setErrors(json.errors))
     }
 })
-handleSubmitVet()
+// handleSubmitVet()
+navigate((`/pets`))
 }
 
 
