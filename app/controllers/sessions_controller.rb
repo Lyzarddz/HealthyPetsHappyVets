@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
     def create 
         puts params[:username]
         owner = Owner.find_by_username(params[:username])
-      
         if owner&.authenticate(params[:password])
             puts owner.id
             session[:owner_id] = owner.id  

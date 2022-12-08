@@ -7,7 +7,7 @@ class VetsController < ApplicationController
     end
 
     def show 
-        vet = Vets.find(params[:id])
+        vet = Vet.find(params[:id])
         render json: vet
     end
 
@@ -19,6 +19,6 @@ class VetsController < ApplicationController
     private
     
     def vet_params
-        params.permit(:name)
+        params.permit(:vet, :name)
     end
 end

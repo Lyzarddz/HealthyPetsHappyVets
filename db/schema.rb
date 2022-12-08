@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_18_180007) do
+ActiveRecord::Schema.define(version: 2022_12_08_164141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2022_11_18_180007) do
     t.string "vaccine"
     t.string "prevention"
     t.boolean "altered"
-    t.bigint "pets_id"
+    t.bigint "pet_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["pets_id"], name: "index_records_on_pets_id"
+    t.index ["pet_id"], name: "index_records_on_pet_id"
   end
 
   create_table "vets", force: :cascade do |t|

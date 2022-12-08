@@ -3,5 +3,4 @@ class PetSerializer < ActiveModel::Serializer
 
   has_many :records
   belongs_to :owner
-  belongs_to :pet
 end
