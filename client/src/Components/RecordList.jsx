@@ -8,12 +8,14 @@ const RecordList = ( { record } ) => {
   
 
 
-    const cards= record.map((r)=> {
+    const cards= record.map((r, idx)=> {
         return(
+          <div key={idx}>
             <RecordCard
             key={r.id}
             record={r}
           />
+          </div>
         )
     })  
   

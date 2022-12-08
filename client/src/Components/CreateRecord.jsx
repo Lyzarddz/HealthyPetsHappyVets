@@ -30,7 +30,6 @@ const CreateRecord = ({ addRecord }) => {
   }
 
 
-
 function handleSubmit() {
 
   const newRecord = {
