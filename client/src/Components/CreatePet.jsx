@@ -24,15 +24,16 @@ const CreatePet = ({ addPet , user }) => {
   const [value, setValue] = useState('');
 
 
-  //   useEffect(() => {
-  //   fetch("http://localhost:3000/vets")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setAddVet(data)
-  //   })
+    useEffect(() => {
+    fetch("http://localhost:3000/vets")
+    .then((resp) => resp.json())
+    .then((data)=> {
+      setAddVet(data)
+    })
      
-  // } , [])
+  } , [])
 
+  console.log(addVet)
    
  
   function addVetToForm(vet){
@@ -181,21 +182,21 @@ navigate((`/pets`))
           <br/>
           <br/>
           </Form>
-          {/* <div>
+          <div>
           <Form onSubmit={handleSubmitVet}>
         <h3>Don't see your Vet? Add below</h3>
           <Form.Input
             placeholder="Vet Name"
             name="newVet"
             value={formData.newVet}
-            onChange={handleVetChange}
+            onChange={handleChange}
           />
           <br/>
           <Form.Button className="btn">Submit</Form.Button>
           </Form>
           </div>
 
-        */}
+        
       
     </div>
 
