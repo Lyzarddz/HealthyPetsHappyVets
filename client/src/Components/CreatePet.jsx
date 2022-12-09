@@ -20,8 +20,8 @@ const CreatePet = ({ addPet , user }) => {
   });
 
 
-  const [addVet, setAddVet] = useState("")
- 
+  const [loadVet, setloadVet] = useState([])
+  const [search, setSearch] = useState("")
   const [errors, setErrors] = useState([])
   const [value, setValue] = useState('');
 
@@ -30,35 +30,41 @@ const CreatePet = ({ addPet , user }) => {
     fetch("http://localhost:3000/vets")
     .then((resp) => resp.json())
     .then((data)=> {
-      setAddVet(data)
+      setloadVet((data))
     })
      
   } , [])
 
-  console.log(addVet)
+  console.log(loadVet)
 
-  const vets = addVet.map((v,idx) => {
+
+  const vetSearch = loadVet.filter((vet) =>
+  vet.name.toLowerCase().includes(search.toLowerCase())
+  )
+
+
+
+  const vets = vetSearch.map((v,idx) => {
     return (
       <div key={idx}>
         <ul>
-          Vet name: {v.name}
+          {v.name}
           <br/>
-          Id: {v.id}
         </ul>
       </div>
     )
   })
 
 
-   const {id, pets, owners} = addVet
+   const {id, pets, owners} = loadVet
 
    
 
 
 
 
-  function addVetToForm(vet){
-    setAddVet([vet,...vet])
+  function loadVetToForm(vet){
+    setloadVet([vet,...vet])
   }
 
   function handleChange(event) {
@@ -90,7 +96,7 @@ const CreatePet = ({ addPet , user }) => {
       .then(res => {
         if(res.ok){
             res.json().then(newVet => {
-                addVetToForm(newVet)
+                loadVetToForm(newVet)
             })
         } else {
           console.log(res)
@@ -226,7 +232,7 @@ navigate((`/pets`))
           </Form>
           </div>
 
- {vets}
+{/* {vets} */}
       
     </div>
 
