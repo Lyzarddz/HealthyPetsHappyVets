@@ -18,6 +18,8 @@ const CreatePet = ({ addPet , user }) => {
     vet_id: "",    
     owner_id: "",
   });
+
+
   const [addVet, setAddVet] = useState("")
  
   const [errors, setErrors] = useState([])
@@ -34,8 +36,27 @@ const CreatePet = ({ addPet , user }) => {
   } , [])
 
   console.log(addVet)
+
+  const vets = addVet.map((v,idx) => {
+    return (
+      <div key={idx}>
+        <ul>
+          Vet name: {v.name}
+          <br/>
+          Id: {v.id}
+        </ul>
+      </div>
+    )
+  })
+
+
+   const {id, pets, owners} = addVet
+
    
- 
+
+
+
+
   function addVetToForm(vet){
     setAddVet([vet,...vet])
   }
@@ -50,23 +71,33 @@ const CreatePet = ({ addPet , user }) => {
   const {name, species, age, vet_id } = formData;
 
 
-  function handleSubmitVet(){
+  function handleSubmitVet(e){
+    e.preventDefault();
 
     const newVet = {
         name: vet_id
     }
+
     fetch("http://localhost:3000/vets", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+        
         },
+     
         body: JSON.stringify(newVet),
       })
-        .then((r) => r.json())
-        .then(addVet);
-        window.location.reload(false)
-    }
-    
+      .then(res => {
+        if(res.ok){
+            res.json().then(newVet => {
+                addVetToForm(newVet)
+            })
+        } else {
+          console.log(res)
+          res.json().then(json => setErrors(json.errors))
+        }
+    })
+  }
 
 function handleSubmit(e) {
 e.preventDefault();
@@ -80,8 +111,6 @@ e.preventDefault();
     owner_id, 
     vet_id
  };
-
-
 
  fetch("http://localhost:3000/pets", {
     method: "POST",
@@ -183,6 +212,7 @@ navigate((`/pets`))
           <br/>
           </Form>
           <div>
+
           <Form onSubmit={handleSubmitVet}>
         <h3>Don't see your Vet? Add below</h3>
           <Form.Input
@@ -196,7 +226,7 @@ navigate((`/pets`))
           </Form>
           </div>
 
-        
+ {vets}
       
     </div>
 

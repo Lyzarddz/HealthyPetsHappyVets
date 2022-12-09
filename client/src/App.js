@@ -58,9 +58,6 @@ fetch("http://localhost:3000/pets", {
   // }
   
 
-
-
-console.log(petLoad)
     // useEffect(() => {
   //   fetch("http://localhost:3000/records")
   //   .then((resp) => resp.json())
@@ -123,9 +120,6 @@ console.log(petLoad)
   // }, [loggedIn])
 
 
-  // const pets = petLoad.filter((pet) =>
-  // pet.name.toLowerCase().includes(search.toLowerCase())
-  // )
 
   return (
     <Router>
