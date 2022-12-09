@@ -20,10 +20,10 @@ const CreatePet = ({ addPet , user }) => {
   });
 
 
-  const [loadVet, setloadVet] = useState([])
-  const [search, setSearch] = useState("")
-  const [errors, setErrors] = useState([])
-  const [value, setValue] = useState('');
+  const [loadVet, setloadVet] = useState([]);
+  const [search, setSearch] = useState("");
+  const [errors, setErrors] = useState([]);
+
 
 
     useEffect(() => {
@@ -34,8 +34,6 @@ const CreatePet = ({ addPet , user }) => {
     })
      
   } , [])
-
-  console.log(loadVet)
 
 
   const vetSearch = loadVet.filter((vet) =>
@@ -56,11 +54,7 @@ const CreatePet = ({ addPet , user }) => {
   })
 
 
-   const {id, pets, owners} = loadVet
-
-   
-
-
+  //  const {id, pets, owners} = loadVet
 
 
   function loadVetToForm(vet){
@@ -142,11 +136,13 @@ e.preventDefault();
 navigate((`/pets`))
 }
 
+function handleSearchChange(e){
+  setSearch(e.target.value)
+}
 
-// function handleVetChange(event){
-//   setVet(event.currentTarget.value);
-// }
-
+function handleVetChange(event){
+  setloadVet(event.targe.value);
+}
 
 
 //     .then((r) => r.json())
@@ -184,32 +180,53 @@ navigate((`/pets`))
             onChange={handleChange}
           />
            <br></br>
-           <Form.Input
+           {/* <Form.Input
             label="Vet"
             placeholder="Vet"
             name="vet_id"
             type='text'
-            value={formData.vet_id}
-            onChange={handleChange}
-          />
-           <br></br>
+            value={search}
+            onChange={handleSearchChange}
+          /> */}
 
-           {/* <Box sx={{ maxWidth: 150 }} paddingLeft="850px">
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Vet</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={formData.vet_id}
-          label="Vet"
-          onChange={handleChange}
-        >
-          <MenuItem value={vet.name}>first vet</MenuItem>
-          <MenuItem value={vet.name}>second vet</MenuItem>
-          <MenuItem value={vet.name}>Third vet</MenuItem>
-        </Select>
-      </FormControl>
-    </Box> */}
+
+
+
+
+{/* <Select
+   value={""}
+   onChange={handleVetChange}
+   
+   >
+
+{vets}
+
+</Select> */}
+
+
+
+
+
+
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Vet</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              name="loadVet"
+              value={""}
+              label="Vet"
+              onChange={handleVetChange}
+            >
+              {vets.map(v => {
+                return(
+                  <MenuItem value={v}>{v}</MenuItem>
+                )
+              })}
+            </Select>
+          </FormControl>
+
+           <br></br>
            <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>
@@ -217,11 +234,20 @@ navigate((`/pets`))
           <br/>
           <br/>
           </Form>
-          <div>
 
+
+
+
+
+
+
+
+
+          <div>
           <Form onSubmit={handleSubmitVet}>
         <h3>Don't see your Vet? Add below</h3>
           <Form.Input
+            class="options"
             placeholder="Vet Name"
             name="newVet"
             value={formData.newVet}
@@ -231,9 +257,6 @@ navigate((`/pets`))
           <Form.Button className="btn">Submit</Form.Button>
           </Form>
           </div>
-
-{/* {vets} */}
-      
     </div>
 
     )
