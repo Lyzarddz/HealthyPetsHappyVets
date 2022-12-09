@@ -180,35 +180,8 @@ function handleVetChange(event){
             onChange={handleChange}
           />
            <br></br>
-           {/* <Form.Input
-            label="Vet"
-            placeholder="Vet"
-            name="vet_id"
-            type='text'
-            value={search}
-            onChange={handleSearchChange}
-          /> */}
-
-
-
-
-
-{/* <Select
-   value={""}
-   onChange={handleVetChange}
-   
-   >
-
-{vets}
-
-</Select> */}
-
-
-
-
-
-
-          <FormControl fullWidth>
+      
+          <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Vet</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -225,7 +198,6 @@ function handleVetChange(event){
               })}
             </Select>
           </FormControl>
-
            <br></br>
            <br></br>
         </Form.Group>
