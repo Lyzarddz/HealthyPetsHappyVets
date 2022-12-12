@@ -19,6 +19,6 @@ class VetsController < ApplicationController
     private
     
     def vet_params
-        params.permit(:vet, :name)
+        params.permit(:name)
     end
 end

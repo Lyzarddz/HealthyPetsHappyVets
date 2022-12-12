@@ -6,9 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const PetCard = ( { pet } ) => {
 
-  const {name, species, age, vet} = pet;
-
-
+ console.log(pet)
   return (
     <Card variant="outlined">
         
@@ -24,7 +22,7 @@ const PetCard = ( { pet } ) => {
             <br></br>
              Age: {pet.age}    
            <br></br>
-            Vet: {pet.vet}
+            Vet: {pet.owner.username}
             </ul>
             <Button variant="outlined" color="inherit" to="/Records" component={ Link } >All Records</Button>
             <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 

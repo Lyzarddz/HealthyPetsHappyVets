@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -12,53 +11,57 @@ const CreatePet = ({ addPet , user }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: '',
+    name: "",
     species: "",
     age: "",
     vet_id: "",    
     owner_id: "",
   });
 
-
-  const [loadVet, setloadVet] = useState([]);
-  const [search, setSearch] = useState("");
+  const [loadVet, setLoadVet] = useState([]);
+  const [chosenVet, setChosenVet] = useState("none");
   const [errors, setErrors] = useState([]);
+  
+ 
 
-
-
-    useEffect(() => {
+  useEffect(() => {
     fetch("http://localhost:3000/vets")
     .then((resp) => resp.json())
     .then((data)=> {
-      setloadVet((data))
+      setLoadVet(data);  
     })
-     
   } , [])
 
 
-  const vetSearch = loadVet.filter((vet) =>
-  vet.name.toLowerCase().includes(search.toLowerCase())
-  )
+function loadVetsData() {
+    fetch("http://localhost:3000/vets")
+    .then((resp) => resp.json())
+    .then((data)=> {
+      setLoadVet(data); 
+    })
+}
+
+  // using Object.keys only provides id values
+  //using Object.entries causes index 0 to be empty with index 1 returing proper data
+  // but still gets mapping error
+  // using Object.values still returns an object
 
 
 
-  const vets = vetSearch.map((v,idx) => {
+  const vets = loadVet.map((v,idx) => {   
+  
     return (
-      <div key={idx}>
-        <ul>
-          {v.name}
-          <br/>
-        </ul>
-      </div>
+      <MenuItem key={idx} value={JSON.stringify(v)}>
+        {v.name} 
+  
+        </MenuItem>
     )
   })
 
 
-  //  const {id, pets, owners} = loadVet
-
 
   function loadVetToForm(vet){
-    setloadVet([vet,...vet])
+    setLoadVet([vet,...vet])
   }
 
   function handleChange(event) {
@@ -84,7 +87,6 @@ const CreatePet = ({ addPet , user }) => {
           "Content-Type": "application/json",
         
         },
-     
         body: JSON.stringify(newVet),
       })
       .then(res => {
@@ -104,13 +106,23 @@ e.preventDefault();
 
   const owner_id = user["id"];
 
+  const vet_id = JSON.parse(chosenVet[0])["id"];
+
+
+
   const newPet = {
     name,
     species,
     age,
     owner_id, 
-    vet_id
- };
+    vet_id 
+  }
+
+
+  console.log(newPet)
+  console.log(vet_id)
+  console.log(chosenVet)
+
 
  fetch("http://localhost:3000/pets", {
     method: "POST",
@@ -136,13 +148,15 @@ e.preventDefault();
 navigate((`/pets`))
 }
 
-function handleSearchChange(e){
-  setSearch(e.target.value)
-}
+ 
 
 function handleVetChange(event){
-  setloadVet(event.targe.value);
+  setChosenVet([event.target.value]);
 }
+
+
+
+
 
 
 //     .then((r) => r.json())
@@ -181,21 +195,20 @@ function handleVetChange(event){
           />
            <br></br>
       
-          <FormControl sx={{ minWidth: 120 }}>
+          <FormControl sx={{ minWidth: 120 }} onClick={loadVetsData} >
             <InputLabel id="demo-simple-select-label">Vet</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              name="loadVet"
-              value={""}
+              name="chosenVet"
+              value={chosenVet}
               label="Vet"
               onChange={handleVetChange}
             >
-              {vets.map(v => {
-                return(
-                  <MenuItem value={v}>{v}</MenuItem>
-                )
-              })}
+            <MenuItem key={-1} value={"none"}>
+          Please Select Vet
+              </MenuItem>
+              {vets}
             </Select>
           </FormControl>
            <br></br>
@@ -206,20 +219,11 @@ function handleVetChange(event){
           <br/>
           <br/>
           </Form>
-
-
-
-
-
-
-
-
-
           <div>
           <Form onSubmit={handleSubmitVet}>
         <h3>Don't see your Vet? Add below</h3>
           <Form.Input
-            class="options"
+            className="options"
             placeholder="Vet Name"
             name="newVet"
             value={formData.newVet}
