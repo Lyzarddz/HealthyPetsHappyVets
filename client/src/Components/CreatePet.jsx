@@ -31,13 +31,13 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
     })
 }
 
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/vets")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setLoadVet(data);  
-  //   })
-  // } , [])
+  useEffect(() => {
+    fetch("http://localhost:3000/vets")
+    .then((resp) => resp.json())
+    .then((data)=> {
+      setLoadVet(data);  
+    })
+  } , [])
 
 
   // const vets = loadVet.map((v,idx) => {   
@@ -97,8 +97,6 @@ e.preventDefault();
 
   const vet_id = JSON.parse(chosenVet[0])["id"];
 
-
-
   const newPet = {
     name,
     species,
@@ -106,10 +104,6 @@ e.preventDefault();
     owner_id, 
     vet_id 
   }
-
-  // console.log(newPet)
-  
-  console.log(chosenVet)
 
 
  fetch("http://localhost:3000/pets", {
@@ -136,21 +130,11 @@ e.preventDefault();
 navigate((`/pets`))
 }
 
- 
 
 function handleVetChange(event){
   setChosenVet([event.target.value]);
 }
 
-
-
-
-
-
-//     .then((r) => r.json())
-//     .then(addPet);
-//     navigate("/pets");
-// }
 
     return (
          <div className='primary'>
@@ -222,7 +206,6 @@ function handleVetChange(event){
           </Form>
           </div>
     </div>
-
     )
     }
 

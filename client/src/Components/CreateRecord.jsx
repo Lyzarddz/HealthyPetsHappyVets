@@ -21,7 +21,7 @@ const CreateRecord = ({ addRecord, pet }) => {
     pet_id: "",
   });
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState();
 
 
   function handleChange(event) {
@@ -29,6 +29,10 @@ const CreateRecord = ({ addRecord, pet }) => {
       ...formData,
       [event.target.name]: event.target.value,
     });
+  }
+
+  function handleAlterChange(event) {
+    setFormData([event.target.name, event.target.value])
   }
 
 const {vaccine, prevention, altered, notes, pet_id} = formData;
@@ -88,10 +92,10 @@ function handleSubmit(e) {
           id="demo-simple-select"
           value={value}
           label="Altered"
-          onChange={handleChange}
+          onChange={handleAlterChange}
         >
-          <MenuItem value={value}>Yes</MenuItem>
-          <MenuItem value={value}>No</MenuItem>
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
 
         </Select>
       </FormControl>
