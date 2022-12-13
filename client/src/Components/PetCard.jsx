@@ -4,9 +4,14 @@ import Button from '@material-ui/core/Button';
 import { Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const PetCard = ( { pet } ) => {
+const PetCard = ( { pet , chosenVet} ) => {
 
- console.log(pet)
+
+
+
+ console.log(Object.values(chosenVet))
+
+
   return (
     <Card variant="outlined">
         
@@ -22,7 +27,7 @@ const PetCard = ( { pet } ) => {
             <br></br>
              Age: {pet.age}    
            <br></br>
-            Vet: {pet.owner.username}
+            Vet: {chosenVet[0]}
             </ul>
             <Button variant="outlined" color="inherit" to="/Records" component={ Link } >All Records</Button>
             <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 

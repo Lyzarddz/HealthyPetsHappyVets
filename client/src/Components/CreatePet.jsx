@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 
-const CreatePet = ({ addPet , user }) => {
+const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setChosenVet}) => {
 
   const navigate = useNavigate();
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -18,22 +19,11 @@ const CreatePet = ({ addPet , user }) => {
     owner_id: "",
   });
 
-  const [loadVet, setLoadVet] = useState([]);
-  const [chosenVet, setChosenVet] = useState("none");
+  // const [loadVet, setLoadVet] = useState([]);
+  // const [chosenVet, setChosenVet] = useState("none");
   const [errors, setErrors] = useState([]);
   
- 
-
-  useEffect(() => {
-    fetch("http://localhost:3000/vets")
-    .then((resp) => resp.json())
-    .then((data)=> {
-      setLoadVet(data);  
-    })
-  } , [])
-
-
-function loadVetsData() {
+  function loadVetsData() {
     fetch("http://localhost:3000/vets")
     .then((resp) => resp.json())
     .then((data)=> {
@@ -41,23 +31,22 @@ function loadVetsData() {
     })
 }
 
-  // using Object.keys only provides id values
-  //using Object.entries causes index 0 to be empty with index 1 returing proper data
-  // but still gets mapping error
-  // using Object.values still returns an object
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/vets")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setLoadVet(data);  
+  //   })
+  // } , [])
 
 
-
-  const vets = loadVet.map((v,idx) => {   
-  
-    return (
-      <MenuItem key={idx} value={JSON.stringify(v)}>
-        {v.name} 
-  
-        </MenuItem>
-    )
-  })
-
+  // const vets = loadVet.map((v,idx) => {   
+  //   return (
+  //     <MenuItem key={idx} value={JSON.stringify(v)}>
+  //       {v.name} 
+  //       </MenuItem>
+  //   )
+  // })
 
 
   function loadVetToForm(vet){
@@ -118,9 +107,8 @@ e.preventDefault();
     vet_id 
   }
 
-
-  console.log(newPet)
-  console.log(vet_id)
+  // console.log(newPet)
+  
   console.log(chosenVet)
 
 

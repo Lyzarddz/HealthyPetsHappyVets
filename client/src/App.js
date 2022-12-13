@@ -10,6 +10,7 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import PetList from './Components/PetList';
 import RecordList from './Components/RecordList';
+import MenuItem from '@mui/material/MenuItem';
 
 
 function App() {
@@ -20,6 +21,26 @@ function App() {
   const [petLoad, setPetLoad] = useState([]);
   const [recordLoad, setRecordLoad] = useState([]);
 
+
+  const [loadVet, setLoadVet] = useState([]);
+  const [chosenVet, setChosenVet] = useState("none");
+  
+
+//   function loadVetsData() {
+//     fetch("http://localhost:3000/vets")
+//     .then((resp) => resp.json())
+//     .then((data)=> {
+//       setLoadVet(data); 
+//     })
+// }
+
+const vets = loadVet.map((v,idx) => {   
+  return (
+    <MenuItem key={idx} value={JSON.stringify(v)}>
+      {v.name} 
+      </MenuItem>
+  )
+})
 
 
 
@@ -57,6 +78,7 @@ fetch("http://localhost:3000/pets", {
   //   })
   // }
   
+
 
     // useEffect(() => {
   //   fetch("http://localhost:3000/records")
@@ -130,8 +152,8 @@ fetch("http://localhost:3000/pets", {
      <Route path="/login" element= {<Login clearErrors={ clearErrors } loadPets={loadPets} loginUser={loginUser} addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
-     <Route path="/createPet"  element= {<CreatePet  user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList  user={currentUser}  pet={petLoad} />} />
+     <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
+     <Route path="/pets"  element= {<PetList  chosenVet={chosenVet} user={currentUser}  pet={petLoad} />} />
      <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} />} />
     </Routes>
     </Router> 

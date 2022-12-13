@@ -4,7 +4,7 @@ import PetCard from './PetCard';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const PetList = ( { pet } ) => {
+const PetList = ( { pet , chosenVet} ) => {
   
 
     const cards= pet.map((p, idx)=> {
@@ -13,6 +13,7 @@ const PetList = ( { pet } ) => {
             <PetCard
             key={idx}
             pet={p}
+            chosenVet= {chosenVet}
           />
           </div>
         )
