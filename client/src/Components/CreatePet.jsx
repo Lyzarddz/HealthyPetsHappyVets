@@ -31,13 +31,13 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
     })
 }
 
-  useEffect(() => {
-    fetch("http://localhost:3000/vets")
-    .then((resp) => resp.json())
-    .then((data)=> {
-      setLoadVet(data);  
-    })
-  } , [])
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/vets")
+  //   .then((resp) => resp.json())
+  //   .then((data)=> {
+  //     setLoadVet(data);  
+  //   })
+  // } , [])
 
 
   // const vets = loadVet.map((v,idx) => {   

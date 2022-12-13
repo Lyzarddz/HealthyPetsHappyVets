@@ -6,14 +6,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const PetCard = ( { pet , chosenVet} ) => {
 
-const str = JSON.stringify(chosenVet, null, 2);
 
-console.log(str);
+const vetParse = JSON.parse(chosenVet[0]);
 
-
-console.log(chosenVet)
-
-
+const vetName = vetParse.name 
 
 
   return (
@@ -31,7 +27,7 @@ console.log(chosenVet)
             <br></br>
              Age: {pet.age}    
            <br></br>
-            Vet: {chosenVet["name"]}
+            Vet: {vetName}
             </ul>
             <Button variant="outlined" color="inherit" to="/Records" component={ Link } >All Records</Button>
             <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 
