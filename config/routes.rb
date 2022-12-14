@@ -8,9 +8,10 @@ root 'sessions#home'
   resources :vets, only: [:index, :show, :create]
   resources :pets, only: [:index, :create, :show, :destroy]
   resources :owners, only: [:show, :create]
+  resources :sessions
 
   post "/signup", to: "owners#create"
-  get "/me", to:"owners#show"
+  get "/me", to: "owners#show"
   post "/login", to:"sessions#create"
   delete "/logout", to:"sessions#destroy"
   get "/vets", to:"vets#show"

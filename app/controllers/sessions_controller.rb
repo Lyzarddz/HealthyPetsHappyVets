@@ -1,12 +1,10 @@
 class SessionsController < ApplicationController
 
-    skip_before_action :authorize, only: [:create]
+    skip_before_action :authorize, only: :create
 
     def create 
-        puts params[:username]
-        owner = Owner.find_by_username(params[:username])
+        owner = Owner.find_by(username: params[:username])
         if owner&.authenticate(params[:password])
-            puts owner.id
             session[:owner_id] = owner.id  
             render json: owner,  status: :ok
         else
@@ -14,10 +12,9 @@ class SessionsController < ApplicationController
         end
     end
 
-    
 
     def destroy
-        session.delete(:owner_id)
-        head :no_content
+        session.delete :owner_id
+        render json: @current_owner
     end
 end

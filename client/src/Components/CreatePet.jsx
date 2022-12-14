@@ -24,7 +24,7 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
   const [errors, setErrors] = useState([]);
   
   function loadVetsData() {
-    fetch("http://localhost:3000/vets")
+    fetch("/vets")
     .then((resp) => resp.json())
     .then((data)=> {
       setLoadVet(data); 
@@ -32,7 +32,7 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
 }
 
   // useEffect(() => {
-  //   fetch("http://localhost:3000/vets")
+  //   fetch("/vets")
   //   .then((resp) => resp.json())
   //   .then((data)=> {
   //     setLoadVet(data);  
@@ -70,7 +70,7 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
         name: vet_id
     }
 
-    fetch("http://localhost:3000/vets", {
+    fetch("/vets", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +106,7 @@ e.preventDefault();
   }
 
 
- fetch("http://localhost:3000/pets", {
+ fetch("/pets", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -130,6 +130,7 @@ e.preventDefault();
 navigate((`/pets`))
 }
 
+ 
 
 function handleVetChange(event){
   setChosenVet([event.target.value]);
@@ -206,6 +207,7 @@ function handleVetChange(event){
           </Form>
           </div>
     </div>
+
     )
     }
 

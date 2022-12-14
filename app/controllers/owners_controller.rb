@@ -9,7 +9,7 @@ class OwnersController < ApplicationController
     end 
 
     def show
-        render json: @current_owner
+        render json: @current_owner, status: :ok
     end
  
     private

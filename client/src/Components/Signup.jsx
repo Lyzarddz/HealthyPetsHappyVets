@@ -23,7 +23,7 @@ const {username, password} = formData;
       password
     }
 
-    fetch('http://localhost:3000/owners', {
+    fetch('/owners', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -50,11 +50,11 @@ const handleChange = (e) => {
 }
 
 
-useEffect(() => {
-  return () => {
-    clearErrors();
-  }
-}, [])
+// useEffect(() => {
+//   return () => {
+//     clearErrors();
+//   }
+// }, [])
  
   return ( 
     <div className='primary'>

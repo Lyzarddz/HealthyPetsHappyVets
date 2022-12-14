@@ -51,7 +51,7 @@ function handleSubmit(e) {
  };
 
 
- fetch("http://localhost:3000/records", {
+ fetch("/records", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

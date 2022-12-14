@@ -30,11 +30,23 @@ function NavBar( {loggedIn, logoutUser}) {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  function logout(e) {
-    e.preventDefault();
-    logoutUser();
-    navigate("/");
-  }
+  // function logout(e) {
+  //   e.preventDefault();
+  //   logoutUser();
+  //   navigate("/");
+  // }
+
+function logout() {
+fetch('/logout', {
+  method: 'DELETE',
+})
+.then(r => 
+  r.json()
+)
+.then(r => {
+  console.log(r)
+})
+}
 
   function loggedInLinks(){
     return (

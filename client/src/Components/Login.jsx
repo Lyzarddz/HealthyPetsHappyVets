@@ -27,8 +27,7 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
       password
     }
 
-  
-    fetch('http://localhost:3000/login', {
+    fetch('/login', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -41,15 +40,17 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
           res.json().then(owner => {
               loginUser(owner)
             //  loadPets
-              navigate((`/pets`))
+              navigate((`/pets/`))
           })
       }else {
-        console.log(res)
+
         res.json().then(json => setErrors(json.errors))
       }
   })
- 
 }   
+
+
+
 
   const handleChange = (e) => {
   const { name, value } = e.target

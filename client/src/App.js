@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
@@ -24,10 +24,25 @@ function App() {
 
   const [loadVet, setLoadVet] = useState([]);
   const [chosenVet, setChosenVet] = useState("none");
-  
+
+
+  useEffect(() => {
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setCurrentUser(user));
+        setLoggedIn(true);
+      }
+    });
+  }, []);
+
+
+  console.log(currentUser)
+
+
 
 //   function loadVetsData() {
-//     fetch("http://localhost:3000/vets")
+//     fetch("/vets")
 //     .then((resp) => resp.json())
 //     .then((data)=> {
 //       setLoadVet(data); 
@@ -43,10 +58,8 @@ const vets = loadVet.map((v,idx) => {
 })
 
 
-
 function loadPets() {
- 
-fetch("http://localhost:3000/pets", {
+fetch("/pets", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -67,21 +80,8 @@ fetch("http://localhost:3000/pets", {
 })
 }
 
-
-  // useEffect(() => {
-
-  // function loadPets(){
-  //   fetch("http://localhost:3000/pets")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setPetLoad(Object.keys(data))
-  //   })
-  // }
-  
-
-
     // useEffect(() => {
-  //   fetch("http://localhost:3000/records")
+  //   fetch("/records")
   //   .then((resp) => resp.json())
   //   .then((data)=> {
   //     setRecordLoad(data)
@@ -115,32 +115,28 @@ fetch("http://localhost:3000/pets", {
     setLoggedIn(true);
   }
   
-  function logoutUser () {
-    setCurrentUser({});
-    setLoggedIn(false);
+  function logoutUser() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setCurrentUser(null);
+      }
+    });
   }
+
+  // function logoutUser () {
+  //   setCurrentUser({});
+  //   setLoggedIn(false);
+  // }
 
   function addErrors (errors) {
     setErrors(errors);
  }
-
  
  const clearErrors = () => {
    setErrors([]);
  }
 
  const deleteRecord = (id) => {setRecordLoad(current => current.filter(r => r.id !== id))}
-
-  // useEffect(() => {
-  //   const userId = localStorage.getItem('user_id')
-  //   if (userId && !loggedIn) {
-  //     fetch('http://localhost:3000/owners/' + userId )
-  //     .then(resp => resp.json())
-  //     .then(data => loginUser(data))
-  //   }
-  
-  // }, [loggedIn])
-
 
 
   return (
@@ -149,7 +145,7 @@ fetch("http://localhost:3000/pets", {
     <Errors errors= {errors} />
     <Routes>
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
-     <Route path="/login" element= {<Login clearErrors={ clearErrors } loadPets={loadPets} loginUser={loginUser} addErrors= {addErrors}/>} />
+     <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} clearErrors={ clearErrors } loadPets={loadPets}  addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
