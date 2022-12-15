@@ -41,6 +41,7 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
               loginUser(owner)
             //  loadPets
               navigate((`/pets/`))
+              
           })
       }else {
 
@@ -50,6 +51,11 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
 }   
 
 
+
+
+const obj = Object.fromEntries(document.cookie.split('; ').map(c => c.split('=')))
+
+console.log(obj)
 
 
   const handleChange = (e) => {

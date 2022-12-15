@@ -29,6 +29,7 @@ function App() {
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
+      console.log(r);
       if (r.ok) {
         r.json().then((user) => setCurrentUser(user));
         setLoggedIn(true);
@@ -37,7 +38,9 @@ function App() {
   }, []);
 
 
-  console.log(currentUser)
+  // console.log(currentUser)
+
+
 
 
 
@@ -119,6 +122,7 @@ fetch("/pets", {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setCurrentUser(null);
+        setLoggedIn(false)
       }
     });
   }
@@ -141,7 +145,7 @@ fetch("/pets", {
 
   return (
     <Router>
-    <NavBar loggedIn={loggedIn} logoutUser={logoutUser}/>
+    <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} logoutUser={logoutUser}/>
     <Errors errors= {errors} />
     <Routes>
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />

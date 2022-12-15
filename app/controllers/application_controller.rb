@@ -10,9 +10,9 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found_resp
 before_action :authorize
 
 
-def current_owner
-  @current_owner ||= Owner.find_by(id: session[:owner_id])    #memoization 
-end 
+# def current_owner
+#   @current_owner ||= Owner.find_by(id: session[:owner_id])    #memoization 
+# end 
 
 
 private 
@@ -26,6 +26,8 @@ def not_found_resp
 end
 
 def authorize
+  @current_owner = Owner.find_by(id: session[:owner_id])
+
   render json: {errors:{Owner: "Not Authorized"}}, status: :unauthorized unless @current_owner
 end
 

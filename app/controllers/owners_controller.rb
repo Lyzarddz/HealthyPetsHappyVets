@@ -2,6 +2,8 @@ class OwnersController < ApplicationController
 
     skip_before_action :authorize, only: :create
 
+    # before_filter :authorize, except: :show, :create
+
     def create
         owner= Owner.create!(owner_params)
         session[:owner_id] = owner.id

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function NavBar( {loggedIn, logoutUser}) {
+function NavBar( {loggedIn, logoutUser, setLoggedIn}) {
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -40,12 +40,8 @@ function logout() {
 fetch('/logout', {
   method: 'DELETE',
 })
-.then(r => 
-  r.json()
-)
-.then(r => {
-  console.log(r)
-})
+setLoggedIn(false)
+    navigate("/");
 }
 
   function loggedInLinks(){

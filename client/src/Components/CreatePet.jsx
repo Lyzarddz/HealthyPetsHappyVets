@@ -111,7 +111,7 @@ e.preventDefault();
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json", 
-      "Access-Control-Allow-Origin": "http://localhost:3000",
+      // "Access-Control-Allow-Origin": "http://localhost:4000",
     },
     credentials: "include",
     body: JSON.stringify(newPet),

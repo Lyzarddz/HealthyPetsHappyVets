@@ -10,7 +10,7 @@ use Rack::Cors do
 
  # allow all origins in development
  allow do
-   origins 'localhost:4000'
+   origins 'localhost:4000', 'localhost:3000'
    resource '*',
        :credentials => true,
        :headers => :any,
