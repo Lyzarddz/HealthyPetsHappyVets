@@ -26,15 +26,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function NavBar( {loggedIn, logoutUser, setLoggedIn}) {
+function NavBar( {loggedIn,  setLoggedIn}) {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  // function logout(e) {
-  //   e.preventDefault();
-  //   logoutUser();
-  //   navigate("/");
-  // }
 
 function logout() {
 fetch('/logout', {
