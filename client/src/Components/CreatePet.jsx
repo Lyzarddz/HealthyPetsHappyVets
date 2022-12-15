@@ -17,6 +17,7 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
     age: "",
     vet_id: "",    
     owner_id: "",
+    newVetName: ""
   });
   
   const [errors, setErrors] = useState([]);
@@ -36,7 +37,7 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
 
 
   function loadVetToForm(vet){
-    setLoadVet([vet,...loadVet])
+    setLoadVet([...loadVet, vet])
   }
 
   function handleChange(event) {
@@ -85,7 +86,7 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
   }
 
   const {name, species, age, vet_id } = formData;
-
+  
 function handleSubmit(e) {
 e.preventDefault();
 
@@ -192,13 +193,13 @@ function handleVetChange(event){
           <Form.Input
             placeholder="Vet Name"
             name="name"
-            value={newVetId.name}
+            // value={newVetId.newVet}
             onChange={handleChange}
           />
           <br/>
           <Form.Button className="btn">Submit</Form.Button>
           </Form>
-          <h1>{errors}</h1>
+        
           </div>
     </div>
 
