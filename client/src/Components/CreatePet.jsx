@@ -1,140 +1,138 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Form } from "semantic-ui-react";
-import { useNavigate } from 'react-router-dom';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useNavigate } from "react-router-dom";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setChosenVet}) => {
-
+const CreatePet = ({
+  addPet,
+  user,
+  setLoadVet,
+  vets,
+  loadVet,
+  chosenVet,
+  setChosenVet
+}) => {
   const navigate = useNavigate();
-
 
   const [formData, setFormData] = useState({
     name: "",
     species: "",
     age: "",
-    vet_id: "",    
-    owner_id: "",
-    newVetName: ""
+    vet_id: "",
+    owner_id: ""
   });
-  
+
   const [errors, setErrors] = useState([]);
   const [newVetId, setNewVetId] = useState({
     name: ""
   });
-  
 
   useEffect(() => {
     fetch("/vets")
-    .then((resp) => resp.json())
-    .then((data)=> {
-      setLoadVet(data);  
-    })
-  } , [])
+      .then((resp) => resp.json())
+      .then((data) => {
+        setLoadVet(data);
+      });
+  }, []);
 
-
-
-  function loadVetToForm(vet){
-    setLoadVet([...loadVet, vet])
+  function loadVetToForm(vet) {
+    setLoadVet([vet, ...loadVet]);
   }
 
   function handleChange(event) {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   }
 
   function handleVetFormChange(event) {
     setNewVetId({
       ...newVetId,
-      [event.target.name]: event.target.value,
-    })
-    
+      [event.target.name]: event.target.value
+    });
   }
 
-
-  function handleSubmitVet(e){
+  function handleSubmitVet(e) {
     e.preventDefault();
 
-    const newVet = {
-        name
-    }
+    var newVet = {
+      name
+    };
 
-    fetch('/vets', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(newVet),
-      })
-      .then(res => {
-        if(res.ok){
-            res.json().then(newVet => {
-                loadVetToForm(newVet)
-                alert('Vet has been added successfully')
-                window.location.reload()
-                
-            })
-        } else {
-          res.json().then(json => setErrors(json.errors))
-        }
-    })
+    newVet.name = document.getElementById("checkFix").value;
+
+    console.log(newVet);
+
+    fetch("/vets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(newVet)
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((newVet) => {
+          loadVetToForm(newVet);
+          alert("Vet has been added successfully");
+          window.location.reload();
+        });
+      } else {
+        res.json().then((json) => setErrors(json.errors));
+      }
+    });
   }
 
-  const {name, species, age, vet_id } = formData;
-  
-function handleSubmit(e) {
-e.preventDefault();
+  const { name, species, age, vet_id } = formData;
 
-  const owner_id = user["id"];
+  function handleSubmit(e) {
+    e.preventDefault();
 
-  const vet_id = JSON.parse(chosenVet[0])["id"];
+    const owner_id = user["id"];
 
-  const newPet = {
-    name,
-    species,
-    age,
-    owner_id, 
-    vet_id 
+    const vet_id = JSON.parse(chosenVet[0])["id"];
+
+    const newPet = {
+      name,
+      species,
+      age,
+      owner_id,
+      vet_id
+    };
+
+    fetch("/pets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+        // "Access-Control-Allow-Origin": "http://localhost:4000",
+      },
+      credentials: "include",
+      body: JSON.stringify(newPet)
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((newPet) => {
+          addPet(newPet);
+        });
+      } else {
+        console.log(res);
+        res.json().then((json) => setErrors(json.errors));
+      }
+    });
+    navigate(`/pets`);
   }
 
- fetch('/pets', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json", 
-      // "Access-Control-Allow-Origin": "http://localhost:4000",
-    },
-    credentials: "include",
-    body: JSON.stringify(newPet),
-  })
-  .then(res => {
-    if(res.ok){
-        res.json().then(newPet => {
-            addPet(newPet)
-        })
-    }else {
-      console.log(res)
-      res.json().then(json => setErrors(json.errors))
-    }
-})
-navigate((`/pets`))
-}
+  function handleVetChange(event) {
+    setChosenVet([event.target.value]);
+  }
 
- 
-
-function handleVetChange(event){
-  setChosenVet([event.target.value]);
-}
-
-
-    return (
-         <div className='primary'>
-      <h1 >Add a Pet!</h1>
+  return (
+    <div className="primary">
+      <h1>Add a Pet!</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
           <Form.Input
@@ -152,18 +150,18 @@ function handleVetChange(event){
             value={formData.species}
             onChange={handleChange}
           />
-           <br></br>
+          <br></br>
           <Form.Input
             label="Age"
             placeholder="Age"
             name="age"
-            type='text'
+            type="text"
             value={formData.age}
             onChange={handleChange}
           />
-           <br></br>
-      
-          <FormControl sx={{ minWidth: 120 }} >
+          <br></br>
+
+          <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Vet</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -173,38 +171,37 @@ function handleVetChange(event){
               label="Vet"
               onChange={handleVetChange}
             >
-            <MenuItem key={-1} value={"none"}>
-          Please Select Vet
+              <MenuItem key={-1} value={"none"}>
+                Please Select Vet
               </MenuItem>
               {vets}
             </Select>
           </FormControl>
-           <br></br>
-           <br></br>
+          <br></br>
+          <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>
-          <br/>
-          <br/>
-          <br/>
-          </Form>
-          <div>
-          <Form onSubmit={handleSubmitVet}>
-        <h3>Don't see your Vet? Add below</h3>
+        <br />
+        <br />
+        <br />
+      </Form>
+      <div>
+        <Form onSubmit={handleSubmitVet}>
+          <h3>Don't see your Vet? Add below</h3>
           <Form.Input
             placeholder="Vet Name"
             name="name"
-            // value={newVetId.newVet}
-            onChange={handleChange}
+            id="checkFix"
+            value={newVetId.name}
+            onChange={handleVetFormChange}
           />
-          <br/>
+          <br />
           <Form.Button className="btn">Submit</Form.Button>
-          </Form>
-        
-          </div>
+        </Form>
+        <h1>{errors}</h1>
+      </div>
     </div>
-
-    )
-    }
-
+  );
+};
 
 export default CreatePet;
