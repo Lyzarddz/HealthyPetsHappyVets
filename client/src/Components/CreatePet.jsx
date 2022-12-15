@@ -46,41 +46,45 @@ const CreatePet = ({ addPet , user, setLoadVet , vets, loadVet, chosenVet, setCh
     });
   }
 
-  const {name, species, age, vet_id } = formData;
+  function handleVetFormChange(event) {
+    setNewVetId({
+      ...newVetId,
+      [event.target.name]: event.target.value,
+    })
+    
+  }
 
 
   function handleSubmitVet(e){
     e.preventDefault();
-
-    // const vet_id = JSON.parse(chosenVet[0])["id"];
-
-    // console.log(vet_id);
 
     const newVet = {
         name
     }
 
     fetch('/vets', {
-        method: "POST",
+        method: 'POST',
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        credentials: "include",
         body: JSON.stringify(newVet),
       })
       .then(res => {
         if(res.ok){
             res.json().then(newVet => {
                 loadVetToForm(newVet)
+                alert('Vet has been added successfully')
+                window.location.reload()
+                
             })
         } else {
-          console.log(res)
           res.json().then(json => setErrors(json.errors))
         }
     })
   }
 
+  const {name, species, age, vet_id } = formData;
 
 function handleSubmit(e) {
 e.preventDefault();
@@ -188,12 +192,13 @@ function handleVetChange(event){
           <Form.Input
             placeholder="Vet Name"
             name="name"
-            value={formData.newVet}
+            value={newVetId.name}
             onChange={handleChange}
           />
           <br/>
           <Form.Button className="btn">Submit</Form.Button>
           </Form>
+          <h1>{errors}</h1>
           </div>
     </div>
 
