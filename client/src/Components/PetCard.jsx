@@ -4,12 +4,27 @@ import Button from '@material-ui/core/Button';
 import { Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const PetCard = ( { pet , chosenVet} ) => {
+const PetCard = ( { pet , chosenVet, deletePet} ) => {
 
+  console.log(pet)
 
 const vetParse = JSON.parse(chosenVet[0]);
 
 const vetName = vetParse.name 
+
+const {id} = pet;
+
+console.log(id)
+
+
+function handleDeletePetClick(e){
+  e.preventDefault();
+  fetch(`/pets/${id}`, {
+    method: 'DELETE',
+  })
+  // deletePet()
+  window.location.reload();
+}
 
 
   return (
@@ -34,8 +49,8 @@ const vetName = vetParse.name
             <br></br>
             <br></br>
 
-            <Button variant="outlined" color="inherit"  > 
-            <DeleteIcon/> Delete Pet</Button> 
+            <Button variant="outlined" color="inherit" onClick={handleDeletePetClick} > 
+            <DeleteIcon /> Delete Pet</Button> 
         </div>
         </h3>
     </Card>

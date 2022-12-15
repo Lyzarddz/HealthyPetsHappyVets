@@ -15,6 +15,7 @@ const CreatePet = ({
   chosenVet,
   setChosenVet
 }) => {
+  
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -104,7 +105,7 @@ const CreatePet = ({
       vet_id
     };
 
-    fetch("/pets", {
+    fetch("/pets/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

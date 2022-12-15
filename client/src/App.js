@@ -37,14 +37,6 @@ function App() {
   }, []);
 
 
-//   function loadVetsData() {
-//     fetch("/vets")
-//     .then((resp) => resp.json())
-//     .then((data)=> {
-//       setLoadVet(data); 
-//     })
-// }
-
 const vets = loadVet.map((v,idx) => {   
   return (
     <MenuItem key={idx} value={JSON.stringify(v)}>
@@ -122,6 +114,8 @@ fetch("/pets", {
 
  const deleteRecord = (id) => {setRecordLoad(current => current.filter(r => r.id !== id))}
 
+ const deletePet = (id) => {setPetLoad(current => current.filter(p => p.id !== id))}
+
 
   return (
     <Router>
@@ -133,7 +127,7 @@ fetch("/pets", {
      <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList  chosenVet={chosenVet} user={currentUser}  pet={petLoad} />} />
+     <Route path="/pets"  element= {<PetList deletePet={deletePet} chosenVet={chosenVet} user={currentUser}  pet={petLoad} />} />
      <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} />} />
     </Routes>
     </Router> 
