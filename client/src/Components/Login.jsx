@@ -39,7 +39,7 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
       if(res.ok){
           res.json().then(owner => {
               loginUser(owner)
-            //  loadPets
+              loadPets()
               navigate((`/pets/`))
               
           })
@@ -49,14 +49,6 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
       }
   })
 }   
-
-
-
-
-const obj = Object.fromEntries(document.cookie.split('; ').map(c => c.split('=')))
-
-console.log(obj)
-
 
   const handleChange = (e) => {
   const { name, value } = e.target

@@ -23,7 +23,10 @@ function App() {
 
 
   const [loadVet, setLoadVet] = useState([]);
-  const [chosenVet, setChosenVet] = useState("none");
+  const [chosenVet, setChosenVet] = useState("");
+
+
+
 
 
   useEffect(() => {
@@ -46,8 +49,16 @@ const vets = loadVet.map((v,idx) => {
 })
 
 
+
+
+
+
 function loadPets() {
-fetch("/pets", {
+  const {id} = currentUser
+
+  console.log(id)
+
+fetch(`/owners/${id}`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -59,7 +70,8 @@ fetch("/pets", {
 .then(res => {
   if(res.ok){
       res.json().then(pets => {
-          setPetLoad(Object.keys(pets))
+        console.log(pets)
+          setPetLoad(pets.pets)
       })
   }else {
     console.log(res)
@@ -124,11 +136,11 @@ fetch("/pets", {
     <Routes>
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} clearErrors={ clearErrors } loadPets={loadPets}  addErrors= {addErrors}/>} />
-     <Route path="/signup"  element= {<Signup clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
+     <Route path="/signup"  element= {<Signup pet={petLoad} clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList deletePet={deletePet} chosenVet={chosenVet} user={currentUser}  pet={petLoad} />} />
-     <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} />} />
+     <Route path="/pets"  element= {<PetList deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   

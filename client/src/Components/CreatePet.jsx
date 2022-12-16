@@ -5,6 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import {useParams} from 'react-router-dom'
 
 const CreatePet = ({
   addPet,
@@ -13,9 +14,23 @@ const CreatePet = ({
   vets,
   loadVet,
   chosenVet,
-  setChosenVet
+  setChosenVet,
+  addErrors,
+  clearErrors
 }) => {
   
+  const params = useParams()
+  const {id} = params
+
+
+
+
+// const {id} = user.pets
+
+
+
+// const {id} =loadVet
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

@@ -1,20 +1,36 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
+import { useState, useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const PetCard = ( { pet , chosenVet, deletePet} ) => {
+const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser} ) => {
 
-  console.log(pet)
+  const [errors, setErrors] = useState([]);
 
-const vetParse = JSON.parse(chosenVet[0]);
+
+const vetParse =  pet.vet
 
 const vetName = vetParse.name 
 
 const {id} = pet;
 
-console.log(id)
+
+// useEffect(()=>{
+//   fetch(`/owners/${id}`)
+//   .then(res => {
+//       if(res.ok){
+//           res.json().then(user => {
+//               setCurrentUser(user)
+//           })
+//       }else {
+//           res.json().then(data => setErrors(data.error))
+//       }
+//   })
+ 
+// },[])
+
 
 
 function handleDeletePetClick(e){
@@ -22,8 +38,7 @@ function handleDeletePetClick(e){
   fetch(`/pets/${id}`, {
     method: 'DELETE',
   })
-  // deletePet()
-  window.location.reload();
+  deletePet(id)
 }
 
 

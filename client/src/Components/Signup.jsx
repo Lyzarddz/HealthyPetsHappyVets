@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
- const Signup = ({loginUser, clearErrors, addErrors }) => {
+ const Signup = ({loginUser, clearErrors, addErrors, pet }) => {
   
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const {username, password} = formData;
       if(res.ok){
           res.json().then(owner => {
             loginUser(owner)
+            pet()
             navigate((`/pets`))
           })
       }else {

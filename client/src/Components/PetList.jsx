@@ -1,11 +1,13 @@
 import React from 'react'
 import { Card } from "semantic-ui-react";
 import PetCard from './PetCard';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const PetList = ( { pet , chosenVet, deletePet} ) => {
+const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, currentUser, setCurrentUser} ) => {
   
+
 
     const cards= pet.map((p, idx)=> {
         return(
@@ -15,6 +17,8 @@ const PetList = ( { pet , chosenVet, deletePet} ) => {
             pet={p}
             chosenVet= {chosenVet}
             deletePet={deletePet}
+            currentUser={currentUser} 
+            setCurrentUser={setCurrentUser}
           />
           </div>
         )
