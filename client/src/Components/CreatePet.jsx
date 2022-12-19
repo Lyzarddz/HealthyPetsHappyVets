@@ -5,7 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import {useParams} from 'react-router-dom'
+
 
 const CreatePet = ({
   addPet,
@@ -16,20 +16,10 @@ const CreatePet = ({
   chosenVet,
   setChosenVet,
   addErrors,
-  clearErrors
+  clearErrors,
 }) => {
-  
-  const params = useParams()
-  const {id} = params
 
 
-
-
-// const {id} = user.pets
-
-
-
-// const {id} =loadVet
 
   const navigate = useNavigate();
 
@@ -81,7 +71,6 @@ const CreatePet = ({
 
     newVet.name = document.getElementById("checkFix").value;
 
-    console.log(newVet);
 
     fetch("/vets", {
       method: "POST",
@@ -95,12 +84,12 @@ const CreatePet = ({
         res.json().then((newVet) => {
           loadVetToForm(newVet);
           alert("Vet has been added successfully");
-          window.location.reload();
         });
       } else {
         res.json().then((json) => setErrors(json.errors));
       }
     });
+    
   }
 
   const { name, species, age, vet_id } = formData;
@@ -139,7 +128,7 @@ const CreatePet = ({
         res.json().then((json) => setErrors(json.errors));
       }
     });
-    navigate(`/pets`);
+     navigate(`/pets`);
   }
 
   function handleVetChange(event) {

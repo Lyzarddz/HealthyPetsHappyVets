@@ -10,7 +10,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const CreateRecord = ({ addRecord, pet }) => {
 
-  console.log(pet)
+
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const CreateRecord = ({ addRecord, pet }) => {
     pet_id: "",
   });
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState();
 
 
   function handleChange(event) {
@@ -62,7 +62,6 @@ function handleSubmit(e) {
     .then(addRecord);
     navigate("/records");
 }
-
     return (
          <div className='primary'>
       <h1 >Add new Record!</h1>
@@ -80,11 +79,29 @@ function handleSubmit(e) {
             label="Prevention"
             placeholder="Prevention"
             name="prevention"
-            value={formData.species}
+            value={formData.prevention}
             onChange={handleChange}
           />
 <br/>   
-<Box sx={{ maxWidth: 150 }} paddingLeft="850px">
+
+          <Form.Input
+            label="Altered"
+            placeholder="Altered"
+            name="altered"
+            value={formData.altered}
+            onChange={handleChange}
+          />
+          <br></br>
+
+          <Form.Input
+            label="Pet Name"
+            placeholder="Pet Name"
+            name="pet_id"
+            value={formData.pet_id}
+            onChange={handleChange}
+          />
+          <br></br>
+{/* <Box sx={{ maxWidth: 150 }} paddingLeft="850px">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Altered?</InputLabel>
         <Select
@@ -99,7 +116,7 @@ function handleSubmit(e) {
 
         </Select>
       </FormControl>
-    </Box>
+    </Box> */}
            <br></br>
           <Form.Input
             label="Notes"

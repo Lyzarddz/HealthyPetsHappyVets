@@ -27,6 +27,7 @@ const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, current
     return (
       <Card>
         <h1 className='primary'>My Pets</h1>
+        <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button>
           {cards}
     <br/>
     <br/>

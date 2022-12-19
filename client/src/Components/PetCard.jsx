@@ -10,11 +10,14 @@ const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser} ) =
   const [errors, setErrors] = useState([]);
 
 
+  console.log(pet)
+
 const vetParse =  pet.vet
 
 const vetName = vetParse.name 
 
 const {id} = pet;
+
 
 
 // useEffect(()=>{
