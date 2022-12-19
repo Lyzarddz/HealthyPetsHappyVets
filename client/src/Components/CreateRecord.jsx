@@ -21,7 +21,7 @@ const CreateRecord = ({ addRecord, pet }) => {
     pet_id: "",
   });
 
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
 
 
   function handleChange(event) {
