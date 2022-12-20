@@ -21,6 +21,7 @@ const CreateRecord = ({ addRecord , loadPets }) => {
     prevention: "",
     altered: "",
     notes: "",
+    date: "",
     pet_id: "",
   });
 
@@ -90,8 +91,7 @@ function handleSubmit(e) {
             value={formData.prevention}
             onChange={handleChange}
           />
-<br/>   
-
+          <br/>  
           <Form.Input
             label="Altered"
             placeholder="Altered"
@@ -99,7 +99,6 @@ function handleSubmit(e) {
             value={formData.altered}
             onChange={handleChange}
           />
-          
            <br></br>
           <Form.Input
             label="Notes"
@@ -109,6 +108,13 @@ function handleSubmit(e) {
             onChange={handleChange}
           />
            <br></br>
+           <Form.Input
+            label="Date"
+            placeholder="Date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+          />
            <br></br>
         </Form.Group>
         <Form.Button className="btn">Submit</Form.Button>

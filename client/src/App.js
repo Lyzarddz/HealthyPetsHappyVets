@@ -25,7 +25,6 @@ function App() {
   const [loadVet, setLoadVet] = useState([]);
   const [chosenVet, setChosenVet] = useState("");
 
-console.log(petLoad)
 
   useEffect(() => {
     // auto-login
@@ -63,7 +62,6 @@ fetch(`/owners/${id}`, {
 .then(res => {
   if(res.ok){
       res.json().then(pets => {
-        console.log(pets)
           setPetLoad(pets.pets)
       })
   }else {
@@ -107,7 +105,6 @@ function loadRecords () {
 // }
 
 
- 
   function addPet(pet){
     setPetLoad([pet,...petLoad])
   }
@@ -158,7 +155,7 @@ function loadRecords () {
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path="/records"  element= {<RecordList  suser={currentUser} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/records"  element= {<RecordList  suser={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   

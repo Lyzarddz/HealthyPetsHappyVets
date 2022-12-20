@@ -9,20 +9,9 @@ const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser, loa
 
   const [errors, setErrors] = useState([]);
 
-
-console.log(pet)
-
-
-  // useEffect(()=>{
-  //   loadPets()
-  // },[])
-
-console.log(pet)
-
 const vetParse =  pet ? pet.vet : ""
 
 const vetName = pet ? vetParse.name : ""
-
 
 
 function handleDeletePetClick(e){

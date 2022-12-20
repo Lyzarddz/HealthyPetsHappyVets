@@ -5,7 +5,25 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const RecordCard = ({ record, key} ) => {
+const RecordCard = ({ record , pet, deleteRecord} ) => {
+
+  const vetParse =  pet ? pet.vet : ""
+
+  const vetName = pet ? vetParse.name : ""
+
+console.log(record)
+
+function handleDeleteRecordClick(e){
+  e.preventDefault();
+
+  const {id} = pet;
+
+  fetch(`/records/pets/${id}`, {
+    method: 'DELETE',
+  })
+  deleteRecord(id)
+}
+
 
   return (
 
@@ -13,22 +31,23 @@ const RecordCard = ({ record, key} ) => {
         
         <div className="content" >
         </div>
+        <h1>Pet: {pet}</h1>
         <h3>
          Record Date:
         <div className="extra content" >
        
             <ul>
          <br/>
-          Vaccine(s):
+          Vaccine(s): {record.vaccine}
               <br/>
-            Prevention:
+            Prevention: {record.prevention}
             <br></br>
-            Altered?:
+            Altered Info: {record.altered}
            <br></br>
-           Notes:
+           Notes: {record.notes}
            <br/>
            <br/>
-           <DeleteIcon />
+           <DeleteIcon onClick={handleDeleteRecordClick}/>
             </ul>
         </div>
     
