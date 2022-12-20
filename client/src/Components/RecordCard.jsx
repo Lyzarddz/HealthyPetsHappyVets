@@ -33,7 +33,7 @@ function handleDeleteRecordClick(e){
         </div>
         <h1>Pet: {pet}</h1>
         <h3>
-         Record Date:
+         Record Date: {record.date}
         <div className="extra content" >
        
             <ul>

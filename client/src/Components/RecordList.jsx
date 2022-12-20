@@ -7,16 +7,12 @@ import Button from '@material-ui/core/Button';
 
 const RecordList = ( { record, loadRecords, deleteRecord } ) => {
   
-console.log(record)
 
 // console.log(loadRecords)
 
-  
 // useEffect(()=>{
 //   loadRecords()
 // },[])
-
-
 
 
     const cards= record.map((r, idx)=> {

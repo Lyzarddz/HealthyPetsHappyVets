@@ -13,8 +13,6 @@ const CreateRecord = ({ addRecord , loadPets }) => {
 //   loadPets()
 // },[])
 
-
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     vaccine: "",
@@ -34,7 +32,7 @@ const CreateRecord = ({ addRecord , loadPets }) => {
   }
 
 
-const {vaccine, prevention, altered, notes, pet_id} = formData;
+const {vaccine, prevention, altered, notes, date, pet_id} = formData;
 
 
 function handleSubmit(e) {
@@ -45,6 +43,7 @@ function handleSubmit(e) {
     prevention,
     altered,
     notes,
+    date,
     pet_id
  };
 

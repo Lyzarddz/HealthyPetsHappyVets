@@ -26,10 +26,6 @@ function handleDeletePetClick(e){
 }
 
 
-
-
-
-
   return (
     <Card variant="outlined">
         
