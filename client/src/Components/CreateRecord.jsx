@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
-const CreateRecord = ({ addRecord, pet }) => {
+const CreateRecord = ({ addRecord , loadPets }) => {
+
+// console.log(pet)
+
+// const {id, name} = pet
+
+// useEffect(()=>{
+//   loadPets()
+// },[])
 
 
 
@@ -21,8 +24,6 @@ const CreateRecord = ({ addRecord, pet }) => {
     pet_id: "",
   });
 
-  const [value, setValue] = useState();
-
 
   function handleChange(event) {
     setFormData({
@@ -31,16 +32,12 @@ const CreateRecord = ({ addRecord, pet }) => {
     });
   }
 
-  function handleAlterChange(event) {
-    setFormData([event.target.name, event.target.value])
-  }
 
 const {vaccine, prevention, altered, notes, pet_id} = formData;
 
+
 function handleSubmit(e) {
   e.preventDefault();
-  
-  // const pet_id = pet["id"];
 
   const newRecord = {
     vaccine,
@@ -50,23 +47,34 @@ function handleSubmit(e) {
     pet_id
  };
 
-
  fetch("/records", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json"
     },
     body: JSON.stringify(newRecord),
-  })
-    .then((r) => r.json())
+  }).then((r) => r.json())
     .then(addRecord);
-    navigate("/records");
+    navigate("/pets");
 }
+
+
+
     return (
          <div className='primary'>
       <h1 >Add new Record!</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
+        <br></br>
+          <Form.Input
+            label="Pet Name"
+            placeholder="Pet Name"
+            name="pet_id"
+            value={formData.pet_id}
+            onChange={handleChange}
+          />
+          <br></br>
           <Form.Input
             label="Vaccine(s)"
             placeholder="Vaccine(s)"
@@ -91,32 +99,7 @@ function handleSubmit(e) {
             value={formData.altered}
             onChange={handleChange}
           />
-          <br></br>
-
-          <Form.Input
-            label="Pet Name"
-            placeholder="Pet Name"
-            name="pet_id"
-            value={formData.pet_id}
-            onChange={handleChange}
-          />
-          <br></br>
-{/* <Box sx={{ maxWidth: 150 }} paddingLeft="850px">
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Altered?</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={value}
-          label="Altered"
-          onChange={handleAlterChange}
-        >
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-
-        </Select>
-      </FormControl>
-    </Box> */}
+          
            <br></br>
           <Form.Input
             label="Notes"

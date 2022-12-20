@@ -19,8 +19,6 @@ const CreatePet = ({
   clearErrors,
 }) => {
 
-
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -71,7 +69,6 @@ const CreatePet = ({
 
     newVet.name = document.getElementById("checkFix").value;
 
-
     fetch("/vets", {
       method: "POST",
       headers: {
@@ -113,7 +110,7 @@ const CreatePet = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        "Accept": "application/json"
         // "Access-Control-Allow-Origin": "http://localhost:4000",
       },
       credentials: "include",

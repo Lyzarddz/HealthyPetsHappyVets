@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const RecordCard = ( ) => {
+const RecordCard = ({ record, key} ) => {
 
   return (
 

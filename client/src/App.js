@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState('');
   const [loggedIn, setLoggedIn]  = useState(false);
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
@@ -25,9 +25,7 @@ function App() {
   const [loadVet, setLoadVet] = useState([]);
   const [chosenVet, setChosenVet] = useState("");
 
-
-
-
+console.log(petLoad)
 
   useEffect(() => {
     // auto-login
@@ -49,14 +47,9 @@ const vets = loadVet.map((v,idx) => {
 })
 
 
-
-
-
-
 function loadPets() {
-  const {id} = currentUser
-
-  console.log(id)
+ 
+const {id} = currentUser
 
 fetch(`/owners/${id}`, {
   method: "GET",
@@ -80,14 +73,39 @@ fetch(`/owners/${id}`, {
 })
 }
 
-    // useEffect(() => {
-  //   fetch("/records")
-  //   .then((resp) => resp.json())
-  //   .then((data)=> {
-  //     setRecordLoad(data)
-  //   })
-     
-  // } , [])
+
+function loadRecords () {
+
+  fetch('/records/', {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json", 
+      // "Access-Control-Allow-Origin": "http://localhost:3000",
+    },
+    // credentials: "include"
+  })
+  .then(res => {
+    if(res.ok){
+        res.json().then(records => {
+          console.log(records)
+            setRecordLoad(records.records)
+        })
+    }else {
+      console.log(res)
+      res.json().then(json => setErrors(json.errors))
+    }
+  })
+  }
+
+
+//   fetch("/records")
+//   .then((resp) => resp.json())
+//   .then((data)=> {
+//     setRecordLoad(data)
+// })
+// }
+
 
  
   function addPet(pet){
@@ -137,10 +155,10 @@ fetch(`/owners/${id}`, {
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} clearErrors={ clearErrors } loadPets={loadPets}  addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup pet={petLoad} clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
-     <Route path="/createRecord"  element= {<CreateRecord user={currentUser}  clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
+     <Route path="/createRecord"  element= {<CreateRecord user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path="/records"  element= {<RecordList  user={currentUser}  record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/records"  element= {<RecordList  suser={currentUser} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   

@@ -5,44 +5,40 @@ import { useState, useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser} ) => {
+const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser, loadPets} ) => {
 
   const [errors, setErrors] = useState([]);
 
 
-  console.log(pet)
-
-const vetParse =  pet.vet
-
-const vetName = vetParse.name 
-
-const {id} = pet;
+console.log(pet)
 
 
+  // useEffect(()=>{
+  //   loadPets()
+  // },[])
 
-// useEffect(()=>{
-//   fetch(`/owners/${id}`)
-//   .then(res => {
-//       if(res.ok){
-//           res.json().then(user => {
-//               setCurrentUser(user)
-//           })
-//       }else {
-//           res.json().then(data => setErrors(data.error))
-//       }
-//   })
- 
-// },[])
+console.log(pet)
+
+const vetParse =  pet ? pet.vet : ""
+
+const vetName = pet ? vetParse.name : ""
 
 
 
 function handleDeletePetClick(e){
   e.preventDefault();
+
+  const {id} = pet;
+
   fetch(`/pets/${id}`, {
     method: 'DELETE',
   })
   deletePet(id)
 }
+
+
+
+
 
 
   return (
@@ -54,16 +50,15 @@ function handleDeletePetClick(e){
         <div className="extra content" >
        
             <ul>
-            Name: {pet.name}
+            Name: {pet ? pet.name : "" }
               <br/>
-            Species: {pet.species}
+            Species: {pet ? pet.species : ""}
             <br></br>
-             Age: {pet.age}    
+             Age: {pet ? pet.age : ""}    
            <br></br>
             Vet: {vetName}
             </ul>
-            <Button variant="outlined" color="inherit" to="/Records" component={ Link } >All Records</Button>
-            <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> 
+            <Button variant="outlined" color="inherit" to="/records/" component={ Link } >Records</Button>
             <br></br>
             <br></br>
 

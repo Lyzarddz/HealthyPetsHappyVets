@@ -5,8 +5,11 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, currentUser, setCurrentUser} ) => {
+const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, currentUser, setCurrentUser, loadPets} ) => {
   
+  useEffect(()=>{
+    loadPets()
+  },[])
 
 
     const cards= pet.map((p, idx)=> {
@@ -19,6 +22,7 @@ const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, current
             deletePet={deletePet}
             currentUser={currentUser} 
             setCurrentUser={setCurrentUser}
+            loadPets={loadPets}
           />
           </div>
         )

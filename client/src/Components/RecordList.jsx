@@ -1,12 +1,14 @@
 import React from 'react'
 import { Card } from "semantic-ui-react";
-import RecordCard from './PetCard';
+import RecordCard from './RecordCard';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const RecordList = ( { record } ) => {
+const RecordList = ( { record, loadRecords } ) => {
   
+// console.log(record)
 
+// console.log(loadRecords)
 
     const cards= record.map((r, idx)=> {
         return(
