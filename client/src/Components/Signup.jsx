@@ -35,7 +35,6 @@ const {username, password} = formData;
       if(res.ok){
           res.json().then(owner => {
             loginUser(owner)
-            // pet()
             navigate((`/pets`))
           })
       }else {

@@ -11,6 +11,7 @@ import Signup from './Components/Signup';
 import PetList from './Components/PetList';
 import RecordList from './Components/RecordList';
 import MenuItem from '@mui/material/MenuItem';
+import EditRecord from './Components/EditRecord';
 
 
 function App() {
@@ -20,8 +21,6 @@ function App() {
   const [errors, setErrors] = useState([]);
   const [petLoad, setPetLoad] = useState([]);
   const [recordLoad, setRecordLoad] = useState([]);
-
-
   const [loadVet, setLoadVet] = useState([]);
   const [chosenVet, setChosenVet] = useState("");
 
@@ -71,10 +70,9 @@ fetch(`/owners/${id}`, {
 })
 }
 
-
 function loadRecords () {
 
-  fetch('/records/', {
+  fetch(`/records`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -113,16 +111,17 @@ function loadRecords () {
     setRecordLoad([record,...recordLoad])
   }
 
-  // function updateRecord(updatedRecord){
-  //    setRecordLoad(current => {
-  //     return current.map(record => {
-  //       if (record.id === updatedRecord.id) {
-  //         return updatedRecord
-  //       } else {
-  //           return record
-  //         }
-  //   })
-  // })
+  function updateRecord(updatedRecord){
+     setRecordLoad(current => {
+      return current.map(record => {
+        if (record.id === updatedRecord.id) {
+          return updatedRecord
+        } else {
+            return record
+          }
+    })
+  })
+}
 
 
   function loginUser (user) {
@@ -155,7 +154,8 @@ function loadRecords () {
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path="/records"  element= {<RecordList  suser={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/records"  element= {<RecordList  user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/editRecord"  element= {<EditRecord  updateRecord={updateRecord} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 
   

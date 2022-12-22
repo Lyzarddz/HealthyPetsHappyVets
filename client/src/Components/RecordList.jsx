@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 const RecordList = ( { record, loadRecords, deleteRecord } ) => {
   
 
-// console.log(loadRecords)
+console.log(loadRecords)
 
 // useEffect(()=>{
 //   loadRecords()
@@ -37,7 +37,7 @@ const RecordList = ( { record, loadRecords, deleteRecord } ) => {
   <Button  className="primary" variant="contained" to="/createRecord" component={ Link } disableElevation>
      Add New Record
     </Button>
-
+    <br></br>
       </Card>
     )
   }

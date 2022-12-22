@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 
 const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, currentUser, setCurrentUser, loadPets} ) => {
   
+console.log(loadPets)
+
+
   useEffect(()=>{
     loadPets()
   },[])
@@ -31,13 +34,20 @@ const PetList = ( { pet , chosenVet, deletePet , clearErrors, addErrors, current
     return (
       <Card>
         <h1 className='primary'>My Pets</h1>
-        <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button>
+        <Button  className="primary" variant="contained" to="/createPet" component={ Link } disableElevation>
+     Add New Pet
+    </Button>
+    <br></br>
+    <br></br>
+    <br></br>
+        {/* <Button variant="outlined" color="inherit" to="/createRecord" component={ Link } >Create Record</Button> */}
+        <Button variant="outlined" color="inherit" to={"/records"} component={ Link } >Records</Button>
+        <br></br>
+        <br></br>
+        <br></br>
           {cards}
     <br/>
     <br/>
-  <Button  className="primary" variant="contained" to="/createPet" component={ Link } disableElevation>
-     Add New Pet
-    </Button>
       </Card>
     )
   }

@@ -4,17 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const CreateRecord = ({ addRecord , loadPets }) => {
+const EditRecord = ({ addRecord , loadPets, updateRecord }) => {
 
 console.log(loadPets) 
 
-useEffect(()=>{
-  loadPets()
-},[])
 
-const {id, name} = loadPets
 
-  const [errors, setErrors] = useState([])
+// useEffect(()=>{
+//   loadPets()
+// },[])
+
+// const {id, name} = loadPets
+
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     vaccine: "",
@@ -44,46 +46,23 @@ function handleSubmit(e) {
     notes,
     date,
     pet_id
- };
+ }; 
 
  fetch("/records", {
-    method: "POST",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
     body: JSON.stringify(newRecord),
-  })
-  .then((res) => {
-    if (res.ok){
-      res.json().then(r => {
-        addRecord(r)
-        navigate("/records")
-      })
-    } else {
-      console.log(res)
-      res.json().then(json => setErrors(json.errors))
-      console.log(errors)
-    }
-  })
+  }).then((r) => r.json())
+    .then(addRecord);
+    navigate("/records");
 }
-
-
-//   r.json())
-//     .then(addRecord);
-//     navigate("/records")}
-
-// }
-
-
-
-
 
     return (
          <div className='primary'>
-          <h1>{errors}</h1>
-          <br/>
-      <h1 >Add new Record!</h1>
+      <h1 >Edit Record</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
         <br></br>
@@ -145,4 +124,4 @@ function handleSubmit(e) {
     )
     }
 
-export default CreateRecord;
+export default EditRecord;

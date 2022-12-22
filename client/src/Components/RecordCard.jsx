@@ -3,6 +3,7 @@ import { Form } from "semantic-ui-react";
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link} from 'react-router-dom';
 
 
 const RecordCard = ({ record , pet, deleteRecord} ) => {
@@ -11,7 +12,6 @@ const RecordCard = ({ record , pet, deleteRecord} ) => {
 
   const vetName = pet ? vetParse.name : ""
 
-console.log(record)
 
 function handleDeleteRecordClick(e){
   e.preventDefault();
@@ -31,7 +31,7 @@ function handleDeleteRecordClick(e){
         
         <div className="content" >
         </div>
-        <h1>Pet: {pet}</h1>
+        <h1>Pet: {record.pet.name}</h1>
         <h3>
          Record Date: {record.date}
         <div className="extra content" >
@@ -47,7 +47,14 @@ function handleDeleteRecordClick(e){
            Notes: {record.notes}
            <br/>
            <br/>
-           <DeleteIcon onClick={handleDeleteRecordClick}/>
+           <Button  className="primary" variant="contained" to="/editRecord" component={ Link } disableElevation>
+              Edit</Button>
+              <br/>
+              <br></br>
+              <Button  onClick={handleDeleteRecordClick} className="primary" variant="contained" to="/editRecord" component={ Link } disableElevation>
+              Delete</Button>
+           <br/>
+
             </ul>
         </div>
     

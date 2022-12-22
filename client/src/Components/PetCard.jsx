@@ -9,9 +9,12 @@ const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser, loa
 
   const [errors, setErrors] = useState([]);
 
+
 const vetParse =  pet ? pet.vet : ""
 
 const vetName = pet ? vetParse.name : ""
+
+// console.log(pet)
 
 
 function handleDeletePetClick(e){
@@ -43,10 +46,6 @@ function handleDeletePetClick(e){
            <br></br>
             Vet: {vetName}
             </ul>
-            <Button variant="outlined" color="inherit" to="/records/" component={ Link } >Records</Button>
-            <br></br>
-            <br></br>
-
             <Button variant="outlined" color="inherit" onClick={handleDeletePetClick} > 
             <DeleteIcon /> Delete Pet</Button> 
         </div>

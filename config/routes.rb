@@ -12,6 +12,7 @@ root 'sessions#home'
   post "/login", to:"sessions#create"
   delete "/logout", to:"sessions#destroy"
   get "/vets", to:"vets#show"
+  get "/pets/records/:id", to:"records#show"
 
 
   # Routing logic: fallback requests for React Router.
