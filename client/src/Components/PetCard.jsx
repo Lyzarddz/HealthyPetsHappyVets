@@ -1,21 +1,14 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
-import { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const PetCard = ( { pet , chosenVet, deletePet, currentUser, setCurrentUser, loadPets} ) => {
-
-  const [errors, setErrors] = useState([]);
-
+const PetCard = ( { pet , deletePet, currentUser, setCurrentUser, loadPets} ) => {
 
 const vetParse =  pet ? pet.vet : ""
-
 const vetName = pet ? vetParse.name : ""
 
 // console.log(pet)
-
 
 function handleDeletePetClick(e){
   e.preventDefault();
@@ -31,12 +24,10 @@ function handleDeletePetClick(e){
 
   return (
     <Card variant="outlined">
-        
         <div className="content" >
         </div>
         <h3>
         <div className="extra content" >
-       
             <ul>
             Name: {pet ? pet.name : "" }
               <br/>

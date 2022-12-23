@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
+const Login = ({ loginUser, clearErrors , loadPets}) => {
   
   
     const navigate = useNavigate();
@@ -55,11 +55,11 @@ const Login = ({ loginUser, addErrors, clearErrors , loadPets}) => {
   setFormData({ ...formData, [name]: value })
 }
 
-    useEffect(() => {
-        return () => {
-          clearErrors();
-        }
-      }, [])
+    // useEffect(() => {
+    //     return () => {
+    //       clearErrors();
+    //     }
+    //   }, [])
 
   
     return (

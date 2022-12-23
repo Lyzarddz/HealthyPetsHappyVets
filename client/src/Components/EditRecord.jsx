@@ -9,7 +9,6 @@ const EditRecord = ({ addRecord , loadPets, updateRecord }) => {
 console.log(loadPets) 
 
 
-
 // useEffect(()=>{
 //   loadPets()
 // },[])

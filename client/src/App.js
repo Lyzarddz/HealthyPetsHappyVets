@@ -4,7 +4,6 @@ import MainPg from './Components/MainPg';
 import CreateRecord from './Components/CreateRecord';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Errors from './Components/Errors';
 import StyleSheet from './Components/StyleSheet';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
@@ -12,6 +11,7 @@ import PetList from './Components/PetList';
 import RecordList from './Components/RecordList';
 import MenuItem from '@mui/material/MenuItem';
 import EditRecord from './Components/EditRecord';
+import {useParams} from 'react-router-dom'
 
 
 function App() {
@@ -24,6 +24,8 @@ function App() {
   const [loadVet, setLoadVet] = useState([]);
   const [chosenVet, setChosenVet] = useState("");
 
+  const params = useParams()
+  const {id} = params
 
   useEffect(() => {
     // auto-login
@@ -43,7 +45,6 @@ const vets = loadVet.map((v,idx) => {
       </MenuItem>
   )
 })
-
 
 function loadPets() {
  
@@ -72,7 +73,7 @@ fetch(`/owners/${id}`, {
 
 function loadRecords () {
 
-  fetch(`/records`, {
+  fetch(`/records/${params.id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -94,14 +95,14 @@ function loadRecords () {
   })
   }
 
-
-//   fetch("/records")
-//   .then((resp) => resp.json())
-//   .then((data)=> {
-//     setRecordLoad(data)
-// })
-// }
-
+  function handleDeleteRecordClick(e){
+    e.preventDefault();
+  
+    fetch(`/records/${params.id}`, {
+      method: 'DELETE',
+    })
+    deleteRecord(id)
+  }
 
   function addPet(pet){
     setPetLoad([pet,...petLoad])
@@ -123,13 +124,11 @@ function loadRecords () {
   })
 }
 
-
   function loginUser (user) {
     setCurrentUser(user); 
     setLoggedIn(true);
   }
   
-
   function addErrors (errors) {
     setErrors(errors);
  }
@@ -142,19 +141,18 @@ function loadRecords () {
 
  const deletePet = (id) => {setPetLoad(current => current.filter(p => p.id !== id))}
 
-
   return (
     <Router>
     <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-    <Errors errors= {errors} />
+
     <Routes>
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} clearErrors={ clearErrors } loadPets={loadPets}  addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup pet={petLoad} clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
      <Route path="/createRecord"  element= {<CreateRecord user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
-     <Route path="/createPet"  element= {<CreatePet  user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
+     <Route path="/createPet"  element= {<CreatePet user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path="/records"  element= {<RecordList  user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path='/records/:id'  element= {<RecordList handleDeleteRecordClick={handleDeleteRecordClick} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
      <Route path="/editRecord"  element= {<EditRecord  updateRecord={updateRecord} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
     </Routes>
     </Router> 

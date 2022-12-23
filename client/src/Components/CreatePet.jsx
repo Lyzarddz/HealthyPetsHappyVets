@@ -14,9 +14,7 @@ const CreatePet = ({
   vets,
   loadVet,
   chosenVet,
-  setChosenVet,
-  addErrors,
-  clearErrors,
+  setChosenVet
 }) => {
 
   const navigate = useNavigate();
@@ -40,7 +38,7 @@ const CreatePet = ({
       .then((data) => {
         setLoadVet(data);
       });
-  }, []);
+  }, [setLoadVet]);
 
   function loadVetToForm(vet) {
     setLoadVet([vet, ...loadVet]);
@@ -89,7 +87,7 @@ const CreatePet = ({
     
   }
 
-  const { name, species, age, vet_id } = formData;
+  const { name, species, age } = formData;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -111,7 +109,6 @@ const CreatePet = ({
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-        // "Access-Control-Allow-Origin": "http://localhost:4000",
       },
       credentials: "include",
       body: JSON.stringify(newPet)
@@ -162,7 +159,6 @@ const CreatePet = ({
             onChange={handleChange}
           />
           <br></br>
-
           <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Vet</InputLabel>
             <Select
@@ -171,8 +167,7 @@ const CreatePet = ({
               name="chosenVet"
               value={chosenVet}
               label="Vet"
-              onChange={handleVetChange}
-            >
+              onChange={handleVetChange} >
               <MenuItem key={-1} value={"none"}>
                 Please Select Vet
               </MenuItem>
@@ -195,10 +190,9 @@ const CreatePet = ({
             name="name"
             id="checkFix"
             value={newVetId.name}
-            onChange={handleVetFormChange}
-          />
+            onChange={handleVetFormChange} />
           <br />
-          <Form.Button className="btn">Submit</Form.Button>
+          <Form.Button  className="btn">Submit</Form.Button>
         </Form>
         <h1>{errors}</h1>
       </div>

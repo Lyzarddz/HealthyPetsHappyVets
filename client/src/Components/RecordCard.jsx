@@ -1,32 +1,19 @@
-import React, { useState } from 'react';
-import { Form } from "semantic-ui-react";
+import React from 'react';
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Link} from 'react-router-dom';
 
 
-const RecordCard = ({ record , pet, deleteRecord} ) => {
 
-  const vetParse =  pet ? pet.vet : ""
+const RecordCard = ({ record , pet, handleDeleteRecordClick} ) => {
 
-  const vetName = pet ? vetParse.name : ""
+  // const vetParse =  pet ? pet.vet : ""
 
+  // const vetName = pet ? vetParse.name : ""
 
-function handleDeleteRecordClick(e){
-  e.preventDefault();
-
-  const {id} = pet;
-
-  fetch(`/records/pets/${id}`, {
-    method: 'DELETE',
-  })
-  deleteRecord(id)
-}
 
 
   return (
-
     <Card variant="outlined">
         
         <div className="content" >

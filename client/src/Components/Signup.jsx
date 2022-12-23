@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
- const Signup = ({loginUser, clearErrors, addErrors, pet }) => {
+ const Signup = ({loginUser }) => {
   
   const navigate = useNavigate();
 
@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 })
 
 const {username, password} = formData;
-
 
   function handleSubmit(e){
     e.preventDefault();
@@ -37,7 +36,7 @@ const {username, password} = formData;
             loginUser(owner)
             navigate((`/pets`))
           })
-      }else {
+      } else {
         res.json().then(json => setErrors(json.errors))
       }
   })
@@ -49,13 +48,6 @@ const handleChange = (e) => {
   setFormData({ ...formData, [name]: value })
 }
 
-
-// useEffect(() => {
-//   return () => {
-//     clearErrors();
-//   }
-// }, [])
- 
   return ( 
     <div className='primary'>
       <h1>{errors}</h1>
@@ -72,10 +64,7 @@ const handleChange = (e) => {
         <br></br>
         <input type="submit" value="Create Account"/>
     </form>
-   
     </div>
-    
-  
   )
 } 
 

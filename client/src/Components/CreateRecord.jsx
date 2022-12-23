@@ -3,15 +3,15 @@ import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
 
 
-
 const CreateRecord = ({ addRecord , loadPets }) => {
 
 console.log(loadPets) 
 
-useEffect(()=>{
-  loadPets()
-},[])
+// useEffect(()=>{
+//   loadPets()
+// },[])
 
+console.log(loadPets)
 const {id, name} = loadPets
 
   const [errors, setErrors] = useState([])
@@ -33,6 +33,8 @@ const {id, name} = loadPets
   }
 
 const {vaccine, prevention, altered, notes, date, pet_id} = formData;
+
+console.log(pet_id)
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -67,17 +69,6 @@ function handleSubmit(e) {
     }
   })
 }
-
-
-//   r.json())
-//     .then(addRecord);
-//     navigate("/records")}
-
-// }
-
-
-
-
 
     return (
          <div className='primary'>
