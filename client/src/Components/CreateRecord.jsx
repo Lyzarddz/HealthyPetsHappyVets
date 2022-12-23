@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 
-const CreateRecord = ({ addRecord , loadPets }) => {
-
-console.log(loadPets) 
-
-// useEffect(()=>{
-//   loadPets()
-// },[])
-
-console.log(loadPets)
-const {id, name} = loadPets
+const CreateRecord = ({ addRecord , chosenPet, setChosenPet, pets }) => {
 
   const [errors, setErrors] = useState([])
   const navigate = useNavigate();
@@ -32,12 +27,13 @@ const {id, name} = loadPets
     });
   }
 
-const {vaccine, prevention, altered, notes, date, pet_id} = formData;
-
-console.log(pet_id)
+const {vaccine, prevention, altered, notes, date} = formData;
 
 function handleSubmit(e) {
   e.preventDefault();
+
+
+const pet_id = JSON.parse(chosenPet[0])["id"];
 
   const newRecord = {
     vaccine,
@@ -70,6 +66,10 @@ function handleSubmit(e) {
   })
 }
 
+function handlePetChange(event) {
+  setChosenPet([event.target.value]);
+}
+
     return (
          <div className='primary'>
           <h1>{errors}</h1>
@@ -78,13 +78,34 @@ function handleSubmit(e) {
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
         <br></br>
-          <Form.Input
+          {/* <Form.Input
             label="Pet Name"
             placeholder="Pet Name"
             name="pet_id"
             value={formData.pet_id}
             onChange={handleChange}
-          />
+          /> */}
+
+
+
+<FormControl sx={{ minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-label">Pet</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              name="chosenPet"
+              value={chosenPet}
+              label="Pet"
+              onChange={handlePetChange} >
+              <MenuItem key={-1} value={"none"}>
+                Please Select Pet
+              </MenuItem>
+              {pets}
+            </Select>
+          </FormControl>
+
+<br></br>
+
           <br></br>
           <Form.Input
             label="Vaccine(s)"
@@ -110,7 +131,7 @@ function handleSubmit(e) {
             onChange={handleChange}
           />
            <br></br>
-          <Form.Input
+          <Form.Input 
             label="Notes"
             placeholder="Notes"
             name="notes"

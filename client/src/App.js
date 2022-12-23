@@ -23,6 +23,8 @@ function App() {
   const [recordLoad, setRecordLoad] = useState([]);
   const [loadVet, setLoadVet] = useState([]);
   const [chosenVet, setChosenVet] = useState("");
+  const [chosenPet, setChosenPet] = useState("");
+
 
   const params = useParams()
   const {id} = params
@@ -42,6 +44,14 @@ const vets = loadVet.map((v,idx) => {
   return (
     <MenuItem key={idx} value={JSON.stringify(v)}>
       {v.name} 
+      </MenuItem>
+  )
+})
+
+const pets = petLoad.map((p,idx) => {   
+  return (
+    <MenuItem key={idx} value={JSON.stringify(p)}>
+      {p.name} 
       </MenuItem>
   )
 })
@@ -149,7 +159,7 @@ function loadRecords () {
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} clearErrors={ clearErrors } loadPets={loadPets}  addErrors= {addErrors}/>} />
      <Route path="/signup"  element= {<Signup pet={petLoad} clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
-     <Route path="/createRecord"  element= {<CreateRecord user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
+     <Route path="/createRecord"  element= {<CreateRecord pets={pets} chosenPet={chosenPet} setChosenPet={setChosenPet} user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
      <Route path='/records/:id'  element= {<RecordList handleDeleteRecordClick={handleDeleteRecordClick} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
