@@ -2,15 +2,28 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
 import { Link} from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
-const RecordCard = ({ record , pet, handleDeleteRecordClick} ) => {
+
+const RecordCard = ({ record , deleteRecord} ) => {
 
   // const vetParse =  pet ? pet.vet : ""
 
   // const vetName = pet ? vetParse.name : ""
+console.log(record)
 
+  function handleDeleteRecordClick(e){
+    e.preventDefault();
+
+    const {id} = record;
+  
+    fetch(`/records/${id}`, {
+      method: 'DELETE',
+    })
+    deleteRecord(id);
+  }
 
 
   return (
@@ -38,8 +51,8 @@ const RecordCard = ({ record , pet, handleDeleteRecordClick} ) => {
               Edit</Button>
               <br/>
               <br></br>
-              <Button  onClick={handleDeleteRecordClick} className="primary" variant="contained"  disableElevation>
-              Delete</Button>
+              <Button variant="outlined" color="inherit" onClick={handleDeleteRecordClick} disableElevation > 
+            <DeleteIcon /> Delete Record</Button> 
            <br/>
 
             </ul>

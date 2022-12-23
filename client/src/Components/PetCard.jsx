@@ -37,7 +37,7 @@ function handleDeletePetClick(e){
            <br></br>
             Vet: {vetName}
             </ul>
-            <Button variant="outlined" color="inherit" onClick={handleDeletePetClick} > 
+            <Button variant="outlined" color="inherit" onClick={handleDeletePetClick} disableElevation > 
             <DeleteIcon /> Delete Pet</Button> 
         </div>
         </h3>

@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-
 const CreatePet = ({
   addPet,
   user,
@@ -18,7 +17,6 @@ const CreatePet = ({
 }) => {
 
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: "",
     species: "",
@@ -38,7 +36,9 @@ const CreatePet = ({
       .then((data) => {
         setLoadVet(data);
       });
-  }, [setLoadVet]);
+  }, []);
+
+  
 
   function loadVetToForm(vet) {
     setLoadVet([vet, ...loadVet]);
@@ -61,11 +61,7 @@ const CreatePet = ({
   function handleSubmitVet(e) {
     e.preventDefault();
 
-    var newVet = {
-      name
-    };
-
-    newVet.name = document.getElementById("checkFix").value;
+    const newVet = newVetId;
 
     fetch("/vets", {
       method: "POST",
@@ -79,15 +75,16 @@ const CreatePet = ({
         res.json().then((newVet) => {
           loadVetToForm(newVet);
           alert("Vet has been added successfully");
+          setErrors("");
+          setNewVetId({});
         });
       } else {
         res.json().then((json) => setErrors(json.errors));
       }
     });
-    
   }
 
-  const { name, species, age } = formData;
+  const { name, species, age} = formData;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -104,11 +101,11 @@ const CreatePet = ({
       vet_id
     };
 
-    fetch("/pets/", {
+    fetch("/pets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json"
       },
       credentials: "include",
       body: JSON.stringify(newPet)
@@ -122,7 +119,7 @@ const CreatePet = ({
         res.json().then((json) => setErrors(json.errors));
       }
     });
-     navigate(`/pets`);
+    navigate(`/pets`);
   }
 
   function handleVetChange(event) {
@@ -159,6 +156,7 @@ const CreatePet = ({
             onChange={handleChange}
           />
           <br></br>
+
           <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Vet</InputLabel>
             <Select
@@ -167,7 +165,8 @@ const CreatePet = ({
               name="chosenVet"
               value={chosenVet}
               label="Vet"
-              onChange={handleVetChange} >
+              onChange={handleVetChange}
+            >
               <MenuItem key={-1} value={"none"}>
                 Please Select Vet
               </MenuItem>
@@ -190,9 +189,10 @@ const CreatePet = ({
             name="name"
             id="checkFix"
             value={newVetId.name}
-            onChange={handleVetFormChange} />
+            onChange={handleVetFormChange}
+          />
           <br />
-          <Form.Button  className="btn">Submit</Form.Button>
+          <Form.Button className="btn">Submit</Form.Button>
         </Form>
         <h1>{errors}</h1>
       </div>

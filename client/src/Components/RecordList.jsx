@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const RecordList = ( { deleteRecord, handleDeleteRecordClick } ) => {
+const RecordList = ( { record, loadRecords, deleteRecord } ) => {
 
 const [recordLoad, setRecordLoad] = useState([]);
 const [errors, setErrors] = useState([]);
+
 
 useEffect(()=>{
   fetch(`/records/`, {
@@ -21,24 +22,33 @@ useEffect(()=>{
   .then(res => {
     if(res.ok){
         res.json().then(records => {
+          console.log(records)
             setRecordLoad(records)
         })
     }else {
-      console.log(res)
+      console.log(errors)
       res.json().then(json => setErrors(json.errors))
     }
   })
 },[])
 
+// function handleDeleteRecordClick(e){
+//   e.preventDefault();
 
-    const cards= recordLoad?.map((r, idx)=> {
+//   fetch(`/records/`, {
+//     method: 'DELETE',
+//   })
+//   deleteRecord(id)
+// }
+
+
+    const cards= recordLoad.map((r, idx)=> {
         return(
           <div key={idx}>
             <RecordCard
             key={r.id}
             record={r}
             deleteRecord ={deleteRecord}
-            handleDeleteRecordClick={handleDeleteRecordClick}
           />
           </div>
         )
