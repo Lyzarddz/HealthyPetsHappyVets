@@ -32,7 +32,6 @@ const {vaccine, prevention, altered, notes, date} = formData;
 function handleSubmit(e) {
   e.preventDefault();
 
-
 const pet_id = JSON.parse(chosenPet[0])["id"];
 
   const newRecord = {
@@ -56,7 +55,7 @@ const pet_id = JSON.parse(chosenPet[0])["id"];
     if (res.ok){
       res.json().then(r => {
         addRecord(r)
-        navigate("/records")
+        navigate("/records/");
       })
     } else {
       console.log(res)
@@ -78,17 +77,8 @@ function handlePetChange(event) {
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
         <br></br>
-          {/* <Form.Input
-            label="Pet Name"
-            placeholder="Pet Name"
-            name="pet_id"
-            value={formData.pet_id}
-            onChange={handleChange}
-          /> */}
-
-
-
-<FormControl sx={{ minWidth: 120 }}>
+      
+      <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Pet</InputLabel>
             <Select
               labelId="demo-simple-select-label"

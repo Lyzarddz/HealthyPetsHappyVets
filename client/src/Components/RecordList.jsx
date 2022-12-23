@@ -5,16 +5,33 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const RecordList = ( { record, loadRecords, deleteRecord, handleDeleteRecordClick } ) => {
-  
+const RecordList = ( { deleteRecord, handleDeleteRecordClick } ) => {
 
-console.log(loadRecords)
+const [recordLoad, setRecordLoad] = useState([]);
+const [errors, setErrors] = useState([]);
 
 useEffect(()=>{
-  loadRecords()
+  fetch(`/records/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json", 
+    },
+  })
+  .then(res => {
+    if(res.ok){
+        res.json().then(records => {
+            setRecordLoad(records)
+        })
+    }else {
+      console.log(res)
+      res.json().then(json => setErrors(json.errors))
+    }
+  })
 },[])
 
-    const cards= record.map((r, idx)=> {
+
+    const cards= recordLoad?.map((r, idx)=> {
         return(
           <div key={idx}>
             <RecordCard

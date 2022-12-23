@@ -83,26 +83,26 @@ fetch(`/owners/${id}`, {
 
 function loadRecords () {
 
-  fetch(`/records/${params.id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json", 
-      // "Access-Control-Allow-Origin": "http://localhost:3000",
-    },
-    // credentials: "include"
-  })
-  .then(res => {
-    if(res.ok){
-        res.json().then(records => {
-          console.log(records)
-            setRecordLoad(records.records)
-        })
-    }else {
-      console.log(res)
-      res.json().then(json => setErrors(json.errors))
-    }
-  })
+  console.log("hit load records in app.js")
+  
+  // fetch(`/records/`, {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "Accept": "application/json", 
+  //   },
+  // })
+  // .then(res => {
+  //   if(res.ok){
+  //       res.json().then(records => {
+  //         console.log(records)
+  //           setRecordLoad(records.records)
+  //       })
+  //   }else {
+  //     console.log(res)
+  //     res.json().then(json => setErrors(json.errors))
+  //   }
+  // })
   }
 
   function handleDeleteRecordClick(e){
@@ -139,13 +139,13 @@ function loadRecords () {
     setLoggedIn(true);
   }
   
-  function addErrors (errors) {
-    setErrors(errors);
- }
+//   function addErrors (errors) {
+//     setErrors(errors);
+//  }
  
- const clearErrors = () => {
-   setErrors([]);
- }
+//  const clearErrors = () => {
+//    setErrors([]);
+//  }
 
  const deleteRecord = (id) => {setRecordLoad(current => current.filter(r => r.id !== id))}
 
@@ -157,13 +157,13 @@ function loadRecords () {
 
     <Routes>
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
-     <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn} clearErrors={ clearErrors } loadPets={loadPets}  addErrors= {addErrors}/>} />
-     <Route path="/signup"  element= {<Signup pet={petLoad} clearErrors={ clearErrors } loginUser={loginUser} addErrors= {addErrors} />} />
-     <Route path="/createRecord"  element= {<CreateRecord pets={pets} chosenPet={chosenPet} setChosenPet={setChosenPet} user={currentUser} loadPets={loadPets} clearErrors={ clearErrors } addErrors= {addErrors} addRecord={addRecord} pet={petLoad}/>} />
-     <Route path="/createPet"  element= {<CreatePet user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet} clearErrors={ clearErrors } addErrors= {addErrors} addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path='/records/:id'  element= {<RecordList handleDeleteRecordClick={handleDeleteRecordClick} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
-     <Route path="/editRecord"  element= {<EditRecord  updateRecord={updateRecord} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} clearErrors={ clearErrors } addErrors= {addErrors} />} />
+     <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn}  loadPets={loadPets} />} />
+     <Route path="/signup"  element= {<Signup pet={petLoad} loginUser={loginUser} />} />
+     <Route path="/createRecord"  element= {<CreateRecord pets={pets} chosenPet={chosenPet} setChosenPet={setChosenPet} user={currentUser} loadPets={loadPets} addRecord={addRecord} pet={petLoad}/>} />
+     <Route path="/createPet"  element= {<CreatePet user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet}  addPet={addPet}/>} />
+     <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser}  pet={petLoad} />} />
+     <Route path='/records'  element= {<RecordList handleDeleteRecordClick={handleDeleteRecordClick} user={currentUser} deleteRecord={deleteRecord} />} />
+     <Route path="/editRecord"  element= {<EditRecord  updateRecord={updateRecord} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
     </Routes>
     </Router> 
   

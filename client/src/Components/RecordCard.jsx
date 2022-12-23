@@ -38,7 +38,7 @@ const RecordCard = ({ record , pet, handleDeleteRecordClick} ) => {
               Edit</Button>
               <br/>
               <br></br>
-              <Button  onClick={handleDeleteRecordClick} className="primary" variant="contained" to="/editRecord" component={ Link } disableElevation>
+              <Button  onClick={handleDeleteRecordClick} className="primary" variant="contained"  disableElevation>
               Delete</Button>
            <br/>
 
