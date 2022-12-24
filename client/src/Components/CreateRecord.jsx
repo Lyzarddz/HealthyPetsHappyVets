@@ -58,9 +58,7 @@ const pet_id = JSON.parse(chosenPet[0])["id"];
         navigate("/records/");
       })
     } else {
-      console.log(res)
       res.json().then(json => setErrors(json.errors))
-      console.log(errors)
     }
   })
 }
@@ -77,7 +75,6 @@ function handlePetChange(event) {
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
         <br></br>
-      
       <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Pet</InputLabel>
             <Select

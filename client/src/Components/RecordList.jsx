@@ -11,11 +11,13 @@ useEffect(()=>{
   loadPets()
 },[])
 
-console.log(pet)
+
+const petClone = JSON.parse(JSON.stringify(pet));
+
 
 let recordsList = []
 
-pet.forEach((e) => {      //reverses order of data so Record is top level
+petClone.forEach((e) => {      //reverses order of data so Record is top level
   e.records.forEach((record) => {
     record.pet = e                
     recordsList.push(record)

@@ -8,6 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const RecordCard = ({ record , deleteRecord } ) => {
 
+  
+
   function handleDeleteRecordClick(e){
     e.preventDefault();
 

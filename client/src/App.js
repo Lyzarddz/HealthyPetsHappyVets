@@ -11,7 +11,6 @@ import PetList from './Components/PetList';
 import RecordList from './Components/RecordList';
 import MenuItem from '@mui/material/MenuItem';
 import EditRecord from './Components/EditRecord';
-import {useParams} from 'react-router-dom'
 
 
 function App() {
@@ -25,10 +24,6 @@ function App() {
   const [chosenVet, setChosenVet] = useState("");
   const [chosenPet, setChosenPet] = useState("");
 
-
-  const params = useParams()
-  const {id} = params
-
   useEffect(() => {
     // auto-login
     fetch('/me').then((r) => {
@@ -38,7 +33,6 @@ function App() {
       }
     });
   }, []);
-
 
 const vets = loadVet.map((v,idx) => {   
   return (
@@ -86,7 +80,7 @@ function loadRecords() {
 
 console.log(petLoad[0]["id"])
 
-  fetch(`/records/${id}`, {
+  fetch(`/records/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

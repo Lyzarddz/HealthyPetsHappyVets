@@ -6,8 +6,19 @@ import { useNavigate } from 'react-router-dom';
 
 const EditRecord = ({ addRecord , loadPets, updateRecord }) => {
 
-console.log(loadPets) 
 
+const [errors, setErrors] = useState([])
+const navigate = useNavigate();
+const [formData, setFormData] = useState({
+  vaccine: "",
+  prevention: "",
+  altered: "",
+  notes: "",
+  date: "",
+  pet_id: "",
+});
+
+// console.log(loadPets) 
 
 // useEffect(()=>{
 //   loadPets()
@@ -16,15 +27,6 @@ console.log(loadPets)
 // const {id, name} = loadPets
 
 
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    vaccine: "",
-    prevention: "",
-    altered: "",
-    notes: "",
-    date: "",
-    pet_id: "",
-  });
 
   function handleChange(event) {
     setFormData({
