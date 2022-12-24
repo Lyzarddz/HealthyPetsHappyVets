@@ -10,7 +10,6 @@ const MainPg = ({ loggedIn }) => {
         paddingTop: 40.
     }
 
-
     function loggedInDisplay(){
         return (
             <div style={myStyles} className="largeText"> 
@@ -34,7 +33,6 @@ const MainPg = ({ loggedIn }) => {
             </div>
         )
       }
-
 
       function loggedOutDisplay(){
         return(

@@ -2,22 +2,17 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const Login = ({ loginUser, clearErrors , loadPets}) => {
+const Login = ({ loginUser, loadPets}) => {
   
   
     const navigate = useNavigate();
-
-
+    const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({
       username:'',
       password:''
   })
 
-  const [errors, setErrors] = useState([])
-
   const {username, password} = formData;
-
-  
   
   function handleSubmit(e){
     e.preventDefault();
@@ -55,13 +50,6 @@ const Login = ({ loginUser, clearErrors , loadPets}) => {
   setFormData({ ...formData, [name]: value })
 }
 
-    // useEffect(() => {
-    //     return () => {
-    //       clearErrors();
-    //     }
-    //   }, [])
-
-  
     return (
       <div className='primary'>
       <h1>{errors}</h1>

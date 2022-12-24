@@ -93,9 +93,7 @@ function handlePetChange(event) {
               {pets}
             </Select>
           </FormControl>
-
-<br></br>
-
+          <br></br>
           <br></br>
           <Form.Input
             label="Vaccine(s)"

@@ -15,8 +15,8 @@ const CreatePet = ({
   chosenVet,
   setChosenVet
 }) => {
-
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     species: "",
@@ -37,8 +37,6 @@ const CreatePet = ({
         setLoadVet(data);
       });
   }, []);
-
-  
 
   function loadVetToForm(vet) {
     setLoadVet([vet, ...loadVet]);
@@ -63,6 +61,8 @@ const CreatePet = ({
 
     const newVet = newVetId;
 
+    console.log(newVet);
+
     fetch("/vets", {
       method: "POST",
       headers: {
@@ -74,17 +74,17 @@ const CreatePet = ({
       if (res.ok) {
         res.json().then((newVet) => {
           loadVetToForm(newVet);
+          document.getElementById("checkFix").value = "";
           alert("Vet has been added successfully");
-          setErrors("");
-          setNewVetId({});
         });
       } else {
+        document.getElementById("checkFix").value = "";
         res.json().then((json) => setErrors(json.errors));
       }
     });
   }
 
-  const { name, species, age} = formData;
+  const { name, species, age } = formData;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -115,7 +115,6 @@ const CreatePet = ({
           addPet(newPet);
         });
       } else {
-        console.log(res);
         res.json().then((json) => setErrors(json.errors));
       }
     });

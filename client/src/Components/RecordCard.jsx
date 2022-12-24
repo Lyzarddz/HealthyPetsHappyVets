@@ -6,13 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
-
-const RecordCard = ({ record , deleteRecord} ) => {
-
-  // const vetParse =  pet ? pet.vet : ""
-
-  // const vetName = pet ? vetParse.name : ""
-console.log(record)
+const RecordCard = ({ record , deleteRecord } ) => {
 
   function handleDeleteRecordClick(e){
     e.preventDefault();
@@ -27,16 +21,14 @@ console.log(record)
 
 
   return (
-    <Card variant="outlined">
-        
+    <Card variant="outlined">  
         <div className="content" >
         </div>
         <h1>Pet: {record.pet.name}</h1>
         <h3>
          Record Date: {record.date}
         <div className="extra content" >
-       
-            <ul>
+          <ul>
          <br/>
           Vaccine(s): {record.vaccine}
               <br/>
@@ -54,10 +46,8 @@ console.log(record)
               <Button variant="outlined" color="inherit" onClick={handleDeleteRecordClick} disableElevation > 
             <DeleteIcon /> Delete Record</Button> 
            <br/>
-
             </ul>
         </div>
-    
         </h3>
     </Card>
   )

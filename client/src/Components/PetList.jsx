@@ -5,7 +5,7 @@ import {  useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const PetList = ( { pet , chosenVet, deletePet , currentUser, setCurrentUser, loadPets} ) => {
+const PetList = ( { pet , deletePet , loadPets } ) => {
   
   useEffect(()=>{
     loadPets()
@@ -17,11 +17,7 @@ const PetList = ( { pet , chosenVet, deletePet , currentUser, setCurrentUser, lo
             <PetCard
             key={idx}
             pet={p}
-            chosenVet= {chosenVet}
             deletePet={deletePet}
-            currentUser={currentUser} 
-            setCurrentUser={setCurrentUser}
-            loadPets={loadPets}
           />
           </div>
         )

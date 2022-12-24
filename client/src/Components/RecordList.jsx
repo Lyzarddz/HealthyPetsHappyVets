@@ -5,50 +5,31 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const RecordList = ( { record, loadRecords, deleteRecord } ) => {
-
-const [recordLoad, setRecordLoad] = useState([]);
-const [errors, setErrors] = useState([]);
-
+const RecordList = ( { record, loadRecords, deleteRecord, pet, loadPets } ) => {
 
 useEffect(()=>{
-  fetch(`/records/`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json", 
-    },
-  })
-  .then(res => {
-    if(res.ok){
-        res.json().then(records => {
-          console.log(records)
-            setRecordLoad(records)
-        })
-    }else {
-      console.log(errors)
-      res.json().then(json => setErrors(json.errors))
-    }
-  })
+  loadPets()
 },[])
 
-// function handleDeleteRecordClick(e){
-//   e.preventDefault();
+console.log(pet)
 
-//   fetch(`/records/`, {
-//     method: 'DELETE',
-//   })
-//   deleteRecord(id)
-// }
+let recordsList = []
 
+pet.forEach((e) => {      //reverses order of data so Record is top level
+  e.records.forEach((record) => {
+    record.pet = e                
+    recordsList.push(record)
+  })
+})
 
-    const cards= recordLoad.map((r, idx)=> {
-        return(
-          <div key={idx}>
+    const cards= recordsList.map((r, idx)=> {
+        return (
+          <div key={r.id}>
             <RecordCard
             key={r.id}
             record={r}
             deleteRecord ={deleteRecord}
+            loadRecords = {loadPets}
           />
           </div>
         )

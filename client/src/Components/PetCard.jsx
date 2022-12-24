@@ -3,12 +3,12 @@ import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const PetCard = ( { pet , deletePet, currentUser, setCurrentUser, loadPets} ) => {
+
+
+const PetCard = ( { pet , deletePet } ) => {
 
 const vetParse =  pet ? pet.vet : ""
 const vetName = pet ? vetParse.name : ""
-
-// console.log(pet)
 
 function handleDeletePetClick(e){
   e.preventDefault();
@@ -20,7 +20,6 @@ function handleDeletePetClick(e){
   })
   deletePet(id)
 }
-
 
   return (
     <Card variant="outlined">
