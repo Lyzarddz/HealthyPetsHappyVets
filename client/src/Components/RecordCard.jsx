@@ -115,7 +115,7 @@ const RecordCard = ({ record , deleteRecord, loadPets, updateRecord } ) => {
               <br/>
               <br></br>
               <Button variant="outlined" color="inherit" onClick={handleDeleteRecordClick} disableElevation > 
-            <DeleteIcon /> Delete Record</Button> 
+            <DeleteIcon onClick={handleDeleteRecordClick} /> Delete Record</Button> 
            <br/>
             </ul>
         </div>
