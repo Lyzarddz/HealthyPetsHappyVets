@@ -21,7 +21,7 @@ class RecordsController < ApplicationController
     def update
         record = Record.find(params[:id])
         record.update(record_params)
-        render json: record, status: :updated
+        render json: record, status: :created
     end
     
     def destroy
@@ -33,6 +33,6 @@ class RecordsController < ApplicationController
     private
 
     def record_params
-        params.permit(:vaccine, :prevention, :altered, :notes, :date, :pet_id)
+        params.permit(:vaccine, :prevention, :altered, :notes, :date, :pet_id, :id)
     end
 end

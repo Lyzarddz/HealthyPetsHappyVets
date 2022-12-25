@@ -18,6 +18,7 @@ const PetList = ( { pet , deletePet , loadPets } ) => {
             key={idx}
             pet={p}
             deletePet={deletePet}
+            loadPets={loadPets}
           />
           </div>
         )

@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const EditRecord = ({ addRecord , loadPets, updateRecord }) => {
+const EditRecord = ({ loadPets, updateRecord, pet }) => {
 
+ console.log(pet)
 
 const [errors, setErrors] = useState([])
 const navigate = useNavigate();
@@ -15,18 +16,24 @@ const [formData, setFormData] = useState({
   altered: "",
   notes: "",
   date: "",
-  pet_id: "",
 });
 
-// console.log(loadPets) 
+useEffect(() => {
+  loadPets()
+},[])
 
-// useEffect(()=>{
-//   loadPets()
-// },[])
+const petClone = JSON.parse(JSON.stringify(pet));
 
-// const {id, name} = loadPets
+let recordsList = []
 
+petClone.forEach((e) => {      //reverses order of data so Record is top level
+  e.records.forEach((record) => {
+    record.pet = e                
+    recordsList.push(record)
+  })
+})
 
+// console.log(recordsList[0].id)
 
   function handleChange(event) {
     setFormData({
@@ -35,45 +42,53 @@ const [formData, setFormData] = useState({
     });
   }
 
-const {vaccine, prevention, altered, notes, date, pet_id} = formData;
+console.log(recordsList)
+
+  const record = recordsList.map((r, idx) => {
+     const properRecord = r
+  })
+
+
+
+  // recordsList.map(r => {
+  //   const record = r
+  //   const {id} = record;
+  //   console.log(id)
+  // })
+
+
+const {vaccine, prevention, altered, notes, date} = formData;
 
 function handleSubmit(e) {
   e.preventDefault();
 
-  const newRecord = {
-    vaccine,
-    prevention,
-    altered,
-    notes,
-    date,
-    pet_id
- }; 
+  const id = record.get();
 
- fetch("/records", {
+ fetch(`/records/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify(newRecord),
-  }).then((r) => r.json())
-    .then(addRecord);
-    navigate("/records");
+    body: JSON.stringify(formData)
+  })
+  .then(res => {
+    if(res.ok){
+      res.json().then(updateRecord(id))
+      navigate((`/records`))
+    } else {
+      res.json().then(json => setErrors(json.errors))
+    }
+  })
 }
 
     return (
          <div className='primary'>
+          <h1>{errors}</h1>
       <h1 >Edit Record</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
         <br></br>
-          <Form.Input
-            label="Pet Name"
-            placeholder="Pet Name"
-            name="pet_id"
-            value={formData.pet_id}
-            onChange={handleChange}
-          />
           <br></br>
           <Form.Input
             label="Vaccine(s)"

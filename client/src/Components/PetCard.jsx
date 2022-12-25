@@ -18,7 +18,7 @@ function handleDeletePetClick(e){
   fetch(`/pets/${id}`, {
     method: 'DELETE',
   })
-  deletePet(id)
+  deletePet(id);
 }
 
   return (

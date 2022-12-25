@@ -136,11 +136,11 @@ console.log(petLoad[0]["id"])
      <Route path="/" element= {<MainPg loggedIn={loggedIn }/>} />
      <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} setLoggedIn={setLoggedIn}  loadPets={loadPets} />} />
      <Route path="/signup"  element= {<Signup pet={petLoad} loginUser={loginUser} />} />
-     <Route path="/createRecord"  element= {<CreateRecord pets={pets}  chosenPet={chosenPet} setChosenPet={setChosenPet} user={currentUser} loadPets={loadPets} addRecord={addRecord} pet={petLoad}/>} />
+     <Route path="/createRecord"  element= {<CreateRecord pets={pets}  loadPets={loadPets} chosenPet={chosenPet} setChosenPet={setChosenPet} user={currentUser} addRecord={addRecord} pet={petLoad}/>} />
      <Route path="/createPet"  element= {<CreatePet user={currentUser} chosenVet={chosenVet} setChosenVet={setChosenVet} vets={vets}loadVet={loadVet} setLoadVet={setLoadVet}  addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} chosenVet={chosenVet} currentUser={currentUser} setCurrentUser={setCurrentUser} pet={petLoad} />} />
-     <Route path='/records'  element= {<RecordList loadPets={loadPets} user={currentUser} pet={petLoad} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
-     <Route path="/editRecord"  element= {<EditRecord  updateRecord={updateRecord} user={currentUser} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
+     <Route path='/records'  element= {<RecordList updateRecord={updateRecord} loadPets={loadPets} user={currentUser} pet={petLoad} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
+     <Route path="/editRecord"  element= {<EditRecord loadPets={loadPets} updateRecord={updateRecord} user={currentUser} pet={petLoad} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
     </Routes>
     </Router> 
   

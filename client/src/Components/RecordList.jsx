@@ -5,15 +5,13 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const RecordList = ( { record, loadRecords, deleteRecord, pet, loadPets } ) => {
+const RecordList = ( { record, loadRecords, deleteRecord, pet, loadPets, updateRecord } ) => {
 
 useEffect(()=>{
   loadPets()
 },[])
 
-
 const petClone = JSON.parse(JSON.stringify(pet));
-
 
 let recordsList = []
 
@@ -30,8 +28,9 @@ petClone.forEach((e) => {      //reverses order of data so Record is top level
             <RecordCard
             key={r.id}
             record={r}
+            updateRecord={updateRecord}
             deleteRecord ={deleteRecord}
-            loadRecords = {loadPets}
+            loadPets = {loadPets}
           />
           </div>
         )
@@ -42,7 +41,7 @@ petClone.forEach((e) => {      //reverses order of data so Record is top level
         <h1 className='primary'>My Records</h1>
             <br/>
             <br/>
-  <Button  className="primary" variant="contained" to="/createRecord" component={ Link } disableElevation>
+    <Button  className="primary" variant="contained" to="/createRecord" component={ Link } disableElevation>
      Add New Record
     </Button>
     <br></br>
