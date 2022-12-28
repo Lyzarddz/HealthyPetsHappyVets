@@ -1,11 +1,11 @@
 import React from 'react'
 import { Card } from "semantic-ui-react";
 import RecordCard from './RecordCard';
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-const RecordList = ( { record, loadRecords, deleteRecord, pet, loadPets, updateRecord } ) => {
+const RecordList = ( { deleteRecord, pet, loadPets, updateRecord } ) => {
 
 useEffect(()=>{
   loadPets()

@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const EditRecord = ({ loadPets, updateRecord, pet }) => {
 
- console.log(pet)
-
 const [errors, setErrors] = useState([])
 const navigate = useNavigate();
 const [formData, setFormData] = useState({
@@ -33,8 +31,6 @@ petClone.forEach((e) => {      //reverses order of data so Record is top level
   })
 })
 
-// console.log(recordsList[0].id)
-
   function handleChange(event) {
     setFormData({
       ...formData,
@@ -48,16 +44,6 @@ console.log(recordsList)
      const properRecord = r
   })
 
-
-
-  // recordsList.map(r => {
-  //   const record = r
-  //   const {id} = record;
-  //   console.log(id)
-  // })
-
-
-const {vaccine, prevention, altered, notes, date} = formData;
 
 function handleSubmit(e) {
   e.preventDefault();

@@ -30,6 +30,9 @@ const CreatePet = ({
     name: ""
   });
 
+console.log(vets)
+
+
   useEffect(() => {
     fetch("/vets")
       .then((resp) => resp.json())

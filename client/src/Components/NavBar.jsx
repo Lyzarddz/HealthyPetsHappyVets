@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import PetsIcon from '@mui/icons-material/Pets';
 
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 function NavBar( {loggedIn,  setLoggedIn}) {
   const classes = useStyles();
   const navigate = useNavigate();
-
 
 function logout() {
 fetch('/logout', {

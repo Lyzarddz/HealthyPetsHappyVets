@@ -12,7 +12,8 @@ root 'sessions#home'
   post "/login", to:"sessions#create"
   delete "/logout", to:"sessions#destroy"
   get "/vets", to:"vets#show"
-  get "/records/id", to:"records#show"
+  get "/records/:id", to:"records#show"
+ 
 
 
 

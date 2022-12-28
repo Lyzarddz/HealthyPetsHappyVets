@@ -75,7 +75,6 @@ fetch(`/owners/${id}`, {
 })
 }
 
-
 function loadRecords() {
 
 console.log(petLoad[0]["id"])

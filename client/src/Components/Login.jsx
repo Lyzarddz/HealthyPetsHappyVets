@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = ({ loginUser, loadPets}) => {
   
-  
     const navigate = useNavigate();
     const [errors, setErrors] = useState([])
     const [formData, setFormData] = useState({

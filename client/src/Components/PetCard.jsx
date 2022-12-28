@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import Card from '@mui/material/Card';
 import Button from '@material-ui/core/Button';
@@ -45,8 +47,6 @@ function handleDeletePetClick(e){
 }
 
 export default PetCard;
-
-
 
 
 

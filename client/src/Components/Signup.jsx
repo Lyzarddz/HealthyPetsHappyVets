@@ -40,7 +40,6 @@ const {username, password} = formData;
         res.json().then(json => setErrors(json.errors))
       }
   })
- 
 }
 
 const handleChange = (e) => {
