@@ -50,7 +50,7 @@ function handleSubmit(e) {
 
   const id = record.get();
 
- fetch(`/records/${id}`, {
+ fetch(`/api/records/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

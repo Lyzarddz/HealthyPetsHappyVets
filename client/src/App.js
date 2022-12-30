@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch('/me').then((r) => {
+    fetch('api/me').then((r) => {
       if (r.ok) {
         r.json().then((user) => setCurrentUser(user));
         setLoggedIn(true);
@@ -54,7 +54,7 @@ function loadPets() {
  
 const {id} = currentUser
 
-fetch(`/owners/${id}`, {
+fetch(`/api/owners/${id}`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -79,7 +79,7 @@ function loadRecords() {
 
 console.log(petLoad[0]["id"])
 
-  fetch(`/records/`, {
+  fetch(`/api/records/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

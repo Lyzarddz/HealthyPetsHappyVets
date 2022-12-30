@@ -23,7 +23,7 @@ const RecordCard = ({ record , deleteRecord, loadPets, updateRecord } ) => {
   function handleDeleteRecordClick(e){
     e.preventDefault();
   
-    fetch(`/records/${id}`, { 
+    fetch(`/api/records/${id}`, { 
       method: 'DELETE',
     })
     deleteRecord(id);
@@ -40,7 +40,7 @@ const RecordCard = ({ record , deleteRecord, loadPets, updateRecord } ) => {
   function handleEditRecordClick(e) {
     e.preventDefault();
   
-   fetch(`/records/${id}`, {
+   fetch(`/api/records/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

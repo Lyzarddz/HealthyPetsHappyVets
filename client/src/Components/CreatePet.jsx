@@ -34,7 +34,7 @@ console.log(vets)
 
 
   useEffect(() => {
-    fetch("/vets")
+    fetch("/api/vets")
       .then((resp) => resp.json())
       .then((data) => {
         setLoadVet(data);
@@ -66,7 +66,7 @@ console.log(vets)
 
     console.log(newVet);
 
-    fetch("/vets", {
+    fetch("/api/vets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +104,7 @@ console.log(vets)
       vet_id
     };
 
-    fetch("/pets", {
+    fetch("/api/pets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -30,7 +30,7 @@ function NavBar( {loggedIn,  setLoggedIn}) {
   const navigate = useNavigate();
 
 function logout() {
-fetch('/logout', {
+fetch('/api/logout', {
   method: 'DELETE',
 })
 setLoggedIn(false)

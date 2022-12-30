@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 # root 'sessions#home'
 
-  resources :records
-  resources :vets, only: [:index, :show, :create]
-  resources :pets, only: [:index, :create, :show, :destroy]
-  resources :owners, only: [:show, :create]
-  resources :sessions
+  namespace :api do
+    resources :records
+    resources :vets, only: [:index, :show, :create]
+    resources :pets, only: [:index, :create, :show, :destroy]
+    resources :owners, only: [:show, :create]
+    resources :sessions
+  end
 
   post "/signup", to: "owners#create"
   get "/me", to: "owners#show"

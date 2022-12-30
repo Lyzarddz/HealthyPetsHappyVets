@@ -22,7 +22,7 @@ const {username, password} = formData;
       password
     }
 
-    fetch('/owners', {
+    fetch('/api/owners', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

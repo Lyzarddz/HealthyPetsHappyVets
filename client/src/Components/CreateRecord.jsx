@@ -47,7 +47,7 @@ const pet_id = JSON.parse(chosenPet[0])["id"];
     pet_id
  };
 
- fetch("/records", {
+ fetch("/api/records", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

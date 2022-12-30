@@ -17,7 +17,7 @@ function handleDeletePetClick(e){
 
   const {id} = pet;
 
-  fetch(`/pets/${id}`, {
+  fetch(`/api/pets/${id}`, {
     method: 'DELETE',
   })
   deletePet(id);
