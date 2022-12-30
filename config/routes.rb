@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
-  
+  namespace :api do
 # root 'sessions#home'
+
   resources :records
   resources :vets, only: [:index, :show, :create]
   resources :pets, only: [:index, :create, :show, :destroy]
   resources :owners, only: [:show, :create]
   resources :sessions
-
+end
   post "/signup", to: "owners#create"
   get "/me", to: "owners#show"
   post "/login", to:"sessions#create"
   delete "/logout", to:"sessions#destroy"
   get "/vets", to:"vets#show"
   get "/records/:id", to:"records#show"
- 
+end
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
