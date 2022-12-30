@@ -1,25 +1,25 @@
 class PetsController < ApplicationController
 
-    skip_before_action :authorize, only: [:create]
+    # skip_before_action :authorize, only: [:create]
 
     def index 
-        render json: Pet.all, status: :ok
+        render json: current_owner.pets, status: :ok
     end
 
     def show 
-        pet = Pet.find(params[:id])
+        pet = current_owner.pets.find(params[:id])
         render json: pet
     end
 
     def create
-        pet = Pet.create!(pet_params)
+        pet = current_owner.pets.create!(pet_params)
         render json: pet, status: :created
         
     end
  
 
     def destroy
-        pet = Pet.find(params[:id])
+        pet = current_owner.pets.find(params[:id])
         pet.destroy
         head :no_content
     end
@@ -27,6 +27,6 @@ class PetsController < ApplicationController
     private
 
     def pet_params
-        params.permit(:name, :species, :age, :vet_id, :owner_id )
+        params.permit(:name, :species, :age, :vet_id)
     end
 end

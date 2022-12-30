@@ -3,29 +3,29 @@ class RecordsController < ApplicationController
     
     skip_before_action :authorize, only: [:create]
 
-
     def index 
-        render json: Record.all, status: :ok
+        render json: current_owner.records.all, status: :ok
     end
 
     def show
-        record = Record.find(params[:id])
+        record = current_owner.records.find(params[:id])
         render json: record
     end
 
     def create
-        record = Record.create!(record_params)
+        pet = current_owner.pets.find(params[:pet_id])
+        record = pet.records.create!(record_params)
         render json: record, status: :created
     end
 
     def update
-        record = Record.find(params[:id])
+        record = current_owner.records.find(params[:id])
         record.update(record_params)
         render json: record, status: :created
     end
     
     def destroy
-        record = Record.find(params[:id])
+        record = current_owner.records.find(params[:id])
         record.destroy
         head :no_content
     end
@@ -33,6 +33,6 @@ class RecordsController < ApplicationController
     private
 
     def record_params
-        params.permit(:vaccine, :prevention, :altered, :notes, :date, :pet_id)
+        params.permit(:vaccine, :prevention, :altered, :notes, :date)
     end
 end
