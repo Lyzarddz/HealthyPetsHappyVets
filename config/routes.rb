@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  namespace :api do
 # root 'sessions#home'
 
   resources :records
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
   delete "/logout", to:"sessions#destroy"
   get "/vets", to:"vets#show"
   get "/records/:id", to:"records#show"
-end
+
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
