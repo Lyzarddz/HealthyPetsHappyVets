@@ -11,16 +11,6 @@
 *Run rails s for backend
 *Open new terminal and run npm start for frontend
 
-*Note that each application will run on its own port:
-
-React: http://localhost:4000
-Rails: http://localhost:3000
-
-
-
-
-
-
 ## Licensing
 Copyright <2022> Alyssa Falcione
 
