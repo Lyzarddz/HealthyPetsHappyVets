@@ -10,7 +10,7 @@ class RecordsController < ApplicationController
     def show
         record = current_owner.records.find(params[:id])
         render json: record
-    end
+    end 
 
     def create
         pet = current_owner.pets.find(params[:pet_id])

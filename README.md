@@ -1,15 +1,37 @@
-## Requirements
+# Healthy Pets, Happy Vets
+This application was built using Ruby on Rails and React Javascript. Healthy pets, Happy Vets allows pet owners to create profiles for their animals to help keep track of each individual pets health and vet records. Pet owners are able to create records to keep track of their pets vaccination status, preventions, any pertaining notes. 
 
+### Project Status
+This projects first version is complete. Future versions may follow with added features
+
+## Requirements
 * Rails 6.1.3.2
 * Ruby 2.7.4
+* NodeJS (v16), and npm
+* Postgresql
+  
 
-
-## How to use
-
+## Installation
 *Fork and clone repository
 *Run npm install
 *Run rails s for backend
 *Open new terminal and run npm start for frontend
+
+
+### Support
+Email alyssafalcione@gmail.com for any issues or technical support
+
+### Roadmap
+In future versions, Happy Pets, Healthy Vets may be updated to allow Veterinarians to add records to their patients profiles
+
+### Contributing
+Feel free to share any ideas that you feel may be useful to this applications success
+
+### Extra Content
+Follow this link to watch a video walkthrough of this application: https://vimeo.com/784565053/c256602fce
+
+Application was deployed through Render and can be found here : https://healthy-pets.onrender.com
+
 
 ## Licensing
 Copyright <2022> Alyssa Falcione

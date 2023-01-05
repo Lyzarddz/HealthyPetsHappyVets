@@ -1,4 +1,5 @@
 
+
 const MainPg = ({ loggedIn }) => {
 
     const myStyles = {
@@ -46,6 +47,7 @@ const MainPg = ({ loggedIn }) => {
             health!
             <br/>
             <br/>
+        
             <br/>
             <br/>
             <br/>
