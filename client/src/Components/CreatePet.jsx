@@ -11,12 +11,11 @@ const CreatePet = ({
   user,
   setLoadVet,
   vets,
-  loadVet,
-  chosenVet,
-  setChosenVet
+  loadVet
+
 }) => {
   const navigate = useNavigate();
-
+  const [chosenVet, setChosenVet] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     species: "",
@@ -29,8 +28,6 @@ const CreatePet = ({
   const [newVetId, setNewVetId] = useState({
     name: ""
   });
-
-console.log(vets)
 
 
   useEffect(() => {
@@ -64,8 +61,6 @@ console.log(vets)
 
     const newVet = newVetId;
 
-    console.log(newVet);
-
     fetch("/api/vets", {
       method: "POST",
       headers: {
@@ -94,6 +89,12 @@ console.log(vets)
 
     const owner_id = user["id"];
 
+    if (!chosenVet){
+      setErrors("Must select a vet");
+      return;
+    }
+
+
     const vet_id = JSON.parse(chosenVet[0])["id"];
 
     const newPet = {
@@ -114,15 +115,17 @@ console.log(vets)
       body: JSON.stringify(newPet)
     }).then((res) => {
       if (res.ok) {
-        res.json().then((newPet) => {
+         res.json().then((newPet) => {
           addPet(newPet);
+          navigate(`/pets`);
         });
       } else {
         res.json().then((json) => setErrors(json.errors));
       }
     });
-    navigate(`/pets`);
   }
+
+
 
   function handleVetChange(event) {
     setChosenVet([event.target.value]);
@@ -131,6 +134,8 @@ console.log(vets)
   return (
     <div className="primary">
       <h1>Add a Pet!</h1>
+      <p style={{color: "red"}}>{errors}</p>
+      <br></br>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
           <Form.Input

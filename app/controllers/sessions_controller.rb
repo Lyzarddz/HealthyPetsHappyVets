@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+  class SessionsController < ApplicationController
 
     skip_before_action :authorize, only: :create
 
@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
             render json: {errors:["Invalid username or password"]}, status: :unauthorized
         end
     end
-
 
     def destroy
         session.delete :owner_id

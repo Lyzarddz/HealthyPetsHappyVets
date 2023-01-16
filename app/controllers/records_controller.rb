@@ -1,6 +1,5 @@
 class RecordsController < ApplicationController
 
-    
     skip_before_action :authorize, only: [:create]
 
     def index 
@@ -20,7 +19,7 @@ class RecordsController < ApplicationController
 
     def update
         record = current_owner.records.find(params[:id])
-        record.update(record_params)
+        record.update!(record_params)
         render json: record, status: :created
     end
     

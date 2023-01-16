@@ -7,12 +7,13 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 
-const CreateRecord = ({ addRecord , chosenPet, setChosenPet, pets, loadPets }) => {
+const CreateRecord = ({ addRecord , pets, loadPets }) => {
 
   useEffect(()=>{
     loadPets()
   },[])
-  
+
+  const [chosenPet, setChosenPet] = useState("");
   const [errors, setErrors] = useState([])
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

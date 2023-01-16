@@ -1,9 +1,14 @@
 class VetsController < ApplicationController
     
-
     def index 
         render json: Vet.all, status: :ok
     end
+
+    # def most_pets
+    #     vetPets = Vet.select { |v|
+            
+    #     }
+    # end
 
     def show 
         vet = Vet.find(params[:id])

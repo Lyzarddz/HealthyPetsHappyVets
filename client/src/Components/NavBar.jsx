@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function NavBar( {loggedIn,  setLoggedIn}) {
+function NavBar( { currentUser, setCurrentUser }) {
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function logout() {
 fetch('/api/logout', {
   method: 'DELETE',
 })
-setLoggedIn(false)
+    setCurrentUser(false);
     navigate("/");
 }
 
@@ -67,7 +67,7 @@ setLoggedIn(false)
           <Typography variant="h6" className={classes.title}>
               Healthy Pets, Happy Vets!
           </Typography>
-          { loggedIn ? loggedInLinks() :  loggedOutLinks()}
+          { currentUser ? loggedInLinks() :  loggedOutLinks()}
         </Toolbar>
       </AppBar>
     </div>

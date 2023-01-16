@@ -1,6 +1,6 @@
 
 
-const MainPg = ({ loggedIn }) => {
+const MainPg = ({ currentUser }) => {
 
     const myStyles = {
         backgroundImage: `url("https://user-images.githubusercontent.com/91993983/203647488-68f8e164-1def-4f46-aeb5-ea49ce683c76.jpeg")`,
@@ -60,7 +60,7 @@ const MainPg = ({ loggedIn }) => {
 
     return (
         <div>
-             { loggedIn ? loggedInDisplay() :  loggedOutDisplay()}
+             { currentUser ? loggedInDisplay() :  loggedOutDisplay()}
         </div>
     )
 }

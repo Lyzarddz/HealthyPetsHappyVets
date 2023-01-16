@@ -12,10 +12,9 @@ class PetsController < ApplicationController
     def create
         pet = current_owner.pets.create!(pet_params)
         render json: pet, status: :created
-        
     end
  
-
+ 
     def destroy
         pet = current_owner.pets.find(params[:id])
         pet.destroy

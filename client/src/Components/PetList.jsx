@@ -7,11 +7,7 @@ import Button from '@material-ui/core/Button';
 
 const PetList = ( { pet , deletePet , loadPets } ) => {
   
-
 const [popularVet, setPopularVet] = useState([]);
-
-
-
 
   useEffect(()=>{
     loadPets()
@@ -46,8 +42,6 @@ const [popularVet, setPopularVet] = useState([]);
 
 
 
-
-  
     return (
       <Card>
         <h1 className='primary'>My Pets</h1>

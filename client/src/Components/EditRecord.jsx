@@ -38,7 +38,6 @@ petClone.forEach((e) => {      //reverses order of data so Record is top level
     });
   }
 
-console.log(recordsList)
 
   const record = recordsList.map((r, idx) => {
      const properRecord = r

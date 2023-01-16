@@ -35,10 +35,8 @@ const Login = ({ loginUser, loadPets}) => {
               loginUser(owner)
               loadPets()
               navigate((`/pets/`))
-              
           })
-      }else {
-
+      } else {
         res.json().then(json => setErrors(json.errors))
       }
   })
