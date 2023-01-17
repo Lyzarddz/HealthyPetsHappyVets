@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Form } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const CreatePet = ({
   addPet,
   user,
-  setLoadVet,
+  setVetLoad,
   vets,
   loadVet
 
@@ -34,12 +33,12 @@ const CreatePet = ({
     fetch("/api/vets")
       .then((resp) => resp.json())
       .then((data) => {
-        setLoadVet(data);
+        setVetLoad(data);
       });
   }, []);
 
   function loadVetToForm(vet) {
-    setLoadVet([vet, ...loadVet]);
+    setVetLoad([vet, ...loadVet]);
   }
 
   function handleChange(event) {
@@ -174,9 +173,6 @@ const CreatePet = ({
               label="Vet"
               onChange={handleVetChange}
             >
-              <MenuItem key={-1} value={"none"}>
-                Please Select Vet
-              </MenuItem>
               {vets}
             </Select>
           </FormControl>
@@ -201,7 +197,6 @@ const CreatePet = ({
           <br />
           <Form.Button className="btn">Submit</Form.Button>
         </Form>
-        <h1>{errors}</h1>
       </div>
     </div>
   );

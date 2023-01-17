@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Form } from "semantic-ui-react";
 import { useNavigate } from 'react-router-dom';
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
@@ -36,6 +35,11 @@ const {vaccine, prevention, altered, notes, date} = formData;
 
 function handleSubmit(e) {
   e.preventDefault();
+
+  if (!chosenPet){
+    setErrors("Must select a Pet");
+    return;
+  }
 
 const pet_id = JSON.parse(chosenPet[0])["id"];
 
@@ -74,7 +78,7 @@ function handlePetChange(event) {
 
     return (
          <div className='primary'>
-          <h1>{errors}</h1>
+         <p style={{color: "red"}}>{errors}</p>
           <br/>
       <h1 >Add new Record!</h1>
       <Form onSubmit={handleSubmit}>
@@ -89,9 +93,6 @@ function handlePetChange(event) {
               value={chosenPet}
               label="Pet"
               onChange={handlePetChange} >
-              <MenuItem key={-1} value={"none"}>
-                Please Select Pet
-              </MenuItem>
               {pets}
             </Select>
           </FormControl>

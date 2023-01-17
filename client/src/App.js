@@ -17,9 +17,9 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState('');
   const [errors, setErrors] = useState([]);
-  const [petLoad, setPetLoad] = useState([]);
+  const [userPets, setuserPets] = useState([]);
   const [recordLoad, setRecordLoad] = useState([]);
-  const [loadVet, setLoadVet] = useState([]);
+  const [vetLoad, setVetLoad] = useState([]);
 
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
     });
   }, []);
 
-const vets = loadVet.map((v,idx) => {   
+const vets = vetLoad.map((v,idx) => {   
   return (
     <MenuItem key={idx} value={JSON.stringify(v)}>
       {v.name} 
@@ -40,7 +40,7 @@ const vets = loadVet.map((v,idx) => {
 })
 
 
-const pets = petLoad.map((p,idx) => {   
+const pets = userPets.map((p,idx) => {   
   return (
     <MenuItem key={idx} value={JSON.stringify(p)}>
       {p.name} 
@@ -62,10 +62,9 @@ fetch(`/api/owners/${id}`, {
 .then(res => {
   if(res.ok){
       res.json().then(pets => {
-          setPetLoad(pets.pets)
+          setuserPets(pets.pets)
       })
   } else {
-    console.log(res)
     res.json().then(json => setErrors(json.errors))
   }
 })
@@ -94,7 +93,7 @@ function loadRecords() {
   }
 
   function addPet(pet){
-    setPetLoad([pet,...petLoad])
+    setuserPets([pet,...userPets])
   }
 
   function addRecord(record){
@@ -119,7 +118,7 @@ function loadRecords() {
 
  const deleteRecord = (id) => {setRecordLoad(current => current.filter(r => r.id !== id))}
 
- const deletePet = (id) => {setPetLoad(current => current.filter(p => p.id !== id))}
+ const deletePet = (id) => {setuserPets(current => current.filter(p => p.id !== id))}
 
   return (
     <Router>
@@ -127,12 +126,12 @@ function loadRecords() {
     <Routes>
      <Route path="/" element= {<MainPg currentUser={currentUser}/>} />
      <Route path="/login" element= {<Login onLogin={setCurrentUser} loginUser={loginUser} loadPets={loadPets} />} />
-     <Route path="/signup"  element= {<Signup pet={petLoad} loginUser={loginUser} />} />
-     <Route path="/createRecord"  element= {<CreateRecord pets={pets}  loadPets={loadPets} user={currentUser} addRecord={addRecord} pet={petLoad}/>} />
-     <Route path="/createPet"  element= {<CreatePet user={currentUser} vets={vets} loadVet={loadVet} setLoadVet={setLoadVet}  addPet={addPet}/>} />
-     <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} currentUser={currentUser} setCurrentUser={setCurrentUser} pet={petLoad} />} />
-     <Route path='/records'  element= {<RecordList updateRecord={updateRecord} loadPets={loadPets} user={currentUser} pet={petLoad} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
-     <Route path="/editRecord"  element= {<EditRecord loadPets={loadPets} updateRecord={updateRecord} user={currentUser} pet={petLoad} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
+     <Route path="/signup"  element= {<Signup pet={userPets} loginUser={loginUser} />} />
+     <Route path="/createRecord"  element= {<CreateRecord pets={pets}  loadPets={loadPets} user={currentUser} addRecord={addRecord} pet={userPets}/>} />
+     <Route path="/createPet"  element= {<CreatePet user={currentUser} vets={vets} vetLoad={vetLoad} setVetLoad={setVetLoad}  addPet={addPet}/>} />
+     <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} currentUser={currentUser} setCurrentUser={setCurrentUser} pet={userPets} />} />
+     <Route path='/records'  element= {<RecordList updateRecord={updateRecord} loadPets={loadPets} user={currentUser} pet={userPets} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
+     <Route path="/editRecord"  element= {<EditRecord loadPets={loadPets} updateRecord={updateRecord} user={currentUser} pet={userPets} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
     </Routes>
     </Router> 
   
