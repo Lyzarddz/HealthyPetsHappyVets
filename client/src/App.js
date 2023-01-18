@@ -172,7 +172,7 @@ function loadRecords() {
      <Route path="/signup"  element= {<Signup pet={userPets} loginUser={loginUser} />} />
      <Route path="/vets"  element= {<VetList newVetId={newVetId} handleVetFormChange={handleVetFormChange} vets={vets} vetLoad={vetLoad} handleSubmitVet={handleSubmitVet} setVetLoad={setVetLoad} />} />
      <Route path="/createRecord"  element= {<CreateRecord pets={pets}  loadPets={loadPets} user={currentUser} addRecord={addRecord} pet={userPets}/>} />
-     <Route path="/createPet"  element= {<CreatePet user={currentUser} vets={vets} vetLoad={vetLoad} setVetLoad={setVetLoad}  addPet={addPet}/>} />
+     <Route path="/createPet"  element= {<CreatePet user={currentUser} vets={vets} setVetLoad={setVetLoad}  addPet={addPet}/>} />
      <Route path="/pets"  element= {<PetList loadPets={loadPets} deletePet={deletePet} currentUser={currentUser} setCurrentUser={setCurrentUser} pet={userPets} />} />
      <Route path='/records'  element= {<RecordList updateRecord={updateRecord} loadPets={loadPets} user={currentUser} pet={userPets} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />
      <Route path="/editRecord"  element= {<EditRecord loadPets={loadPets} updateRecord={updateRecord} user={currentUser} pet={userPets} deleteRecord={deleteRecord} loadRecords={loadRecords} record={recordLoad} />} />

@@ -13,6 +13,7 @@ const CreatePet = ({
 }) => {
   const navigate = useNavigate();
   const [chosenVet, setChosenVet] = useState("");
+  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     species: "",
@@ -22,7 +23,6 @@ const CreatePet = ({
   });
 
 
-  const [errors, setErrors] = useState([]);
 
 
   useEffect(() => {
