@@ -9,9 +9,7 @@ const CreatePet = ({
   addPet,
   user,
   setVetLoad,
-  vets,
-  loadVet
-
+  vets
 }) => {
   const navigate = useNavigate();
   const [chosenVet, setChosenVet] = useState("");
@@ -23,10 +21,8 @@ const CreatePet = ({
     owner_id: ""
   });
 
+
   const [errors, setErrors] = useState([]);
-  const [newVetId, setNewVetId] = useState({
-    name: ""
-  });
 
 
   useEffect(() => {
@@ -37,9 +33,6 @@ const CreatePet = ({
       });
   }, []);
 
-  function loadVetToForm(vet) {
-    setVetLoad([vet, ...loadVet]);
-  }
 
   function handleChange(event) {
     setFormData({
@@ -48,38 +41,6 @@ const CreatePet = ({
     });
   }
 
-  function handleVetFormChange(event) {
-    setNewVetId({
-      ...newVetId,
-      [event.target.name]: event.target.value
-    });
-  }
-
-  function handleSubmitVet(e) {
-    e.preventDefault();
-
-    const newVet = newVetId;
-
-    fetch("/api/vets", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(newVet)
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((newVet) => {
-          loadVetToForm(newVet);
-          document.getElementById("checkFix").value = "";
-          alert("Vet has been added successfully");
-        });
-      } else {
-        document.getElementById("checkFix").value = "";
-        res.json().then((json) => setErrors(json.errors));
-      }
-    });
-  }
 
   const { name, species, age } = formData;
 
@@ -185,18 +146,7 @@ const CreatePet = ({
         <br />
       </Form>
       <div>
-        <Form onSubmit={handleSubmitVet}>
-          <h3>Don't see your Vet? Add below</h3>
-          <Form.Input
-            placeholder="Vet Name"
-            name="name"
-            id="checkFix"
-            value={newVetId.name}
-            onChange={handleVetFormChange}
-          />
-          <br />
-          <Form.Button className="btn">Submit</Form.Button>
-        </Form>
+       <h3>Don't see your Vet? Head to the Vets Page to add them</h3>
       </div>
     </div>
   );

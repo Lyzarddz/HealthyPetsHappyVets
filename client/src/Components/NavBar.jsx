@@ -42,7 +42,8 @@ fetch('/api/logout', {
       <div>
          <Button color="inherit" to="/" component={ Link }>Home </Button> 
          <Button color="inherit" to="/pets" component={ Link }>My Pets</Button>  
-         <Button color="inherit" to="/createPet" component={ Link }>Add Pet</Button>  
+         <Button color="inherit" to="/createPet" component={ Link }>Add Pet</Button> 
+         <Button color="inherit" to="/vets" component={ Link }>Vets </Button>  
            <a href="#" className="logout" onClick={logout}>Logout
            </a> 
       </div>
