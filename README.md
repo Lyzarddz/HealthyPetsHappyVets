@@ -12,10 +12,20 @@ This projects first version is complete. Future versions may follow with added f
   
 
 ## Installation
-*Fork and clone repository
-*Run npm install
-*Run rails s for backend
-*Open new terminal and run npm start for frontend
+* Fork and clone repository
+* CD into proper directory
+* Run bundle install
+* Run npm install --prefix client
+
+* You can use the following commands to run the application: Make sure to seed and migrate data
+
+rails db:migrate db:seed
+
+* Run the backend on http://localhost:3000:
+- Run rails s for backend
+
+* Run the frontend on http://localhost:4000:
+ - Open new terminal and run npm start --prefix client for the frontend
 
 
 ### Support
